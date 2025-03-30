@@ -1,0 +1,35 @@
+@use "../../../../../../styles/_variables.scss" as *;
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin-right: 12px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: $color-primary;
+}
+
+.list {
+  display: flex;
+}
+
+.item {
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.button {
+  width: 50px;
+  height: 50px;
+
+  &_active {
+    & polygon {
+      fill: $color-brand;
+    }
+  }
+}
