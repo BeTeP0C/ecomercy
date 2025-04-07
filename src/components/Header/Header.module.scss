@@ -1,0 +1,79 @@
+@import "@/styles/_variables.scss";
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: $color-white;
+  z-index: 2000;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 30px;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.basket, .person {
+
+  &:hover path {
+    stroke: $color-brand-hover;
+  }
+
+  &:active path {
+    stroke: $color-brand-active;
+  }
+}
+
+.basket {
+  position: relative;
+  margin-right: 24px;
+}
+
+.amount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-weight: 500;
+  font-size: 16px;
+  color: $color-white;
+  background: $color-brand;
+}
+
+.line {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: $color-gray-lighting;
+}
+
+.line__active {
+  position: absolute;
+  top: 0;
+  // left: 0;
+  width: 80px;
+  bottom: 0;
+  background: $color-brand;
+  transition: left 0.3s ease, width 0.3s ease;
+}

@@ -1,0 +1,6 @@
+@use "@/styles/mixins" as *;
+
+.loader {
+  @include centering();
+  @include square(100px)
+}

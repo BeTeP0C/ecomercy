@@ -6,22 +6,37 @@ import tsconfig from './tsconfig.json';
 
 const SRC_PATH = path.resolve(__dirname, 'src');
 
+// const parseTsConfigPaths = (paths: Record<string, string[]>): Record<string, string> => {
+//   const webpackConfigAliases: Record<string, string> = {};
+
+//   Object.entries(paths).forEach(([alias, paths]) => {
+//     const aliasPath = paths[0].replace(/[^a-zA-Z]/g, '');
+
+//     webpackConfigAliases[alias] = path.join(SRC_PATH, aliasPath);
+//   });
+
+//   return webpackConfigAliases;
+// };
+
 const parseTsConfigPaths = (paths: Record<string, string[]>): Record<string, string> => {
-  const webpackConfigAliases: Record<string, string> = {};
+  const aliases: Record<string, string> = {}
 
-  Object.entries(paths).forEach(([alias, paths]) => {
-    const aliasPath = paths[0].replace(/[^a-zA-Z]/g, '');
+  Object.entries(paths).forEach(([alias, [target]]) => {
+    const cleanedAlias = alias.replace('/*', '')
+    const cleanedTarget = target.replace('/*', '')
+    aliases[cleanedAlias] = path.resolve(__dirname, cleanedTarget)
+  })
 
-    webpackConfigAliases[alias] = path.join(SRC_PATH, aliasPath);
-  });
-
-  return webpackConfigAliases;
-};
+  return aliases
+}
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), sassDts()],
   resolve: {
-    alias: parseTsConfigPaths(tsconfig.compilerOptions.paths),
+    // alias: parseTsConfigPaths(tsconfig.compilerOptions.paths),
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
   },
 })

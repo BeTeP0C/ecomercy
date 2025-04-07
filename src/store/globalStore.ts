@@ -6,16 +6,17 @@ import axios from "axios";
 import qs from "qs"
 import { TProduct } from "../types/TProduct";
 import { TPagination } from "../types/TPagination";
+import React from "react";
 
 // type TLoading = ("loading" | "succefuly" | "failed")
 
-const safeLocalStorageSet = (key: string, value: string) => {
+export const safeLocalStorageSet = (key: string, value: string) => {
   if (typeof window !== "undefined") {
     localStorage.setItem(key,value)
   }
 }
 
-const safeLocalStorageGet = (key: string) => {
+export const safeLocalStorageGet = (key: string) => {
   if (typeof window !== "undefined") {
     return localStorage.getItem(key)
   }
@@ -27,6 +28,8 @@ export class GlobalStore {
   token: string = "f53a84efed5478ffc79d455646b865298d6531cf8428a5e3157fa5572c6d3c51739cdaf3a28a4fdf8b83231163075ef6a8435a774867d035af53717fecd37bca814c6b7938f02d2893643e2c1b6a2f79b3ca715222895e8ee9374c0403d44081e135cda1f811fe7cfec6454746a5657ba070ec8456462f8ca0e881232335d1ef"
   navEl: THeaderItem[] = headerItems;
   isLoading: boolean = false
+  isModalOpen: boolean = false
+  modalContent: React.ReactNode = ''
 
   products: TProduct[] = []
   pagination: TPagination = {
@@ -48,7 +51,6 @@ export class GlobalStore {
 
     this.rootStore = rootStore
     this.getCurrentSavePage()
-    this.getProducts()
   }
 
   getCurrentSavePage = () => {
@@ -64,7 +66,7 @@ export class GlobalStore {
       this.pagination = {...this.pagination,
         page: page
     }
-    safeLocalStorageSet("currentPage", JSON.stringify(page))
+
     this.getProducts()
   }
 
@@ -105,12 +107,6 @@ export class GlobalStore {
       rating: value
     }
   }
-
-  // setFilterPrice = () => {
-  //   this.filter = {...this.filter,
-  //     price: this.filter.price === "up" ? "down" : "up"
-  //   }
-  // }
 
   getProducts = () => {
     this.isLoading = true
@@ -195,5 +191,17 @@ export class GlobalStore {
         this.isLoading = false
       })
     }
+  }
+
+  modalOpen = () => {
+    this.isModalOpen = true
+  }
+
+  modalClose = () => {
+    this.isModalOpen = false
+  }
+
+  setModalContent = (modalContent: React.ReactNode) => {
+    this.modalContent = modalContent
   }
 }
