@@ -20,10 +20,10 @@ export type TProductImage = {
   width: number,
   height: number,
   formats: {
-      large: TProductImageFormat,
-      small: TProductImageFormat,
-      medium: TProductImageFormat,
-      thumbnail: TProductImageFormat
+    large: TProductImageFormat,
+    small: TProductImageFormat,
+    medium: TProductImageFormat,
+    thumbnail: TProductImageFormat
   },
   hash: string,
   ext: string,

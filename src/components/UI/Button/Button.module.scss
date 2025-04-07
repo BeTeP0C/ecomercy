@@ -1,0 +1,19 @@
+@import "@/styles/variables";
+
+.button {
+  padding: 17px 32px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  color: $color-button-text;
+  background: $color-button-bg;
+  transition: background 0.3s ease;
+
+  &:hover, &:focus-visible {
+    background: $color-button-bg-hover;
+  }
+
+  &:active {
+    background: $color-button-bg-active;
+  }
+}
