@@ -1,0 +1,11 @@
+@import "../../../../../styles/variables";
+
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  width: 150%;
+  padding: 20px;
+  background: $color-off-white;
+  box-shadow: 0 1px 5px 1px;
+  z-index: 1000;
+}

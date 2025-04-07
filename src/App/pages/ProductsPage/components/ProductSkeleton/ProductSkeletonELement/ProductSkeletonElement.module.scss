@@ -1,0 +1,40 @@
+@import "../../../../../styles/variables";
+
+@keyframes run {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.main {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &_small {
+    background: $color-card-bg-skeleton;
+  }
+
+  &_big {
+    background: $color-card-bg-skeleton;
+  }
+}
+
+.grad {
+  position: absolute;
+  inset: 0;
+  right: -50%;
+  left: -50%;
+  background: linear-gradient(-90deg,
+    #D9D9D9 0%,
+    rgba(171, 171, 171, 70%) 60%,
+    rgba(171, 171, 171, 55%) 70%,
+    #D9D9D9 98%,
+  );
+  transition: transform 0.3s ease;
+
+  animation: run 3s ease infinite;
+}

@@ -1,0 +1,23 @@
+@import "./normalize.global.scss";
+@import "./_mixins.scss";
+@import "./_fonts.scss";
+@import "./_reset.scss";
+@import "./_variables.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family:  "Roboto", serif;
+}
+
+body {
+  position: relative;
+  background: $color-off-white;
+}
+
+img {
+  width: 100%;
+}
+

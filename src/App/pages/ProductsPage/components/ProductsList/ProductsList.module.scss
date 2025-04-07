@@ -1,0 +1,46 @@
+@use "../../../../styles/_variables.scss" as *;
+
+.section {
+  padding-top: 48px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 36px;
+  color: $color-primary;
+}
+
+.pages {
+  padding-left: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  color: $color-brand;
+}
+
+.main {
+  margin-bottom: 70px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  // align-items: stretch;
+  grid-auto-rows: 1fr;
+  row-gap: 30px;
+  column-gap: 80px;
+
+  &_skeleton {
+    margin-bottom: 69px;
+  }
+}
+
+.item {
+  width: 100%;
+  max-height: 682px;
+  cursor: pointer;
+}
