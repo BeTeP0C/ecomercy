@@ -77,7 +77,7 @@ const AuthInput: FC<AuthInputProps> = ({
         </div>
       )}
 
-      {isPassword && valueInput.length !== 0 && (
+      {isPassword && valueInput.length !== 0 && passwordLevel && (
         <>
           <div className={styles.levels}>
             <div className={`${styles.level} ${passwordLevel === "high" && styles.level_high}`}></div>

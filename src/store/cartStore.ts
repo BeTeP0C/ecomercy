@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from "mobx"
+import { makeAutoObservable } from "mobx"
 import { RootStore } from "./rootStore"
 import { TProductCart } from "@/types/TProductCart";
 import { safeLocalStorageGet, safeLocalStorageSet } from "./globalStore";
@@ -14,12 +14,12 @@ class CartStore {
     this.rootStore = rootStore
 
     makeAutoObservable(this)
+    this.getProductsCart()
   }
 
   addProductToCart = (product: TProductCart) => {
-    console.log (toJS(this.productsCart), product)
     if (this.productsCart.some(productCart => productCart.idDocument === product.idDocument)) {
-      console.log (this.productsCart.some(productCart => productCart.idDocument === product.idDocument))
+
       this.productsCart = this.productsCart.map(productCart => {
         if (productCart.idDocument === product.idDocument) {
           return {
@@ -31,7 +31,6 @@ class CartStore {
         return productCart
       })
 
-      console.log (toJS(this.productsCart), 2)
     } else {
       this.productsCart.push(product)
     }

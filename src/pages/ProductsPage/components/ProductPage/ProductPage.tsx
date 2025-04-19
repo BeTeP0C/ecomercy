@@ -3,7 +3,7 @@ import styles from "./ProductPage.module.scss"
 import { useStore } from "@/hooks/useStore"
 import { useNavigate, useParams } from "react-router"
 import { useEffect, useState } from "react"
-import { TProduct } from "@/types/TProduct"
+
 import Container from "@/components/UI/Container"
 import Button from "@/components/UI/Button"
 import ArrowBack from "@/components/Icons/ArrowBack"
@@ -32,23 +32,27 @@ const ProductPage = observer(() => {
 
   const handleButtonClick = () => {
     if (productStore.product) {
-      const productCart: TProductCart = {
-        idDocument: productStore.product.documentId,
-        id: productStore.product.id,
-        title: productStore.product.title,
-        price: productStore.product.price,
-        type: productStore.product.productCategory.title,
-        amount: 1,
-        discount: productStore.product.discountPercent,
-        images: {
-          large: productStore.product.images[0].formats.large.url,
-          medium: productStore.product.images[0].formats.medium.url,
-          small: productStore.product.images[0].formats.small.url,
-          thumbnail: productStore.product.images[0].formats.thumbnail.url
+      if (cartStore.amountProduct(productStore.product.documentId) === 0) {
+        const productCart: TProductCart = {
+          idDocument: productStore.product.documentId,
+          id: productStore.product.id,
+          title: productStore.product.title,
+          price: productStore.product.price,
+          type: productStore.product.productCategory.title,
+          amount: 1,
+          discount: productStore.product.discountPercent,
+          images: {
+            large: productStore.product.images[0].formats.large.url,
+            medium: productStore.product.images[0].formats.medium.url,
+            small: productStore.product.images[0].formats.small.url,
+            thumbnail: productStore.product.images[0].formats.thumbnail.url
+          }
         }
+  
+        cartStore.addProductToCart(productCart)
+      } else {
+        navigate("/cart")
       }
-
-      cartStore.addProductToCart(productCart)
     }
   }
 
@@ -64,21 +68,23 @@ const ProductPage = observer(() => {
           <Loader />
         ) : (
           <div>
-            <div className={styles.product}>
-              <div className={styles.slider}>
-                <ProductSlider type="look" slides={productStore.images}/>
-              </div>
+            {productStore.product && (
+              <div className={styles.product}>
+                <div className={styles.slider}>
+                  <ProductSlider type="look" slides={productStore.images}/>
+                </div>
 
-              <div className={styles.info}>
-                <h1 className={styles.heading}>{productStore.product?.title}</h1>
-                <p className={styles.descr}>{productStore.product?.description}</p>
-                <span className={styles.price}>${productStore.product?.price}</span>
-                <div className={styles.actions}>
-                  <Button className={styles.product__button_now} text="Buy Now" />
-                  <Button className={styles.product__button} text="Add to Cart" func={handleButtonClick} />
+                <div className={styles.info}>
+                  <h1 className={styles.heading}>{productStore.product?.title}</h1>
+                  <p className={styles.descr}>{productStore.product?.description}</p>
+                  <span className={styles.price}>${productStore.product?.price}</span>
+                  <div className={styles.actions}>
+                    <Button className={styles.product__button_now} text="Buy Now" />
+                    <Button className={styles.product__button} text={cartStore.amountProduct(productStore.product.documentId) === 0 ? "Add to cart" : "Go to cart"} func={handleButtonClick} />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className={styles.related}>
               <h2 className={styles.title}>Related Items</h2>
 
