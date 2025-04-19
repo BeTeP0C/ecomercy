@@ -43,7 +43,17 @@ class ProductStore {
 
   addImages(currentProduct: TProduct) {
     const imageElements = currentProduct.images.map((image, index) => (
-      <img className={styles.img} src={image.formats.medium.url} alt={`Slide ${index + 1}`} />
+      <picture>
+        <source 
+          srcSet={image.formats.small.url}
+          media="(max-width: 750px)"
+        />
+        <source 
+          srcSet={image.formats.medium.url}
+          media="(max-width: 900px)"
+        />
+        <img className={styles.img} src={image.formats.medium.url} alt="" />
+      </picture>
     ))
     this.setImages(imageElements)
   }

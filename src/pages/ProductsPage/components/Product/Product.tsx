@@ -3,16 +3,18 @@ import Button from "@/components/UI/Button"
 import styles from "./styles.module.scss"
 import { Link } from "react-router"
 import { TProductCart } from "@/types/TProductCart"
+import { TCategory } from "@/common/categoriesList"
 
 type ProductProps = {
-  id: string,
+  id: number,
+  idDocument: string,
   images: {
     large: string,
     small: string,
     medium: string,
     thumbnail: string
   },
-  type: string,
+  type: TCategory,
   title: string,
   descr: string,
   price: number,
@@ -28,6 +30,7 @@ const Product: FC<ProductProps> = ({
   descr,
   price,
   discount,
+  idDocument,
   onClick
 }) => { 
   const handleButtonClick = () => {
@@ -36,6 +39,9 @@ const Product: FC<ProductProps> = ({
       title: title,
       price: price,
       discount: discount,
+      idDocument: idDocument,
+      type: type,
+      amount: 1,
       images: images
     }
 
@@ -63,7 +69,7 @@ const Product: FC<ProductProps> = ({
         </div>
       </div>
 
-      <Link className={styles.link} to={`/products/${id}`}></Link>
+      <Link className={styles.link} to={`/products/${idDocument}`}></Link>
     </article>
   )
 }

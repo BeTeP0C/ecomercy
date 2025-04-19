@@ -27,6 +27,27 @@
 }
 
 .person path {
+  fill: none !important;
+  transition: stroke 0.3s ease;
+}
+
+.mail path {
+  stroke: none !important;
+  transition: fill 0.3s ease;
+}
+
+.lock path {
+  fill: none !important;
+  transition: stroke 0.3s ease;
+}
+
+.eye path {
+  fill: none !important;
+  transition: stroke 0.3s ease;
+}
+
+.eye_close path {
+  fill: none !important;
   transition: stroke 0.3s ease;
 }
 
@@ -63,4 +84,21 @@
   & polygon {
     transition: fill 0.3s ease;
   }
+}
+
+.door {
+  padding-right: 3px;
+}
+
+.edit {
+  padding-right: 3px;
+}
+
+.success_arrow {
+  padding-left: 5px;
+}
+
+.photo {
+  position: relative;
+  z-index: 1000;
 }

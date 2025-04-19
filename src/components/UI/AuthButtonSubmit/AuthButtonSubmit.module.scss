@@ -1,0 +1,32 @@
+@import "@/styles/variables";
+
+.error {
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  color: $color-error;
+}
+
+.button {
+  padding: 17px 32px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  color: $color-button-text;
+  background: $color-button-bg;
+  transition: background 0.3s ease;
+
+  &:hover, &:focus-visible {
+    background: $color-button-bg-hover;
+  }
+
+  &:active {
+    background: $color-button-bg-active;
+  }
+
+  &:disabled {
+    background: $color-button-bg-disabled;
+  }
+}

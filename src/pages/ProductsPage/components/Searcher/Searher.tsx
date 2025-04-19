@@ -33,10 +33,11 @@ const Searcher = observer(() => {
             <SearcherInput func={globalStore.setFilterTitle} valueStore={globalStore.filter.title}/>
           </div>
 
-          <Button text="Find now" func={handleButtonSubmit} />
+          <Button className={styles.search__button} text="Find now" func={handleButtonSubmit} />
         </div>
 
         <SearcherFilter />
+        <Button className={styles.button} text="Find now" func={handleButtonSubmit} />
       </Container>
     </section>
   ) 

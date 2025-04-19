@@ -1,0 +1,48 @@
+@use "@/styles/_variables.scss" as *;
+
+.item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+
+  &:hover {
+    .img {
+      transform: scale(1.1);
+    }
+
+    .overlay {
+      background: transparent;
+    }
+  }
+}
+
+.title {
+  position: relative;
+  font-weight: 700;
+  font-size: 30px;
+  color: $color-white;
+  z-index: 1000;
+  
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.overlay {
+  position: absolute;
+  border-radius: 30px;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0,0,0, 0.4);
+  transition: background 0.5s ease;
+}

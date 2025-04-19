@@ -1,0 +1,20 @@
+declare const classNames: {
+  readonly label: "label";
+  readonly label_low: "label_low";
+  readonly label_medium: "label_medium";
+  readonly label_high: "label_high";
+  readonly type: "type";
+  readonly label_error: "label_error";
+  readonly error: "error";
+  readonly message: "message";
+  readonly error__arrow: "error__arrow";
+  readonly input: "input";
+  readonly type_active: "type_active";
+  readonly show: "show";
+  readonly levels: "levels";
+  readonly level: "level";
+  readonly level_low: "level_low";
+  readonly level_medium: "level_medium";
+  readonly level_high: "level_high";
+};
+export = classNames;

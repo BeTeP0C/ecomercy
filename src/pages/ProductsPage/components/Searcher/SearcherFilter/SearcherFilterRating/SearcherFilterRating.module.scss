@@ -33,3 +33,14 @@
     }
   }
 }
+
+@media (max-width: 490px) {
+  .button {
+    width: 25px;
+    height: 25px;
+  }
+
+  .item:not(:last-child) {
+    margin-right: 5px;
+  }
+}

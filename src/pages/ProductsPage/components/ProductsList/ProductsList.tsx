@@ -40,7 +40,8 @@ const ProductsList = observer(() => {
                 return (
                   <li className={styles.item} key={product.id}>
                     <Product
-                      id={product.documentId}
+                      id={product.id}
+                      idDocument={product.documentId}
                       images={{
                         large: images.large.url,
                         medium: images.medium.url,

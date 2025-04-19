@@ -16,6 +16,7 @@ const CartPage = observer(() => {
   }
 
   const handlePayment = () => {
+    cartStore.addOrderLocal()
     cartStore.clearCart()
     globalStore.modalClose()
     globalStore.setModalContent("")
@@ -48,12 +49,12 @@ const CartPage = observer(() => {
       <Container>
         <h1 className={styles.heading}>
           Cart
-          {cartStore.productsCart.length !== 0 && <span className={styles.amount}>{cartStore.productsCart.length} products</span>}
+          {cartStore.amountProducts !== 0 && <span className={styles.amount}>{cartStore.amountProducts} products</span>}
         </h1>
 
         <div className={styles.block}>
           <div className={styles.main}>
-            {cartStore.productsCart.length === 0 && (
+            {cartStore.amountProducts === 0 && (
               <p className={styles.empty}>You haven't added anything to the shopping cart</p>
             )}
             <ul className={styles.list}>
@@ -65,7 +66,7 @@ const CartPage = observer(() => {
             </ul>
           </div>
 
-          {cartStore.productsCart.length !== 0 && (
+          {cartStore.amountProducts !== 0 && (
             <div className={styles.payment}>
               <div className={styles.modul}>
                 <h2 className={styles.title}>Условия заказа</h2>
@@ -75,11 +76,11 @@ const CartPage = observer(() => {
                 <div className={styles.payment__info}>
                   <h3 className={styles.payment__heading}>Total</h3>
                   <div className={`${styles.payment__line_main} ${styles.payment__line}`}>
-                    <h4 className={`${styles.payment__title} ${styles.payment__title_main}`}>{cartStore.productsCart.length} products</h4>
+                    <h4 className={`${styles.payment__title} ${styles.payment__title_main}`}>{cartStore.amountProducts} products</h4>
                     <span className={`${styles.price} ${styles.price_main}`}>{cartStore.getFullSumWithDiscount().toFixed(2)}$</span>
                   </div>
                   <div className={styles.payment__line}>
-                    <h4 className={styles.payment__title}>{cartStore.productsCart.length} products</h4>
+                    <h4 className={styles.payment__title}>{cartStore.amountProducts} products</h4>
                     <span className={styles.price}>{cartStore.getFullSum().toFixed(2)}$</span>
                   </div>
                   <div className={styles.payment__line}>

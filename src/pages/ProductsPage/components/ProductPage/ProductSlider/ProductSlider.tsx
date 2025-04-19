@@ -23,7 +23,11 @@ const ProductSlider: FC<ProductSliderProps> = ({slides, type}) => {
   }
 
   const translateX = useMemo(() => {
-    return `translateX(calc(-${Math.max(0, currentIndex) * (type === "look" ? 100 : 360)}${type === "look" ? "%" : "px"} - ${Math.max(0, currentIndex) * 20}px))`;
+    if (window.innerWidth <= 450) {
+      return `translateX(calc(-${Math.max(0, currentIndex) * (type === "look" ? 100 : 280)}${type === "look" ? "%" : "px"} - ${Math.max(0, currentIndex) * 20}px))`;
+    } else {
+      return `translateX(calc(-${Math.max(0, currentIndex) * (type === "look" ? 100 : 360)}${type === "look" ? "%" : "px"} - ${Math.max(0, currentIndex) * 20}px))`;
+    }
   }, [currentIndex, type])
 
   return (
@@ -35,7 +39,7 @@ const ProductSlider: FC<ProductSliderProps> = ({slides, type}) => {
           return (
             <li
               key={index}
-              className={`${styles.slide} ${conditionActive ? styles.slide_active : ""}`}
+              className={`${styles.slide} ${conditionActive ? styles.slide_active : ""} ${type === "related" ? styles.slide_related : ""}`}
             >
               {Slide}
             </li>

@@ -75,3 +75,10 @@
     visibility: visible;
   }
 }
+
+@media (max-width: 521px) {
+  .filter {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+}

@@ -27,7 +27,7 @@ const ProductCart: FC<ProductCartProps> = ({product, onClick}) => {
         <div className={styles.info}>
           <h2 className={styles.title}>{product.title}</h2>
           <span className={styles.price}>
-            ${finalPrice}
+            ${finalPrice} х {product.amount}
             {product.discount !== 0 && <span className={styles.price__discount}>{product.price}</span>}
           </span>
         </div>

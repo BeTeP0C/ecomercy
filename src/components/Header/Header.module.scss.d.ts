@@ -1,6 +1,18 @@
 declare const classNames: {
   readonly header: "header";
   readonly header__container: "header__container";
+  readonly nav: "nav";
+  readonly menu: "menu";
+  readonly menu__nav: "menu__nav";
+  readonly menu__nav_active: "menu__nav_active";
+  readonly menu__list: "menu__list";
+  readonly burger: "burger";
+  readonly burger__line: "burger__line";
+  readonly burger_close: "burger_close";
+  readonly burger__line_first: "burger__line_first";
+  readonly burger__line_second: "burger__line_second";
+  readonly burger__line_third: "burger__line_third";
+  readonly burger_reverse: "burger_reverse";
   readonly list: "list";
   readonly actions: "actions";
   readonly basket: "basket";
@@ -8,5 +20,6 @@ declare const classNames: {
   readonly amount: "amount";
   readonly line: "line";
   readonly line__active: "line__active";
+  readonly logo: "logo";
 };
 export = classNames;

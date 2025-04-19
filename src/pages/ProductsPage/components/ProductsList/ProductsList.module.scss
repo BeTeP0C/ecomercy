@@ -1,4 +1,4 @@
-@use "../../../../styles/_variables.scss" as *;
+@use "@/styles/_variables.scss" as *;
 
 .section {
   padding-top: 48px;
@@ -32,7 +32,7 @@
   // align-items: stretch;
   grid-auto-rows: 1fr;
   row-gap: 30px;
-  column-gap: 80px;
+  column-gap: 6.15%;
 
   &_skeleton {
     margin-bottom: 69px;
@@ -43,4 +43,16 @@
   width: 100%;
   max-height: 682px;
   cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 635px) {
+  .list {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

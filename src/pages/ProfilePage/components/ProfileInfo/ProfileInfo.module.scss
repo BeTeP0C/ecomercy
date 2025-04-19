@@ -1,0 +1,68 @@
+@use "@/styles/variables" as *;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+  padding: 30px;
+  border-radius: 30px;
+  width: 300px;
+  height: max-content;
+  box-shadow: 1px 4px 4px 3px rgba($color-primary, 0.25);
+  background: $color-off-white;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.img {
+  margin-bottom: 10px;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: $color-primary;
+}
+
+.mail {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: $color-secondary;
+}
+
+.actions {
+  display: flex;
+}
+
+.profile__button {
+  display: flex;
+  align-items: center;
+  padding: 6px 9px;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  transition: background 0.3s ease;
+
+  &_logout {
+    margin-right: 6px;
+    background: rgba($color-danger, 0.8);
+    color: $color-white;
+  }
+
+  &_edit {
+    background: rgba($color-gray-milk, 0.5);
+    color: $color-black-light;
+  }
+}

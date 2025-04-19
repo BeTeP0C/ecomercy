@@ -23,18 +23,19 @@ const HeaderItem: FC<HeaderItemProps> = ({
   const linkRef = useRef<HTMLAnchorElement | null>(null)
 
   const handleClickLink = useCallback((e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
-    e.preventDefault()
     setActive(el.id)
   }, [el.id])
 
   useEffect(() => {
     if (!linkRef.current) return
+    if (!linkRef.current.parentElement?.parentElement) return
 
     if (el.active) {
-      const pos = linkRef.current.getBoundingClientRect()
+      const posEl = linkRef.current.getBoundingClientRect()
+      const posParent = linkRef.current.parentElement.parentElement.getBoundingClientRect()
 
       setWidth(linkRef.current.offsetWidth)
-      setPositionX(pos.left)
+      setPositionX(posEl.left - posParent.left)
     }
   }, [el.active])
 

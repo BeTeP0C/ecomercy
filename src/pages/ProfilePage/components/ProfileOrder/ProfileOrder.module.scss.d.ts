@@ -1,0 +1,24 @@
+declare const classNames: {
+  readonly item: "item";
+  readonly info: "info";
+  readonly info__main: "info__main";
+  readonly code: "code";
+  readonly code_small: "code_small";
+  readonly date: "date";
+  readonly paid: "paid";
+  readonly open: "open";
+  readonly open_active: "open_active";
+  readonly content__info: "content__info";
+  readonly content__info_active: "content__info_active";
+  readonly content__review: "content__review";
+  readonly content__list: "content__list";
+  readonly content__item: "content__item";
+  readonly content__img: "content__img";
+  readonly content__button: "content__button";
+  readonly more: "more";
+  readonly list: "list";
+  readonly list_active: "list_active";
+  readonly price: "price";
+  readonly delete: "delete";
+};
+export = classNames;
