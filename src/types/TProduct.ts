@@ -1,3 +1,5 @@
+import { TCategory } from "@/common/categoriesList"
+
 export type TProductImageFormat = {
   ext: string,
   url: string,
@@ -54,7 +56,7 @@ export type TProduct = {
   productCategory: {
     id: number,
     documentId: string,
-    title: string,
+    title: TCategory,
     createdAt: string,
     updatedAt: string,
     publishedAt: string,

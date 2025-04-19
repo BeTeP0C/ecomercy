@@ -30,3 +30,9 @@
     border: 1px solid $color-brand-active;
   }
 }
+
+@media (max-width: 366px) {
+  .input:not(:last-child) {
+    margin-bottom: 5px;
+  }
+}

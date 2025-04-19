@@ -1,0 +1,40 @@
+@use "@/styles/variables" as *;
+
+.main {
+  padding-top: 200px;
+}
+
+.form {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.auth__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  max-width: 500px;
+  width: 100%;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 48px;
+}
+
+.link {
+  font-weight: 400;
+  font-size: 14px;
+  color: $color-secondary;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $color-brand;
+  }
+}

@@ -7,8 +7,31 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+
+  &__button {
+    width: 137px;
+  }
+}
+
+.button {
+  display: none;
 }
 
 .input {
-  width: 1080px;
+  flex-grow: 1;
+  margin-right: 24px;
+}
+
+@media (max-width: 521px) {
+  .input {
+    margin-right: 0;
+  }
+
+  .search__button {
+    display: none;
+  }
+
+  .button {
+    display: block;
+  }
 }

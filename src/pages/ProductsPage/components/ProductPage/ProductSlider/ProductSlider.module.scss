@@ -1,7 +1,6 @@
 @use "../../../../../styles/_variables.scss" as *;
 .slider {
   position: relative;
-  margin-right: 48px;
   overflow: hidden;
 
   &:hover .button {
@@ -12,8 +11,8 @@
 
 .container {
   display: flex;
-  width: 600px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   transition: transform 0.5s ease;
 
   &_related {
@@ -23,6 +22,7 @@
 }
 
 .slide {
+  flex: none;
   width: 100%;
   height: 100%;
   opacity: 0.5;
@@ -34,6 +34,10 @@
 
   &_active {
     opacity: 1;
+  }
+
+  &_related {
+    width: 360px;
   }
 }
 
@@ -75,4 +79,19 @@
 
 .icon {
   line-height: 0;
+}
+
+@media (max-width: 1000px) {
+  .button {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (max-width: 450px) {
+  .slide {
+    &_related {
+      width: 280px;
+    }
+  }
 }

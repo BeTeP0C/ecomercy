@@ -33,9 +33,12 @@ const ProductPage = observer(() => {
   const handleButtonClick = () => {
     if (productStore.product) {
       const productCart: TProductCart = {
-        id: productStore.product.documentId,
+        idDocument: productStore.product.documentId,
+        id: productStore.product.id,
         title: productStore.product.title,
         price: productStore.product.price,
+        type: productStore.product.productCategory.title,
+        amount: 1,
         discount: productStore.product.discountPercent,
         images: {
           large: productStore.product.images[0].formats.large.url,
@@ -48,31 +51,6 @@ const ProductPage = observer(() => {
       cartStore.addProductToCart(productCart)
     }
   }
-
-  // useEffect (() => {
-  //   const getProduct = async () => {
-  //     if (id) {
-  //       try {
-  //         const currentProduct = await globalStore.getProduct(id)
-  //         const filter = {
-  //           productCategory: {
-  //             "title": currentProduct?.productCategory.title 
-  //           }
-  //         }
-  //         const currentRelatedProducts = await globalStore.getProductsFilter(filter)
-  //         setProduct(currentProduct as TProduct)
-  //         setRelatedProducts(currentRelatedProducts)
-  //         addedImages(currentProduct as TProduct)
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
-        
-  //     }
-  //   }
-
-  //   setImages([])
-  //   getProduct()
-  // }, [id])
 
   return (
     <main className={styles.main}>
@@ -87,7 +65,10 @@ const ProductPage = observer(() => {
         ) : (
           <div>
             <div className={styles.product}>
-              <ProductSlider type="look" slides={productStore.images}/>
+              <div className={styles.slider}>
+                <ProductSlider type="look" slides={productStore.images}/>
+              </div>
+
               <div className={styles.info}>
                 <h1 className={styles.heading}>{productStore.product?.title}</h1>
                 <p className={styles.descr}>{productStore.product?.description}</p>
@@ -102,23 +83,24 @@ const ProductPage = observer(() => {
               <h2 className={styles.title}>Related Items</h2>
 
               <ProductSlider type="related" slides={productStore.relatedProducts ? productStore.relatedProducts.map(relatedProduct => (
-                  <Product 
-                    key={relatedProduct.id} 
-                    id={relatedProduct.documentId}
-                    images={{
-                      large: relatedProduct.images[0].formats.large.url,
-                      medium: relatedProduct.images[0].formats.medium.url,
-                      small: relatedProduct.images[0].formats.small.url,
-                      thumbnail: relatedProduct.images[0].formats.thumbnail.url
-                    }}
-                    type={relatedProduct.productCategory.title}
-                    title={relatedProduct.title}
-                    descr={relatedProduct.description}
-                    price={relatedProduct.price}
-                    discount={relatedProduct.discountPercent}
-                    onClick={cartStore.addProductToCart}
-                  />
-                )): []}/>
+                <Product 
+                  key={relatedProduct.id} 
+                  id={relatedProduct.id}
+                  idDocument={relatedProduct.documentId}
+                  images={{
+                    large: relatedProduct.images[0].formats.large.url,
+                    medium: relatedProduct.images[0].formats.medium.url,
+                    small: relatedProduct.images[0].formats.small.url,
+                    thumbnail: relatedProduct.images[0].formats.thumbnail.url
+                  }}
+                  type={relatedProduct.productCategory.title}
+                  title={relatedProduct.title}
+                  descr={relatedProduct.description}
+                  price={relatedProduct.price}
+                  discount={relatedProduct.discountPercent}
+                  onClick={cartStore.addProductToCart}
+                />
+              )): []}/>
             </div>
           </div>
         )}

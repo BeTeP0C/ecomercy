@@ -1,0 +1,93 @@
+@use "@/styles/variables" as *;
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 130px;
+}
+
+.eye {
+  width: 60px;
+  height: 60px;
+  background-color: $color-white;
+  border: 4px solid $color-black-light;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.pupil {
+  width: 20px;
+  height: 20px;
+  background-color: $color-brand;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.pupilBody {
+  width: 100%;
+  height: 100%;
+  background-color: $color-brand;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.pupilHighlight {
+  width: 25%;
+  height: 25%;
+  background-color: $color-white;
+  border-radius: 50%;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+
+.lidTop,
+.lidBottom {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background-color: $color-black-light;
+  left: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lidTop {
+  top: 0;
+  animation: blink-top 2s infinite;
+}
+
+.lidBottom {
+  bottom: 0;
+  animation: blink-bottom 2s infinite;
+}
+
+@keyframes blink-top {
+  0%, 40%, 100% { transform: translateY(-100%); }
+  45%, 55% { transform: translateY(0); }
+}
+
+@keyframes blink-bottom {
+  0%, 40%, 100% { transform: translateY(100%); }
+  45%, 55% { transform: translateY(0); }
+}
+
+@keyframes eye-movement {
+  0% { transform: translate(10px, 10px); }
+  33% { transform: translate(-10px, 10px); }
+  66% { transform: translate(0, 0); }
+  100% { transform: translate(10px, 10px); }
+}
+
+.idle {
+  animation: eye-movement 4s infinite ease-in-out;
+}

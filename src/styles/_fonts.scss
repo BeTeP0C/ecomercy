@@ -1,5 +1,6 @@
 @import "./mixins";
 
+@include font-face("Roboto", "Roboto-300", "300");
 @include font-face("Roboto", "Roboto-400", "400");
 @include font-face("Roboto", "Roboto-500", "500");
 @include font-face("Roboto", "Roboto-600", "600");

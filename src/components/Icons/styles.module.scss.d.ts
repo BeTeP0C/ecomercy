@@ -2,6 +2,10 @@ declare const classNames: {
   readonly icon: "icon";
   readonly basket: "basket";
   readonly person: "person";
+  readonly mail: "mail";
+  readonly lock: "lock";
+  readonly eye: "eye";
+  readonly eye_close: "eye_close";
   readonly arrow: "arrow";
   readonly loader: "loader";
   readonly loader_border: "loader_border";
@@ -9,5 +13,9 @@ declare const classNames: {
   readonly loader_border_second: "loader_border_second";
   readonly loader_border_third: "loader_border_third";
   readonly star: "star";
+  readonly door: "door";
+  readonly edit: "edit";
+  readonly success_arrow: "success_arrow";
+  readonly photo: "photo";
 };
 export = classNames;
