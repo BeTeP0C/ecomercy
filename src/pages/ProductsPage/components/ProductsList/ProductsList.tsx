@@ -5,9 +5,18 @@ import Loader from "@/components/Icons/Loader"
 import Container from "@/components/UI/Container"
 import Product from "../Product/Product"
 import ProductSkeleton from "../ProductSkeleton"
+import { TPagination } from "@/types/TPagination"
+import { TProduct } from "@/types/TProduct"
+import { FC } from "react"
 
-const ProductsList = observer(() => {
-  const {globalStore, cartStore} = useStore()
+type ProductsListProps = {
+  pagination: TPagination,
+  products: TProduct[],
+  isLoading: boolean
+}
+
+const ProductsList: FC<ProductsListProps> = observer(({pagination, products, isLoading}) => {
+  const {cartStore} = useStore()
 
   return (
     <section className={styles.section}>
@@ -16,14 +25,14 @@ const ProductsList = observer(() => {
           <span>
             Total products
           </span>
-          {globalStore.isLoading ? (
+          {isLoading ? (
             <Loader width={30} height={30}/>
           ) : (
-            <span className={styles.pages}>{globalStore.pagination.total}</span>
+            <span className={styles.pages}>{pagination.total}</span>
           )}
         </h2>
 
-        {globalStore.isLoading ? (
+        {isLoading ? (
           (
             <ul className={`${styles.list} ${styles.list_skeleton}`} style={{marginRight: 30}}>
               <ProductSkeleton />
@@ -34,7 +43,7 @@ const ProductsList = observer(() => {
         ) : (
           <div className={styles.main}>
             <ul className={styles.list}>
-              {globalStore.products.map(product => {
+              {products.map(product => {
                 const images = product.images[0].formats
                 const amountProduct = cartStore.amountProduct(product.documentId)
 

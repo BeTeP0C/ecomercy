@@ -4,6 +4,7 @@ import { TProductCart } from "@/types/TProductCart";
 import { TOrder } from "@/types/TOrder";
 import { getDateTransform } from "@/utils/getDateTransform";
 import localStorageStore from "@/utils/localStorageStore";
+import { TProduct } from "@/types/TProduct";
 
 class CartStore {
   rootStore: RootStore;
@@ -92,6 +93,26 @@ class CartStore {
     if (product) return product.amount
 
     return 0
+  }
+
+  transformProductToCart (product: TProduct) {
+    const productCart: TProductCart = {
+      idDocument: product.documentId,
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      type: product.productCategory.title,
+      amount: 1,
+      discount: product.discountPercent,
+      images: {
+        large: product.images[0].formats.large.url,
+        medium: product.images[0].formats.medium.url,
+        small: product.images[0].formats.small.url,
+        thumbnail: product.images[0].formats.thumbnail.url
+      }
+    }
+
+    return productCart
   }
 
   addOrderLocal = () => {

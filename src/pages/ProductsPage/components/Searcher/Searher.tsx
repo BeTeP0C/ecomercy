@@ -22,7 +22,6 @@ const Searcher = observer(() => {
     params.set("page", query.get("page") ?? "")
 
     navigate(`/products?${params.toString()}`)
-    globalStore.getProducts()
   }
 
   return (

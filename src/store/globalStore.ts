@@ -8,6 +8,7 @@ import { TProduct } from "../types/TProduct";
 import { TPagination } from "../types/TPagination";
 import { TUserInfoData } from "@/types/api/TAuth";
 import localStorageStore from "@/utils/localStorageStore";
+import { TProductApi } from "@/types/api/TProductApi";
 
 // type TLoading = ("loading" | "succefuly" | "failed")
 
@@ -39,12 +40,6 @@ export class GlobalStore {
 
   // перенести в локальный стор
   products: TProduct[] = []
-  pagination: TPagination = {
-    page: 1,
-    pageSize: 9,
-    pageCount: 0,
-    total: 0
-  } 
 
   // добавить в локальный стор
   filter: TFilterStore = {
@@ -98,23 +93,7 @@ export class GlobalStore {
     localStorageStore.safeLocalStorageDelete("user_id")
   }
 
-  getCurrentSavePage = () => {
-    const checkPage = localStorageStore.safeLocalStorageGet("currentPage")
-    const localPage = checkPage ? JSON.parse(checkPage) : null
-    if (localPage) {
-      this.pagination.page = localPage
-    }
-  }
-
-  setPagePagination = (page: number) => {
-    runInAction(() => {})
-      this.pagination = {...this.pagination,
-        page: page
-    }
-
-    this.getProducts()
-  }
-
+  // перенести в локальный стор
   setFilterTitle = (value: string) => {
     this.filter = {...this.filter,
       title: value
@@ -136,93 +115,6 @@ export class GlobalStore {
   setFilterRating = (value: number) => {
     this.filter = {...this.filter,
       rating: value
-    }
-  }
-
-  getProducts = () => {
-    this.isLoading = true
-
-    const queryParams =  qs.stringify( {
-      populate: ['images', 'productCategory']
-    })
-
-    const filters = {
-      "title": {
-        "$containsi": this.filter.title
-      },
-      "price": this.filter.priceEnd !== 0 ? {
-        "$gte": this.filter.priceStart,
-        "$lte": this.filter.priceEnd
-      }: {},
-      "rating": {
-        "$gte": this.filter.rating,
-        // "$lte": 
-      }
-      
-    }
-
-    const res = axios.get(`${this.endpoint}/products?pagination[pageSize]=9&pagination[page]=${this.pagination.page}&${qs.stringify({filters})}&${queryParams}`, {
-      headers: {
-        "Authorization": `Bearer ${this.token}`
-      }
-    })
-
-    res.then(resp => {
-      runInAction(() => {
-        this.products = resp.data.data
-        this.pagination = resp.data.meta.pagination
-        this.isLoading = false
-      })
-    })
-  }
-
-  getProductsFilter = async (filters: {}): Promise<TProduct[]> => {
-    this.isLoading = true
-
-    const queryParams =  qs.stringify( {
-      populate: ['images', 'productCategory']
-    })
-
-    const resp = await axios.get(`${this.endpoint}/products?${qs.stringify({filters})}&${queryParams}`, {
-      headers: {
-        "Authorization": `Bearer ${this.token}`
-      }
-    })
-
-    const data: TProduct[] = resp.data.data
-
-    runInAction(() => {
-      this.isLoading = false
-    })
-
-    return data
-  }
-
-  getProduct = async (id: string): Promise<TProduct | undefined> => {
-    runInAction(() => {
-      this.isLoading = true
-    })
-
-    const queryParams =  qs.stringify( {
-      populate: ['images', 'productCategory']
-    })
-
-    try {
-      const resp = await axios.get(`${this.endpoint}/products/${id}?${queryParams}`, {
-        headers: {
-          "Authorization": `Bearer ${this.token}`
-        }
-      })
-
-      const product: TProduct = resp.data.data
-
-      return product
-    } catch (error) {
-      console.log(error)
-    } finally {
-      runInAction(() => {
-        this.isLoading = false
-      })
     }
   }
 

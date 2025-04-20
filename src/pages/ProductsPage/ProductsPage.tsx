@@ -1,4 +1,4 @@
-import { observer } from "mobx-react-lite"
+import { observer, useLocalObservable } from "mobx-react-lite"
 import Hero from "./components/Hero"
 import ProductsList from "./components/ProductsList"
 import Searcher from "./components/Searcher"
@@ -6,9 +6,11 @@ import { useStore } from "@/hooks/useStore"
 import { useEffect } from "react"
 import ProductPagination from "./components/ProductPagination"
 import { useLocation } from "react-router"
+import ProductsPageStore from "./ProductsPageStore"
 
 const ProductsPage = observer(() => {
   const {globalStore} = useStore ()
+  const store = useLocalObservable(() => new ProductsPageStore(globalStore))
   const query = new URLSearchParams(useLocation().search)
   const text = query.get("text")
   const priceStart = query.get("priceStart")
@@ -22,17 +24,19 @@ const ProductsPage = observer(() => {
     globalStore.setFilterPriceEnd(Number(priceEnd) ?? 0)
     globalStore.setFilterRating(Number(rating) ?? 0)
     globalStore.setFilterRating(Number(rating) ?? 0)
-    globalStore.setPagePagination(Number(currentPage) ?? 1)
-
-    globalStore.getProducts()
+    store.setPagePagination(Number(currentPage) ?? 1)
   }, [])
 
   return (
     <main>
       <Hero />
       <Searcher />
-      <ProductsList />
-      <ProductPagination currentPage={globalStore.pagination.page} totalPages={globalStore.pagination.pageCount} func={globalStore.setPagePagination}/>
+      <ProductsList 
+        pagination={store.pagination}
+        products={store.products}
+        isLoading={store.isLoading}
+      />
+      <ProductPagination currentPage={store.pagination.page} totalPages={store.pagination.pageCount} func={store.setPagePagination}/>
     </main>
   )
 })

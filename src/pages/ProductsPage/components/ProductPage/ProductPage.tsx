@@ -18,12 +18,12 @@ const ProductPage = observer(() => {
   const {id} = useParams()
   const navigate = useNavigate()
 
-  const store = useLocalObservable(() => new ProductStore())
+  const store = useLocalObservable(() => new ProductStore(globalStore))
 
   useEffect(() => {
     const loadData = async () => {
       if (id) {
-        store.loadProductData(id, globalStore)
+        store.loadProductData(id)
       }
     }
 
@@ -33,21 +33,7 @@ const ProductPage = observer(() => {
   const handleButtonClick = () => {
     if (store.product) {
       if (cartStore.amountProduct(store.product.documentId) === 0) {
-        const productCart: TProductCart = {
-          idDocument: store.product.documentId,
-          id: store.product.id,
-          title: store.product.title,
-          price: store.product.price,
-          type: store.product.productCategory.title,
-          amount: 1,
-          discount: store.product.discountPercent,
-          images: {
-            large: store.product.images[0].formats.large.url,
-            medium: store.product.images[0].formats.medium.url,
-            small: store.product.images[0].formats.small.url,
-            thumbnail: store.product.images[0].formats.thumbnail.url
-          }
-        }
+        const productCart: TProductCart = cartStore.transformProductToCart(store.product)
   
         cartStore.addProductToCart(productCart)
       } else {
