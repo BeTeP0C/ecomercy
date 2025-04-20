@@ -1,4 +1,4 @@
-import { observer } from "mobx-react-lite"
+import { observer, useLocalObservable } from "mobx-react-lite"
 import Logo from "../Icons/Logo"
 import Container from "../UI/Container"
 import styles from "./Header.module.scss"
@@ -8,9 +8,11 @@ import Basket from "../Icons/Basket"
 import Person from "../Icons/Person"
 import { useEffect, useRef, useState } from "react"
 import HeaderItem from "./HeaderItem"
+import HeaderStore from "./HeaderStore"
 
 const Header = observer(() => {
   const { globalStore, cartStore } = useStore()
+  const store = useLocalObservable(() => new HeaderStore())
   const lineRef = useRef<HTMLDivElement | null>(null)
   const [positionX, setPositionX] = useState<number>(0)
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
@@ -45,18 +47,17 @@ const Header = observer(() => {
       <div className={`${styles.menu}`}>
         <nav className={`${styles.nav} ${styles.menu__nav} ${isMenuOpen ? styles.menu__nav_active : ""}`}>
           <ul className={`${styles.list} ${styles.menu__list}`}>
-            {globalStore.navEl.map(el => (
+            {store.navEl.map(el => (
               <HeaderItem 
                 key={el.id} 
                 el={el}
                 setPositionX={setPositionX}
                 setWidth={setWidth}
-                setActive={globalStore.setNavEl}
+                setActive={store.setActiveNavEl}
               />
             ))}
           </ul>
         </nav>
-
 
         <button className={`${styles.burger} ${isReverse ? styles.burger_reverse : ""} ${isBurgerClose ? styles.burger_close : ""}`} type="button" onClick={handleClickBurderButton}>
           <div className={`${styles.burger__line} ${styles.burger__line_first}`}></div>
@@ -73,13 +74,13 @@ const Header = observer(() => {
 
         <nav className={styles.nav}>
           <ul className={styles.list}>
-            {globalStore.navEl.map(el => (
+            {store.navEl.map(el => (
               <HeaderItem 
                 key={el.id} 
                 el={el}
                 setPositionX={setPositionX}
                 setWidth={setWidth}
-                setActive={globalStore.setNavEl}
+                setActive={store.setActiveNavEl}
               />
             ))}
           </ul>

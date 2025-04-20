@@ -1,7 +1,7 @@
 import { FC } from "react"
 import styles from "./ProductPagination.module.scss"
 import ArrowBack from "@/components/Icons/ArrowBack";
-import { useLocation, useNavigate } from "react-router";
+import { useSearchParams } from "react-router";
 
 type ProductPaginationProps = {
   currentPage: number,
@@ -10,19 +10,21 @@ type ProductPaginationProps = {
 }
 
 const ProductPagination: FC<ProductPaginationProps> = ({currentPage, totalPages, func}) => {
-  const { search } = useLocation()
-  const query = new URLSearchParams(search)
-  const navigate = useNavigate()
-  query.delete("page")
+  const [queryParams, setQueryParams] = useSearchParams()
+
+  const updateQueryParams = (key: string, value: any) => {
+    const newParams = new URLSearchParams(queryParams.toString());
+    newParams.set(key, value.toString());
+    setQueryParams(newParams);
+  }
 
   const handleNextPage = () => {
-    navigate(`/products?${query}&page=${currentPage+1}`)
+    updateQueryParams("page", currentPage + 1)
     func(currentPage+1)
-    
   }
 
   const handleBackPage = () => {
-    navigate(`/products?${query}&page=${currentPage-1}`)
+    updateQueryParams("page", currentPage - 1)
     func(currentPage-1)
   }
 
@@ -48,7 +50,7 @@ const ProductPagination: FC<ProductPaginationProps> = ({currentPage, totalPages,
         <li key={index} className={styles.item}>
           <button
             onClick={() => {
-              navigate(`/products?${query}&page=${page}`)
+              updateQueryParams("page", page)
               func(page)
             }}
             className={`${styles.button} ${page === currentPage ? styles.button_active : ""}`}

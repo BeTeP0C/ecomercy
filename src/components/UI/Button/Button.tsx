@@ -5,14 +5,15 @@ type ButtonProps = {
   text: string,
   func?: () => void,
   className?: string,
+  type?: ("default" | "transparent")
 }
 
-const Button: FC<ButtonProps> = ({text, func, className = ""}) => {
+const Button: FC<ButtonProps> = ({text, func, className = "", type = "default"}) => {
 
   return (
     <button
       onClick={func}
-      className={`${styles.button} ${className}`}
+      className={`${className} ${styles.button} ${type === "transparent" && styles.button_transparent}`}
     >
       {text}
     </button>

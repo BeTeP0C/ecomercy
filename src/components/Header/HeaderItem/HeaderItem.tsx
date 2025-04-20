@@ -1,6 +1,8 @@
-import { FC, MouseEvent, useCallback, useEffect, useRef } from "react"
+import { FC, useCallback, useEffect, useRef } from "react"
 import styles from "./HeaderItem.module.scss"
 import { Link } from "react-router"
+import { headerItems, THeaderItem } from "@/common/headerItems"
+import { useLocation } from "react-router"
 
 type HeaderItemProps = {
   el: {
@@ -21,10 +23,29 @@ const HeaderItem: FC<HeaderItemProps> = ({
   setActive
 }) => {
   const linkRef = useRef<HTMLAnchorElement | null>(null)
+  const location = useLocation()
 
-  const handleClickLink = useCallback((e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
+  const handleClickLink = useCallback(() => {
     setActive(el.id)
   }, [el.id])
+
+  const handleActiveLink = () => {
+    if (!linkRef.current) return
+    if (!linkRef.current.parentElement?.parentElement) return
+    
+    const posEl = linkRef.current.getBoundingClientRect()
+    const posParent = linkRef.current.parentElement.parentElement.getBoundingClientRect()
+
+    setWidth(linkRef.current.offsetWidth)
+    setPositionX(posEl.left - posParent.left)
+  }
+
+  useEffect(() => {
+    if (location.pathname === "") {
+      setActive(1)
+    } else if (location.pathname === el.href) setActive(el.id)
+
+  }, [])
 
   useEffect(() => {
     if (!linkRef.current) return

@@ -1,5 +1,6 @@
-import { GlobalStore, safeLocalStorageGet, safeLocalStorageSet } from "@/store/globalStore";
+import { GlobalStore } from "@/store/globalStore";
 import { TOrder } from "@/types/TOrder";
+import localStorageStore from "@/utils/localStorageStore";
 import { action, makeObservable, observable } from "mobx";
 
 class ProfilePageStore {
@@ -28,11 +29,11 @@ class ProfilePageStore {
   deleteOrders = (id: number) => {
     this.orders = this.orders.filter(order => order.id !== id)
 
-    safeLocalStorageSet("orders", JSON.stringify(this.orders))
+    localStorageStore.safeLocalStorageSet("orders", JSON.stringify(this.orders))
   }
 
   getOrders = () => {
-    const ordersJSON = safeLocalStorageGet("orders")
+    const ordersJSON = localStorageStore.safeLocalStorageGet("orders")
 
     if (ordersJSON) {
       const orders: TOrder[] = JSON.parse(ordersJSON)
@@ -46,7 +47,7 @@ class ProfilePageStore {
   addOrders (order: TOrder) {
     this.orders = [...this.orders, order]
 
-    safeLocalStorageSet("orders", JSON.stringify(this.orders))
+    localStorageStore.safeLocalStorageSet("orders", JSON.stringify(this.orders))
   }
 }
 

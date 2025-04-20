@@ -1,8 +1,8 @@
-import { observer } from "mobx-react-lite"
+import { observer, useLocalObservable } from "mobx-react-lite"
 import styles from "./ProductPage.module.scss"
 import { useStore } from "@/hooks/useStore"
 import { useNavigate, useParams } from "react-router"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import Container from "@/components/UI/Container"
 import Button from "@/components/UI/Button"
@@ -18,12 +18,12 @@ const ProductPage = observer(() => {
   const {id} = useParams()
   const navigate = useNavigate()
 
-  const [productStore] = useState(() => new ProductStore())
+  const store = useLocalObservable(() => new ProductStore())
 
   useEffect(() => {
     const loadData = async () => {
       if (id) {
-        productStore.loadProductData(id, globalStore)
+        store.loadProductData(id, globalStore)
       }
     }
 
@@ -31,21 +31,21 @@ const ProductPage = observer(() => {
   }, [id])
 
   const handleButtonClick = () => {
-    if (productStore.product) {
-      if (cartStore.amountProduct(productStore.product.documentId) === 0) {
+    if (store.product) {
+      if (cartStore.amountProduct(store.product.documentId) === 0) {
         const productCart: TProductCart = {
-          idDocument: productStore.product.documentId,
-          id: productStore.product.id,
-          title: productStore.product.title,
-          price: productStore.product.price,
-          type: productStore.product.productCategory.title,
+          idDocument: store.product.documentId,
+          id: store.product.id,
+          title: store.product.title,
+          price: store.product.price,
+          type: store.product.productCategory.title,
           amount: 1,
-          discount: productStore.product.discountPercent,
+          discount: store.product.discountPercent,
           images: {
-            large: productStore.product.images[0].formats.large.url,
-            medium: productStore.product.images[0].formats.medium.url,
-            small: productStore.product.images[0].formats.small.url,
-            thumbnail: productStore.product.images[0].formats.thumbnail.url
+            large: store.product.images[0].formats.large.url,
+            medium: store.product.images[0].formats.medium.url,
+            small: store.product.images[0].formats.small.url,
+            thumbnail: store.product.images[0].formats.thumbnail.url
           }
         }
   
@@ -55,6 +55,22 @@ const ProductPage = observer(() => {
       }
     }
   }
+
+  const slidesImage = store.images.map(image => {
+    return (
+      <picture>
+        <source 
+          srcSet={image.small}
+          media="(max-width: 750px)"
+        />
+        <source 
+          srcSet={image.medium}
+          media="(max-width: 900px)"
+        />
+        <img className={styles.img} src={image.medium} alt="" />
+      </picture>
+    )
+  })
 
   return (
     <main className={styles.main}>
@@ -68,19 +84,19 @@ const ProductPage = observer(() => {
           <Loader />
         ) : (
           <div>
-            {productStore.product && (
+            {store.product && (
               <div className={styles.product}>
                 <div className={styles.slider}>
-                  <ProductSlider type="look" slides={productStore.images}/>
+                  <ProductSlider type="look" slides={slidesImage}/>
                 </div>
 
                 <div className={styles.info}>
-                  <h1 className={styles.heading}>{productStore.product?.title}</h1>
-                  <p className={styles.descr}>{productStore.product?.description}</p>
-                  <span className={styles.price}>${productStore.product?.price}</span>
+                  <h1 className={styles.heading}>{store.product?.title}</h1>
+                  <p className={styles.descr}>{store.product?.description}</p>
+                  <span className={styles.price}>${store.product?.price}</span>
                   <div className={styles.actions}>
                     <Button className={styles.product__button_now} text="Buy Now" />
-                    <Button className={styles.product__button} text={cartStore.amountProduct(productStore.product.documentId) === 0 ? "Add to cart" : "Go to cart"} func={handleButtonClick} />
+                    <Button className={styles.product__button} text={cartStore.amountProduct(store.product.documentId) === 0 ? "Add to cart" : "Go to cart"} func={handleButtonClick} />
                   </div>
                 </div>
               </div>
@@ -88,25 +104,28 @@ const ProductPage = observer(() => {
             <div className={styles.related}>
               <h2 className={styles.title}>Related Items</h2>
 
-              <ProductSlider type="related" slides={productStore.relatedProducts ? productStore.relatedProducts.map(relatedProduct => (
-                <Product 
-                  key={relatedProduct.id} 
-                  id={relatedProduct.id}
-                  idDocument={relatedProduct.documentId}
-                  images={{
-                    large: relatedProduct.images[0].formats.large.url,
-                    medium: relatedProduct.images[0].formats.medium.url,
-                    small: relatedProduct.images[0].formats.small.url,
-                    thumbnail: relatedProduct.images[0].formats.thumbnail.url
-                  }}
-                  type={relatedProduct.productCategory.title}
-                  title={relatedProduct.title}
-                  descr={relatedProduct.description}
-                  price={relatedProduct.price}
-                  discount={relatedProduct.discountPercent}
-                  onClick={cartStore.addProductToCart}
-                />
-              )): []}/>
+              <ProductSlider type="related" slides={store.relatedProducts ? store.relatedProducts.map(relatedProduct => {
+                return (
+                  <Product 
+                    key={relatedProduct.id} 
+                    id={relatedProduct.id}
+                    idDocument={relatedProduct.documentId}
+                    amount={cartStore.amountProduct(relatedProduct.documentId)}
+                    images={{
+                      large: relatedProduct.images[0].formats.large.url,
+                      medium: relatedProduct.images[0].formats.medium.url,
+                      small: relatedProduct.images[0].formats.small.url,
+                      thumbnail: relatedProduct.images[0].formats.thumbnail.url
+                    }}
+                    type={relatedProduct.productCategory.title}
+                    title={relatedProduct.title}
+                    descr={relatedProduct.description}
+                    price={relatedProduct.price}
+                    discount={relatedProduct.discountPercent}
+                    onClick={cartStore.addProductToCart}
+                  />
+                )
+              }): []}/>
             </div>
           </div>
         )}

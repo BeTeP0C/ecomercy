@@ -4,12 +4,12 @@ import { observer, useLocalObservable } from "mobx-react-lite"
 import { useStore } from "@/hooks/useStore"
 import AuthPageStore, { TInfoTries } from "./AuthPageStore"
 import { FormEvent, useEffect } from "react"
-import { safeLocalStorageGet } from "@/store/globalStore"
 import { Link, useNavigate } from "react-router"
 import Person from "@/components/Icons/Person"
 import AuthInput from "../../components/UI/AuthInput"
 import Lock from "@/components/Icons/Lock"
 import AuthButtonSubmit from "@/components/UI/AuthButtonSubmit"
+import localStorageStore from "@/utils/localStorageStore"
 
 const AuthPage = observer(() => {
   const {globalStore} = useStore()
@@ -25,7 +25,7 @@ const AuthPage = observer(() => {
   }
 
   useEffect(() => {
-    const infoTriesJSON = safeLocalStorageGet("infoTries")
+    const infoTriesJSON = localStorageStore.safeLocalStorageGet("infoTries")
     const resultToken = globalStore.checkToken
 
     if (resultToken) {

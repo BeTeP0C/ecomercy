@@ -53,19 +53,20 @@ const CategoryPage = observer(() => {
           <div className={styles.content}>
             <ul className={styles.list}>
               {store && store.products.map(product => {
-                console.log(toJS(product))
                 const images = product.images[0].formats
 
                 return (
                   <li className={styles.item} key={product.id}>
                     <Product
-                      id={product.documentId}
+                      id={product.id}
+                      idDocument={product.documentId}
                       images={{
                         large: images.large.url,
                         medium: images.medium.url,
                         small: images.small.url,
                         thumbnail: images.thumbnail.url
                       }}
+                      amount={cartStore.amountProduct(product.documentId)}
                       type={product.productCategory.title}
                       title={product.title}
                       descr={product.description}

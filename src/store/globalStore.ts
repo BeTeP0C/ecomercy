@@ -1,14 +1,13 @@
 import { makeAutoObservable, observable, runInAction } from "mobx";
 import { RootStore } from "./rootStore";
-import { headerItems, THeaderItem } from "../common/headerItems";
 import { TFilterStore } from "../types/TFilter";
 import axios from "axios";
 import qs from "qs"
 import {jwtDecode} from 'jwt-decode';
 import { TProduct } from "../types/TProduct";
 import { TPagination } from "../types/TPagination";
-import React from "react";
 import { TUserInfoData } from "@/types/api/TAuth";
+import localStorageStore from "@/utils/localStorageStore";
 
 // type TLoading = ("loading" | "succefuly" | "failed")
 
@@ -23,24 +22,6 @@ export const getInfoJWT = (token: string) => {
   return jwtToken
 }
 
-export const safeLocalStorageSet = (key: string, value: string) => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem(key,value)
-  }
-}
-
-export const safeLocalStorageGet = (key: string) => {
-  if (typeof window !== "undefined") {
-    return localStorage.getItem(key)
-  }
-}
-
-export const safeLocalStorageDelete = (key: string) => {
-  if (typeof window !== "undefined") {
-    return localStorage.removeItem(key)
-  }
-}
-
 type TUserInfo = {
   mail: string,
   name: string,
@@ -52,13 +33,11 @@ export class GlobalStore {
   endpoint: string = "https://front-school-strapi.ktsdev.ru/api";
   token: string = "f53a84efed5478ffc79d455646b865298d6531cf8428a5e3157fa5572c6d3c51739cdaf3a28a4fdf8b83231163075ef6a8435a774867d035af53717fecd37bca814c6b7938f02d2893643e2c1b6a2f79b3ca715222895e8ee9374c0403d44081e135cda1f811fe7cfec6454746a5657ba070ec8456462f8ca0e881232335d1ef"
   accessToken: string | null = null
-  navEl: THeaderItem[] = headerItems;
   isLoading: boolean = false
-  isModalOpen: boolean = false
-  modalContent: React.ReactNode = ''
 
   isAuthorizate: boolean = false
 
+  // перенести в локальный стор
   products: TProduct[] = []
   pagination: TPagination = {
     page: 1,
@@ -67,6 +46,7 @@ export class GlobalStore {
     total: 0
   } 
 
+  // добавить в локальный стор
   filter: TFilterStore = {
     title: "",
     priceStart: 0,
@@ -85,7 +65,7 @@ export class GlobalStore {
     this.getCurrentSavePage()
 
     if (this.checkToken) {
-      const access_token = safeLocalStorageGet("access_token")
+      const access_token = localStorageStore.safeLocalStorageGet("access_token")
       if (access_token) {
         this.accessToken = access_token
         this.handleAuthorizate()
@@ -93,11 +73,10 @@ export class GlobalStore {
     } else {
       this.handleLogout()
     }
-
   }
 
   get checkToken () {
-    const access_token = safeLocalStorageGet("access_token")
+    const access_token = localStorageStore.safeLocalStorageGet("access_token")
     if (access_token) {
       const infoToken = getInfoJWT(access_token)
 
@@ -115,12 +94,12 @@ export class GlobalStore {
 
   handleLogout = () => {
     this.isAuthorizate = false
-    safeLocalStorageDelete("access_token")
-    safeLocalStorageDelete("user_id")
+    localStorageStore.safeLocalStorageDelete("access_token")
+    localStorageStore.safeLocalStorageDelete("user_id")
   }
 
   getCurrentSavePage = () => {
-    const checkPage = safeLocalStorageGet("currentPage")
+    const checkPage = localStorageStore.safeLocalStorageGet("currentPage")
     const localPage = checkPage ? JSON.parse(checkPage) : null
     if (localPage) {
       this.pagination.page = localPage
@@ -134,20 +113,6 @@ export class GlobalStore {
     }
 
     this.getProducts()
-  }
-
-  setNavEl = (id: number) => {
-    this.navEl = this.navEl.map(el => {
-      if (el.id === id) {
-        return {...el,
-          active: true
-        }
-      }
-
-      return {...el,
-        active: false
-      }
-    })
   }
 
   setFilterTitle = (value: string) => {
@@ -211,7 +176,7 @@ export class GlobalStore {
     })
   }
 
-  getProductsFilter = async (filters: {}) => {
+  getProductsFilter = async (filters: {}): Promise<TProduct[]> => {
     this.isLoading = true
 
     const queryParams =  qs.stringify( {
@@ -224,14 +189,16 @@ export class GlobalStore {
       }
     })
 
+    const data: TProduct[] = resp.data.data
+
     runInAction(() => {
       this.isLoading = false
     })
 
-    return resp.data.data
+    return data
   }
 
-  getProduct = async (id: string) => {
+  getProduct = async (id: string): Promise<TProduct | undefined> => {
     runInAction(() => {
       this.isLoading = true
     })
@@ -290,17 +257,5 @@ export class GlobalStore {
         this.isLoading = false
       })
     }
-  }
-
-  modalOpen = () => {
-    this.isModalOpen = true
-  }
-
-  modalClose = () => {
-    this.isModalOpen = false
-  }
-
-  setModalContent = (modalContent: React.ReactNode) => {
-    this.modalContent = modalContent
   }
 }

@@ -11,7 +11,7 @@ type ProductCartProps = {
 
 const ProductCart: FC<ProductCartProps> = ({product, onClick}) => {
   const handleButtonClick = () => {
-    onClick(product.id)
+    onClick(product.idDocument)
   }
 
   const finalPrice = useMemo(() => {
@@ -33,7 +33,7 @@ const ProductCart: FC<ProductCartProps> = ({product, onClick}) => {
         </div>
       </div>
 
-      <div className={styles.actions}>
+      <div>
         <button type="button" className={styles.delete} onClick={handleButtonClick}>
           <Cart />
         </button>

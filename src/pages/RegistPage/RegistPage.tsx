@@ -10,7 +10,6 @@ import Person from "@/components/Icons/Person"
 import AuthButtonSubmit from "@/components/UI/AuthButtonSubmit"
 import Mail from "@/components/Icons/Mail"
 import Lock from "@/components/Icons/Lock"
-import PasswordLevel from "./components/PasswordLevel"
 
 const RegistPage = observer(() => {
   const {globalStore} = useStore()

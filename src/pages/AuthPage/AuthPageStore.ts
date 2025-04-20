@@ -1,5 +1,6 @@
-import { GlobalStore, safeLocalStorageSet } from "@/store/globalStore";
+import { GlobalStore } from "@/store/globalStore";
 import { TAuthSuccess } from "@/types/api/TAuth";
+import localStorageStore from "@/utils/localStorageStore";
 import axios from "axios";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 
@@ -90,7 +91,7 @@ class AuthPageStore {
 
     this.addErrorForTry()
 
-    safeLocalStorageSet("infoTries", JSON.stringify(this.infoTries))
+    localStorageStore.safeLocalStorageSet("infoTries", JSON.stringify(this.infoTries))
   }
   async handleAuth () {
     if (this.infoTries.dataBlock < Date.now() / 1000) {
@@ -106,8 +107,8 @@ class AuthPageStore {
 
         const data: TAuthSuccess = resp.data
 
-        safeLocalStorageSet("access_token", data.jwt)
-        safeLocalStorageSet("user_id", data.user.id.toString())
+        localStorageStore.safeLocalStorageSet("access_token", data.jwt)
+        localStorageStore.safeLocalStorageSet("user_id", data.user.id.toString())
 
         runInAction(() => {
           this.globalStore.accessToken = data.jwt
@@ -118,7 +119,7 @@ class AuthPageStore {
           }
           this.globalStore.handleAuthorizate()
           this.setTries(0, 0)
-          safeLocalStorageSet("infoTries", JSON.stringify(this.infoTries))
+          localStorageStore.safeLocalStorageSet("infoTries", JSON.stringify(this.infoTries))
         })
 
         return true

@@ -1,9 +1,9 @@
-import { makeAutoObservable } from "mobx"
+import { action, computed, makeObservable, observable } from "mobx"
 import { RootStore } from "./rootStore"
 import { TProductCart } from "@/types/TProductCart";
-import { safeLocalStorageGet, safeLocalStorageSet } from "./globalStore";
 import { TOrder } from "@/types/TOrder";
 import { getDateTransform } from "@/utils/getDateTransform";
+import localStorageStore from "@/utils/localStorageStore";
 
 class CartStore {
   rootStore: RootStore;
@@ -13,7 +13,18 @@ class CartStore {
   constructor (rootStore: RootStore) {
     this.rootStore = rootStore
 
-    makeAutoObservable(this)
+    makeObservable(this, {
+      productsCart: observable,
+      addProductToCart: action,
+      getProductsCart: action,
+      deleteProductToCart: action,
+      clearCart: action,
+      addOrderLocal: action,
+      fullSum: computed,
+      amountProducts: computed,
+      fullSumWithDiscount: computed,
+
+    })
     this.getProductsCart()
   }
 
@@ -35,11 +46,11 @@ class CartStore {
       this.productsCart.push(product)
     }
 
-    safeLocalStorageSet("productCart", JSON.stringify(this.productsCart))
+    localStorageStore.safeLocalStorageSet("productCart", JSON.stringify(this.productsCart))
   }
 
   getProductsCart = () => {
-    const productsJson = safeLocalStorageGet("productCart")
+    const productsJson = localStorageStore.safeLocalStorageGet("productCart")
     const products = productsJson ? JSON.parse(productsJson) : []
 
     this.productsCart = products
@@ -48,55 +59,44 @@ class CartStore {
   deleteProductToCart = (id: string) => {
     this.productsCart = this.productsCart.filter(el => el.idDocument !== id)
 
-    safeLocalStorageSet("productCart", JSON.stringify(this.productsCart))
+    localStorageStore.safeLocalStorageSet("productCart", JSON.stringify(this.productsCart))
   }
 
   clearCart = () => {
     this.productsCart = []
 
-    safeLocalStorageSet("productCart", JSON.stringify(this.productsCart))
+    localStorageStore.safeLocalStorageSet("productCart", JSON.stringify(this.productsCart))
   }
 
-  getFullSum = () => {
-    let sum = 0
-
-    for (const product of this.productsCart) {
-      sum += product.price * product.amount
-    }
+  get fullSum () {
+    const sum = this.productsCart.reduce((fullPrice, {price, amount}) => fullPrice + price * amount, 0)
 
     return sum
   }
 
   get amountProducts () {
-    let amount = 0
-    this.productsCart.map(product => amount += product.amount)
+    const amount = this.productsCart.reduce((acc, {amount}) => acc + amount, 0)
 
     return amount
   }
 
-  getFullSumWithDiscount = () => {
-    let sum = 0
-
-    for (const product of this.productsCart) {
-      sum += product.price * (1 - product.discount / 100) * product.amount
-    }
-
+  get fullSumWithDiscount () {
+    const sum = this.productsCart.reduce((fullSum, {price, discount, amount}) => fullSum + price * (1 - discount / 100) * amount, 0)
+    
     return sum
   }
 
   amountProduct (id: string) {
-    for (const product of this.productsCart) {
-      if (product.idDocument === id) {
-        return product.amount
-      }
-    }
+    const product = this.productsCart.find(prod => prod.idDocument === id)
+
+    if (product) return product.amount
 
     return 0
   }
 
   addOrderLocal = () => {
-    const ordersJSON = safeLocalStorageGet("orders")
-    const lastOrderJSON = safeLocalStorageGet("last_order")
+    const ordersJSON = localStorageStore.safeLocalStorageGet("orders")
+    const lastOrderJSON = localStorageStore.safeLocalStorageGet("last_order")
     const lastOrder = lastOrderJSON ? JSON.parse(lastOrderJSON) + 1 : 1
     const orders: TOrder[] = []
 
@@ -123,11 +123,11 @@ class CartStore {
           isPopular: Math.random() > 0.5
         }
       }),
-      price: this.getFullSumWithDiscount(),
+      price: this.fullSumWithDiscount,
     })
 
-    safeLocalStorageSet("orders", JSON.stringify(orders))
-    safeLocalStorageSet("last_order", JSON.stringify(lastOrder))
+    localStorageStore.safeLocalStorageSet("orders", JSON.stringify(orders))
+    localStorageStore.safeLocalStorageSet("last_order", JSON.stringify(lastOrder))
   }
 } 
 

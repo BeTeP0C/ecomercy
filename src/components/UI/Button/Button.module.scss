@@ -16,4 +16,16 @@
   &:active {
     background: $color-button-bg-active;
   }
+
+  &_transparent {
+    outline: 1px solid $color-input-placeholder;
+    background: transparent;
+    color: $color-primary;
+    transition: color 0.3s ease, outline 0.3s ease, background 0.3s ease;
+
+    &:hover {
+      color: $color-white;
+      outline: 1px solid $color-brand-hover;
+    }
+  }
 }

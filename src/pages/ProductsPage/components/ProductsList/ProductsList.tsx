@@ -36,6 +36,7 @@ const ProductsList = observer(() => {
             <ul className={styles.list}>
               {globalStore.products.map(product => {
                 const images = product.images[0].formats
+                const amountProduct = cartStore.amountProduct(product.documentId)
 
                 return (
                   <li className={styles.item} key={product.id}>
@@ -48,6 +49,7 @@ const ProductsList = observer(() => {
                         small: images.small.url,
                         thumbnail: images.thumbnail.url
                       }}
+                      amount={amountProduct}
                       type={product.productCategory.title}
                       title={product.title}
                       descr={product.description}

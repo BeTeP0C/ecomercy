@@ -1,9 +1,10 @@
-import { GlobalStore, safeLocalStorageSet } from "@/store/globalStore";
+import { GlobalStore } from "@/store/globalStore";
 import { TAuthSuccess } from "@/types/api/TAuth";
 import axios from "axios";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { STATUSES, TStatuses } from "../AuthPage/AuthPageStore";
 import { getLevelPassword, getMessageCorrectLogin, getMessageCorrectMail } from "@/utils/validation";
+import localStorageStore from "@/utils/localStorageStore";
 
 type TInfoForm = {
   login: string,
@@ -141,8 +142,8 @@ class RegistPageStore {
         this.resetErorrsForm()
         const data: TAuthSuccess = resp.data
   
-        safeLocalStorageSet("access_token", data.jwt)
-        safeLocalStorageSet("user_id", data.user.id.toString())
+        localStorageStore.safeLocalStorageSet("access_token", data.jwt)
+        localStorageStore.safeLocalStorageSet("user_id", data.user.id.toString())
   
         runInAction(() => {
           this.globalStore.accessToken = data.jwt

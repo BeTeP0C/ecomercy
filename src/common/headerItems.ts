@@ -2,7 +2,7 @@ export type THeaderItem = {
   id: number,
   text: string,
   active: boolean,
-  href: string
+  href: ("/products" | "/categories" | "/about")
 }
 
 export const headerItems: THeaderItem[] = [

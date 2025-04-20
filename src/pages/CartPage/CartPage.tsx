@@ -3,46 +3,30 @@ import styles from "./CartPage.module.scss"
 import { observer } from "mobx-react-lite"
 import { useStore } from "@/hooks/useStore"
 import ProductCart from "./components/ProductCart"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Button from "@/components/UI/Button"
 
 const CartPage = observer(() => {
-  const {globalStore, cartStore} = useStore()
-  const [modalContent, setModalContent] = useState<React.ReactNode>("")
-
-  const handleButtonClick = () => {
-    globalStore.setModalContent(modalContent)
-    globalStore.modalOpen()
-  }
+  const { cartStore, modalStore} = useStore()
 
   const handlePayment = () => {
     cartStore.addOrderLocal()
     cartStore.clearCart()
-    globalStore.modalClose()
-    globalStore.setModalContent("")
+    modalStore.modalClose()
+    setTimeout(modalStore.modalReset, 300)
   }
 
   const handleCancel = () => {
-    globalStore.modalClose()
+    modalStore.modalClose()
+  }
+
+  const handleButtonClick = () => {
+    modalStore.modalOpen("payment", {price: cartStore.fullSum, onPayment: handlePayment, onClose: handleCancel})
   }
 
   useEffect(() => {
     cartStore.getProductsCart()
   }, [])
-
-  useEffect(() => {
-    setModalContent((
-      <div className={styles.modal__main}>
-        <h2 className={styles.modal__title}>Total</h2>
-        <span className={styles.modal__price}>{cartStore.getFullSum()}$</span>
-
-        <div className={styles.modal__actions}>
-          <Button className={styles.modal__payment} text="Payment" func={handlePayment}/>
-          <Button className={styles.modal__cancle} text="Cancle" func={handleCancel}/>
-        </div>
-      </div>
-    ))
-  }, [cartStore.productsCart])
 
   return (
     <main className={styles.cart}>
@@ -77,15 +61,15 @@ const CartPage = observer(() => {
                   <h3 className={styles.payment__heading}>Total</h3>
                   <div className={`${styles.payment__line_main} ${styles.payment__line}`}>
                     <h4 className={`${styles.payment__title} ${styles.payment__title_main}`}>{cartStore.amountProducts} products</h4>
-                    <span className={`${styles.price} ${styles.price_main}`}>{cartStore.getFullSumWithDiscount().toFixed(2)}$</span>
+                    <span className={`${styles.price} ${styles.price_main}`}>{cartStore.fullSumWithDiscount.toFixed(2)}$</span>
                   </div>
                   <div className={styles.payment__line}>
                     <h4 className={styles.payment__title}>{cartStore.amountProducts} products</h4>
-                    <span className={styles.price}>{cartStore.getFullSum().toFixed(2)}$</span>
+                    <span className={styles.price}>{cartStore.fullSum.toFixed(2)}$</span>
                   </div>
                   <div className={styles.payment__line}>
                     <h4 className={styles.payment__title}>Discount</h4>
-                    <span className={styles.price__discount}>-{((cartStore.getFullSum() - cartStore.getFullSumWithDiscount()).toFixed(2))}$</span>
+                    <span className={styles.price__discount}>-{((cartStore.fullSum - cartStore.fullSumWithDiscount).toFixed(2))}$</span>
                   </div>
                 </div>
 

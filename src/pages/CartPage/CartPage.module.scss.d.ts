@@ -15,11 +15,5 @@ declare const classNames: {
   readonly modul: "modul";
   readonly title: "title";
   readonly price__discount: "price__discount";
-  readonly modal__main: "modal__main";
-  readonly modal__title: "modal__title";
-  readonly modal__price: "modal__price";
-  readonly modal__actions: "modal__actions";
-  readonly modal__payment: "modal__payment";
-  readonly modal__cancle: "modal__cancle";
 };
 export = classNames;
