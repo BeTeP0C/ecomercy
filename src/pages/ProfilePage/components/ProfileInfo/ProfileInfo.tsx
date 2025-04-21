@@ -22,7 +22,7 @@ const ProfileInfo: FC<ProfileInfoProps> = ({
     <div className={styles.content}>
       <div className={styles.main}>
         <div className={styles.info}>
-          <img className={styles.img} src={avatarUrl || "../../../../../public/avatar.jpg"} alt="Avatar user" />
+          <img className={styles.img} src={avatarUrl || "./avatar.jpg"} alt="Avatar user" />
           <h2 className={styles.username}>{userName}</h2>
           <span className={styles.mail}>{mail}</span>
         </div>

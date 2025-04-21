@@ -104,7 +104,23 @@ class ProductsPageStore {
     this.setProducts()
   }
 
-  async setProducts () {
+  async getProductsFilter () {
+    const queryParams =  qs.stringify( {
+      populate: ['images', 'productCategory']
+    })
+
+    const filters = this.filter
+
+    const resp = await axios.get(`${this.globalStore.endpoint}/products?${qs.stringify({filters})}&${queryParams}`, {
+      headers: {
+        "Authorization": `Bearer ${this.globalStore.token}`
+      }
+    })
+
+    return resp.data.data
+  }
+
+  setProducts = async () => {
     runInAction(() => {
       this.isLoading = true
     })

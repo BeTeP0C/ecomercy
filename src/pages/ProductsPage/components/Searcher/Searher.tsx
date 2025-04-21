@@ -10,14 +10,15 @@ import { TSetFilterField } from "../../ProductsPageStore"
 
 type SearcherProps = {
   filter: TFilterStore, 
-  updateFilterField: TSetFilterField
+  updateFilterField: TSetFilterField,
+  setProductsFilter: () => void
 }
 
-const Searcher: FC<SearcherProps> = ({filter, updateFilterField}) => {
+const Searcher: FC<SearcherProps> = ({filter, updateFilterField, setProductsFilter}) => {
   const [queryParams, setQueryParams] = useSearchParams()
   const query = new URLSearchParams(useLocation().search)
 
-  const handleButtonSubmit = () => {
+  const handleButtonSubmit = async () => {
     const params = new URLSearchParams(queryParams.toString())
     params.set("text", filter.title)
     params.set("priceStart", filter.priceStart.toString())
@@ -26,6 +27,7 @@ const Searcher: FC<SearcherProps> = ({filter, updateFilterField}) => {
     params.set("page", query.get("page") ?? "")
 
     setQueryParams(params)
+    setProductsFilter()
   }
 
   return (

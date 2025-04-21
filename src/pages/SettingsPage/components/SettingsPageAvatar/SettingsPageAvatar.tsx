@@ -37,7 +37,7 @@ const SettingsPageAvatar: FC<SettingsPageAvatarProps> = ({avatarUrl, func}) => {
 
       <div className={styles.actions}>
         <div className={styles.avatar}>
-          <img className={styles.img} src={preview || "../../../../../public/avatar"} alt="" />
+          <img className={styles.img} src={preview || "./avatar.jpg"} alt="" />
           <div className={styles.overlay}></div>
           <Photo />
         </div>

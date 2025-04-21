@@ -34,7 +34,7 @@ const ProductsPage = observer(() => {
     <main>
       <Hero />
       <FilterContext.Provider value={store}>
-        <Searcher filter={store.filter} updateFilterField={store.setFilterField}/>
+        <Searcher filter={store.filter} updateFilterField={store.setFilterField} setProductsFilter={store.setProducts}/>
       </FilterContext.Provider>
       <ProductsList 
         pagination={store.pagination}

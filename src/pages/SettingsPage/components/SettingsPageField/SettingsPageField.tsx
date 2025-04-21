@@ -35,7 +35,6 @@ const SettingsPageField: FC<SettingsPageFieldProps> = ({
   return (
     <div className={styles.content}>
       <h2 className={styles.title}>{title}</h2>
-      // @ts-ignore
       <label className={`${styles.label} ${isPassword && styles.label_password} ${isError && styles.label_error} ${isPassword && passwordLevel && styles[`label_${passwordLevel}`]}`} htmlFor={`settings_${title}`}>
         <input id={`settings_${title}`} onChange={handleChangeInput} className={`${styles.input} ${isPassword && styles.input_password}`} value={value} type="text" placeholder={placeholder} />
 
@@ -59,7 +58,6 @@ const SettingsPageField: FC<SettingsPageFieldProps> = ({
               <div className={`${styles.level} ${passwordLevel === "medium" ? styles.level_medium : passwordLevel === "high" && styles.level_high}`}></div>
               <div className={`${styles.level} ${passwordLevel === "low" ? styles.level_low : passwordLevel === "medium" ? styles.level_medium : passwordLevel && styles.level_high}`}></div>
             </div>
-            // @ts-ignore
             {value !== "" && <div className={`${styles.level__title} ${styles[`level__title_${passwordLevel}`]}`}>{uppercaseFirstSymbol(passwordLevel || "")}</div>} 
           </>
         )}
