@@ -9,27 +9,25 @@ import Person from "../Icons/Person"
 import { useEffect, useRef, useState } from "react"
 import HeaderItem from "./HeaderItem"
 import HeaderStore from "./HeaderStore"
+import LOCAL_ENDPOINT from "@/config/localEndpoint"
 
 const Header = observer(() => {
   const { globalStore, cartStore } = useStore()
+
   const store = useLocalObservable(() => new HeaderStore())
   const lineRef = useRef<HTMLDivElement | null>(null)
-  const [positionX, setPositionX] = useState<number>(0)
+  
+  const [positionX, setPositionX] = useState<number | null>(null)
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [isBurgerClose, setIsBurgerClose] = useState<boolean>(false)
   const [isReverse, setIsReverse] = useState<boolean>(false)
-  const [width, setWidth] = useState<number>(73)
+  const [width, setWidth] = useState<number | null>(null)
 
-  useEffect(() => {
-    if (cartStore.productsCart.length === 0) {
-      cartStore.getProductsCart()
-    }
-  }, [])
-
-  const handleClickBurderButton = () => {
+  const handleClickBurgerButton = () => {
     if (isBurgerClose) {
       setIsReverse(true)
       setIsMenuOpen(false)
+
       setTimeout(() => {
         setIsReverse(false)
         setIsBurgerClose(false)
@@ -39,6 +37,22 @@ const Header = observer(() => {
       setIsBurgerClose(true)
     }
   }
+
+  const handleCloseMenu = () => {
+    setIsReverse(true)
+    setIsMenuOpen(false)
+
+    setTimeout(() => {
+      setIsReverse(false)
+      setIsBurgerClose(false)
+    }, 500)
+  }
+
+  useEffect(() => {
+    if (cartStore.productsCart.length === 0) {
+      cartStore.getProductsCart()
+    }
+  }, [cartStore])
 
   return (
     <header className={styles.header}>
@@ -54,12 +68,13 @@ const Header = observer(() => {
                 setPositionX={setPositionX}
                 setWidth={setWidth}
                 setActive={store.setActiveNavEl}
+                setIsMenuOpen={handleCloseMenu}
               />
             ))}
           </ul>
         </nav>
 
-        <button className={`${styles.burger} ${isReverse ? styles.burger_reverse : ""} ${isBurgerClose ? styles.burger_close : ""}`} type="button" onClick={handleClickBurderButton}>
+        <button className={`${styles.burger} ${isReverse ? styles.burger_reverse : ""} ${isBurgerClose ? styles.burger_close : ""}`} type="button" onClick={handleClickBurgerButton}>
           <div className={`${styles.burger__line} ${styles.burger__line_first}`}></div>
           <div className={`${styles.burger__line} ${styles.burger__line_second}`}></div>
           <div className={`${styles.burger__line} ${styles.burger__line_third}`}></div>
@@ -67,7 +82,7 @@ const Header = observer(() => {
       </div>
         
         <div className={styles.logo}>
-          <Link to={"/"}>
+          <Link to={LOCAL_ENDPOINT.MAIN}>
             <Logo />
           </Link>
         </div>
@@ -84,23 +99,26 @@ const Header = observer(() => {
               />
             ))}
           </ul>
-          <div
-            ref={lineRef}
-            style={{
-              width: width + 7,
-              left: `${positionX - 3}px`
-            }}
-            className={styles.line__active}>
-          </div>
+
+          {width !== null && positionX !== null && (
+            <div
+              ref={lineRef}
+              style={{
+                width: width + 7,
+                left: `${positionX - 3}px`
+              }}
+              className={styles.line__active}>
+            </div>
+          )}
         </nav>
 
         <div className={styles.actions}>
-          <Link to={"/cart"} className={styles.basket}>
+          <Link to={LOCAL_ENDPOINT.CART} className={styles.basket}>
             <Basket />
             {cartStore.productsCart.length !== 0 && <span className={styles.amount}>{cartStore.amountProducts}</span>}
           </Link>
           
-          <Link to={globalStore.isAuthorizate ? "/profile" : "/auth"} className={styles.person}>
+          <Link to={globalStore.isAuthorizate ? LOCAL_ENDPOINT.PROFILE : LOCAL_ENDPOINT.AUTH} className={styles.person}>
             {globalStore.isAuthorizate ? <Person /> : "Login"}
           </Link>
         </div>

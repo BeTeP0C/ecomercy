@@ -50,8 +50,10 @@ const SettingsPageAvatar: FC<SettingsPageAvatarProps> = ({avatarUrl, func}) => {
           className={styles.hiddenInput}
         />
 
-        <button onClick={handleClick} type="button" className={`${styles.button} ${styles.button_update}`}>Update</button>
-        <button onClick={handleDelete} type="button" className={`${styles.button} ${styles.button_delete}`}>Delete</button>
+        <div className={styles.actions__buttons}>
+          <button onClick={handleClick} type="button" className={`${styles.button} ${styles.button_update}`}>Update</button>
+          <button onClick={handleDelete} type="button" className={`${styles.button} ${styles.button_delete}`}>Delete</button>
+        </div>
       </div>
     </div>
   )

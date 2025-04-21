@@ -11,7 +11,7 @@ type ModalContentProps = {
 }
 
 const ModalContent: FC<ModalContentProps> = ({type, props}) => {
-  let content = null;
+  let content: React.ReactNode | null = null;
   
   if (props) {
     switch (type) {

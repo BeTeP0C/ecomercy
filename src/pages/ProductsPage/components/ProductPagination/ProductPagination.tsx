@@ -29,7 +29,7 @@ const ProductPagination: FC<ProductPaginationProps> = ({currentPage, totalPages,
   }
 
   const renderPagination = () => {
-    let pages: (number | string)[] = [];
+    const pages: (number | string)[] = [];
 
     if (currentPage > 2) {
       pages.push(1);

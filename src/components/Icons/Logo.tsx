@@ -3,7 +3,7 @@ import { IconProps } from "@/types/TIconProps"
 
 function Logo ({width = 131, height = 42}: IconProps) {
   return (
-    <span className={`${styles.icon} ${styles.logo}`}>
+    <span className={`${styles.icon}`}>
       <svg width={width} height={height} viewBox="0 0 131 42" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clipPath="url(#clip0_502_629)">
         <path d="M42 0H0V42H42V0Z" fill="white"/>

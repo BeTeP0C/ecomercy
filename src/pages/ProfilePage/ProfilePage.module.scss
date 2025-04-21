@@ -16,3 +16,9 @@
   display: flex;
   min-height: 500px;
 }
+
+@media (max-width: 970px) {
+  .content {
+    flex-direction: column;
+  }
+}

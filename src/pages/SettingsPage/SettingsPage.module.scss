@@ -13,6 +13,7 @@
 }
 
 .content {
+  margin-bottom: 20px;
   padding-bottom: 20px;
   border-radius: 30px;
   box-shadow: 0 4px 4px 0 rgba(#000000, 0.25);
@@ -64,4 +65,11 @@
   border-radius: 10px;
   min-width: 110px;
   padding: 5.5px  20px;
+}
+
+@media (max-width: 400px) {
+  .actions {
+    padding-right: 0;;
+    align-items: center;
+  }
 }

@@ -4,6 +4,7 @@ declare const classNames: {
   readonly title: "title";
   readonly descr: "descr";
   readonly actions: "actions";
+  readonly actions__buttons: "actions__buttons";
   readonly avatar: "avatar";
   readonly img: "img";
   readonly overlay: "overlay";

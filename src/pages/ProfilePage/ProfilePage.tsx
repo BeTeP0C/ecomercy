@@ -5,31 +5,26 @@ import ButtonBack from "@/components/UI/ButtonBack"
 import ProfileInfo from "./components/ProfileInfo"
 import { useStore } from "@/hooks/useStore"
 import ProfilePageStore from "./ProfilePageStore"
-import { useEffect } from "react"
-import { useNavigate } from "react-router"
 import ProfileOrders from "./components/ProfileOrders"
 import Loader from "@/components/UI/Loader"
 import { TOrder } from "@/types/TOrder"
-import { getDateTransform } from "@/utils/getDateTransform"
 import localStorageStore from "@/utils/localStorageStore"
+import getDateTransform from "@/utils/getDateTransform"
+import useCheckAuthrizate from "@/hooks/useCheckAuthorizate"
+import { useCallback } from "react"
 
 const ProfilePage = observer(() => {
   const { globalStore, modalStore } = useStore()
-  const navigate = useNavigate()
   const store = useLocalObservable(() => new ProfilePageStore (globalStore))
 
-  const handlePayment = (order: TOrder, lastOrder: number) => {
+  const handlePayment = useCallback((order: TOrder, lastOrder: number) => {
     store.addOrders(order)
     localStorageStore.safeLocalStorageSet("last_order", JSON.stringify(lastOrder))
     modalStore.modalClose()
     setTimeout(modalStore.modalReset, 300)
-  }
+  }, [store])
 
-  const handleCancel = () => {
-    modalStore.modalClose()
-  }
-
-  const handleRepeat = (id: number) => {
+  const handleRepeat = useCallback((id: number) => {
     const currentOrder = store.orders.find(order => order.id === id)
     const lastOrderJSON = localStorageStore.safeLocalStorageGet("last_order")
 
@@ -39,45 +34,47 @@ const ProfilePage = observer(() => {
         onClose: handleCancel
       })
     }
+  }, [store])
+
+  const handleCancel = () => {
+    modalStore.modalClose()
   }
 
-  useEffect(() => {
-    if (globalStore.checkToken) {
-      globalStore.getUserInfo()
-    } else {
-      globalStore.handleLogout()
-      navigate("/auth")
-    }
-  }, [globalStore.isAuthorizate])
+  useCheckAuthrizate()
 
   return (
     <main className={styles.main}>
       {globalStore.isAuthorizate && (
         <Container>
-          <ButtonBack />
-          <h1 className={styles.heading}>Profile</h1>
+          {store.isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <ButtonBack />
+                <h1 className={styles.heading}>Profile</h1>
 
-          <div className={styles.content}>
-            {store.isLoading ? (
-              <Loader />
-            ): (
-              <>
-                {globalStore.userInfo && (
-                  <>
-                    <ProfileInfo 
-                      avatarUrl=""
-                      userName={globalStore.userInfo.name}
-                      mail={globalStore.userInfo.mail}
-                      handleLogout={globalStore.handleLogout}
-                      handleEdit={() => {}}
-                    />
+                <div className={styles.content}>
+                  {store.isLoading ? (
+                    <Loader />
+                  ): (
+                    <>
+                      {globalStore.userInfo && (
+                        <>
+                          <ProfileInfo 
+                            avatarUrl=""
+                            userName={globalStore.userInfo.name}
+                            mail={globalStore.userInfo.mail}
+                            handleLogout={globalStore.handleLogout}
+                          />
 
-                    <ProfileOrders orders={store.orders} handleDeleteOrder={store.deleteOrders} handleRepeatOrder={handleRepeat}/>
-                  </>
-                )}
-              </>
-            )}
-          </div>
+                          <ProfileOrders orders={store.orders} handleDeleteOrder={store.deleteOrders} handleRepeatOrder={handleRepeat}/>
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+            </>
+          )}
         </Container>
       )}
     </main>

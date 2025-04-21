@@ -7,7 +7,7 @@ export type TCategoriesItem = {
 export const CATEGORIES = ["electronics", "furniture", "shoes", "miscellaneous"] as const;
 export type TCategory = typeof CATEGORIES[number];
 
-export const isTCategory = (value: any): value is TCategory => {
+export const isTCategory = (value: string | undefined): value is TCategory => {
   return CATEGORIES.includes(value as TCategory);
 };
 

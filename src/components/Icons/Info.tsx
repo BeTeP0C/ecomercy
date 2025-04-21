@@ -3,7 +3,7 @@ import { IconProps } from "@/types/TIconProps"
 
 function Info ({width = 20, height = 20}: IconProps) {
   return (
-    <span className={`${styles.icon} ${styles.info}`}>
+    <span className={`${styles.icon}`}>
       <svg width={width} height={height} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M9.21289 8.26749H10.7754V14.931H9.21289V8.26749Z" fill="#AF0808"/>
         <path d="M10 6.66823C10.4487 6.66823 10.8125 6.28039 10.8125 5.80197C10.8125 5.32355 10.4487 4.93571 10 4.93571C9.55127 4.93571 9.1875 5.32355 9.1875 5.80197C9.1875 6.28039 9.55127 6.66823 10 6.66823Z" fill="#AF0808"/>

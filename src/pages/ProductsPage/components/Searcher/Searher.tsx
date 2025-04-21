@@ -1,27 +1,31 @@
-import { observer } from "mobx-react-lite"
 import styles from "./Searcher.module.scss"
 import Container from "@/components/UI/Container"
 import SearcherInput from "./SearcherInput"
-import { useStore } from "@/hooks/useStore"
 import Button from "@/components/UI/Button"
 import SearcherFilter from "./SearcherFilter"
-import { useLocation, useNavigate } from "react-router"
+import { useLocation, useSearchParams } from "react-router"
+import { TFilterStore } from "@/types/TFilter"
+import { FC } from "react"
+import { TSetFilterField } from "../../ProductsPageStore"
 
-const Searcher = observer(() => {
-  const {globalStore} = useStore()
+type SearcherProps = {
+  filter: TFilterStore, 
+  updateFilterField: TSetFilterField
+}
+
+const Searcher: FC<SearcherProps> = ({filter, updateFilterField}) => {
+  const [queryParams, setQueryParams] = useSearchParams()
   const query = new URLSearchParams(useLocation().search)
-  const navigate = useNavigate()
 
   const handleButtonSubmit = () => {
-    console.log("fsdfsd")
-    const params = new URLSearchParams()
-    params.set("text", globalStore.filter.title)
-    params.set("priceStart", globalStore.filter.priceStart.toString())
-    params.set("priceEnd", globalStore.filter.priceEnd.toString())
-    params.set("rating", globalStore.filter.rating.toString())
+    const params = new URLSearchParams(queryParams.toString())
+    params.set("text", filter.title)
+    params.set("priceStart", filter.priceStart.toString())
+    params.set("priceEnd", filter.priceEnd.toString())
+    params.set("rating", filter.rating.toString())
     params.set("page", query.get("page") ?? "")
 
-    navigate(`/products?${params.toString()}`)
+    setQueryParams(params)
   }
 
   return (
@@ -29,7 +33,7 @@ const Searcher = observer(() => {
       <Container >
         <div className={styles.search}>
           <div className={styles.input}>
-            <SearcherInput func={globalStore.setFilterTitle} valueStore={globalStore.filter.title}/>
+            <SearcherInput func={updateFilterField} valueStore={filter.title}/>
           </div>
 
           <Button className={styles.search__button} text="Find now" func={handleButtonSubmit} />
@@ -40,6 +44,6 @@ const Searcher = observer(() => {
       </Container>
     </section>
   ) 
-})
+}
 
 export default Searcher

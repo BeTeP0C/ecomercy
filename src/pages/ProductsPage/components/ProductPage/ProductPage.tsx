@@ -2,16 +2,17 @@ import { observer, useLocalObservable } from "mobx-react-lite"
 import styles from "./ProductPage.module.scss"
 import { useStore } from "@/hooks/useStore"
 import { useNavigate, useParams } from "react-router"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 
 import Container from "@/components/UI/Container"
 import Button from "@/components/UI/Button"
-import ArrowBack from "@/components/Icons/ArrowBack"
 import ProductSlider from "./ProductSlider/ProductSlider"
 import Loader from "@/components/UI/Loader"
 import Product from "../Product/Product"
 import { TProductCart } from "@/types/TProductCart"
 import ProductStore from "./ProductStore"
+import LOCAL_ENDPOINT from "@/config/localEndpoint"
+import ButtonBack from "@/components/UI/ButtonBack"
 
 const ProductPage = observer(() => {
   const {globalStore, cartStore} = useStore() 
@@ -20,27 +21,17 @@ const ProductPage = observer(() => {
 
   const store = useLocalObservable(() => new ProductStore(globalStore))
 
-  useEffect(() => {
-    const loadData = async () => {
-      if (id) {
-        store.loadProductData(id)
-      }
-    }
-
-    loadData()
-  }, [id])
-
-  const handleButtonClick = () => {
+  const handleButtonClick = useCallback(() => {
     if (store.product) {
       if (cartStore.amountProduct(store.product.documentId) === 0) {
         const productCart: TProductCart = cartStore.transformProductToCart(store.product)
   
         cartStore.addProductToCart(productCart)
       } else {
-        navigate("/cart")
+        navigate(LOCAL_ENDPOINT.CART)
       }
     }
-  }
+  }, [store.product])
 
   const slidesImage = store.images.map(image => {
     return (
@@ -58,15 +49,22 @@ const ProductPage = observer(() => {
     )
   })
 
+  useEffect(() => {
+    const loadData = async () => {
+      if (id) {
+        await store.loadProductData(id)
+      }
+    }
+
+    loadData()
+  }, [store, id])
+
   return (
     <main className={styles.main}>
-      <Container className={`${styles.product__container} ${globalStore.isLoading ? styles.product__container_loading : ""}`}>
-        <button onClick={() => navigate(-1)} type="button" className={styles.back}>
-          <ArrowBack />
-          Назад
-        </button>
+      <Container className={`${styles.product__container} ${store.isLoading ? styles.product__container_loading : ""}`}>
+        <ButtonBack />
 
-        {globalStore.isLoading ? (
+        {store.isLoading ? (
           <Loader />
         ) : (
           <div>

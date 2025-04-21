@@ -1,5 +1,4 @@
-import {Navigate, RouteObject} from "react-router"
-import { routesVar } from "./routesVar";
+import { RouteObject} from "react-router"
 import App from "../components/App";
 import ProductsPage from "../pages/ProductsPage";
 import ProductPage from "../pages/ProductsPage/components/ProductPage";
@@ -10,56 +9,58 @@ import AuthPage from "@/pages/AuthPage";
 import RegistPage from "@/pages/RegistPage";
 import ProfilePage from "@/pages/ProfilePage";
 import SettingsPage from "@/pages/SettingsPage";
+import LOCAL_ENDPOINT from "./localEndpoint";
+import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 
 export const routesConfig: RouteObject[] = [
   {
-    path: '/',
+    path: LOCAL_ENDPOINT.MAIN,
     element: <App />,
     children: [
       {
-        path: "/",
+        path: LOCAL_ENDPOINT.MAIN,
         element: <ProductsPage />
       },
       {
-        path: "/products",
+        path: LOCAL_ENDPOINT.PRODUCTS,
         element: <ProductsPage />
       },
       {
-        path: "/products/:id",
+        path: LOCAL_ENDPOINT.PRODUCT,
         element: <ProductPage />
       },
       {
-        path: "/categories",
+        path: LOCAL_ENDPOINT.CATEGORIES,
         element: <CategoriesPage />
       },
       {
-        path: "/categories/:category",
+        path: LOCAL_ENDPOINT.CATEGORY,
         element: <CategoryPage />
       },
       {
-        path: "/cart",
+        path: LOCAL_ENDPOINT.CART,
         element: <CartPage />
       },
       {
-        path: "/auth",
+        path: LOCAL_ENDPOINT.AUTH,
         element: <AuthPage />
       },
       {
-        path: "/regist",
+        path: LOCAL_ENDPOINT.REGIST,
         element: <RegistPage />
       },
       {
-        path: "/profile",
+        path: LOCAL_ENDPOINT.PROFILE,
         element: <ProfilePage />
       },
       {
-        path: "/settings",
+        path: LOCAL_ENDPOINT.SETTINGS,
         element: <SettingsPage />
       },
     ]
   },
   {
     path: "*",
-    element: <Navigate to={routesVar.main.mask} replace />,
+    element: <ErrorPage />,
   }
 ];

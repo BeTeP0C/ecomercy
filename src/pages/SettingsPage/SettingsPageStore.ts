@@ -3,6 +3,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { TPasswordCorrect } from "../RegistPage/RegistPageStore";
 import axios from "axios";
 import { getLevelPassword, getMessageCorrectLogin, getMessageCorrectMail } from "@/utils/validation";
+import API_ENDPOINTS from "@/config/apiEndpoints";
 
 type TSettingsInfo = {
   username: string,
@@ -130,7 +131,7 @@ class SettingsPageStore {
   }
 
   get checkErrorsForm () {
-    let flag = true
+    const flag = true
 
     for (const value of Object.values(this.settingsErrorsForm)) {
       if (value.length !== 0) return false
@@ -188,17 +189,11 @@ class SettingsPageStore {
         }
   
         try {
-          const resp = await axios.put(`${this.globalStore.endpoint}/users/${this.globalStore.userInfo.id}`, data, {
+          await axios.put(`${this.globalStore.endpoint}${API_ENDPOINTS.USERS}/${this.globalStore.userInfo.id}`, data, {
             headers: {
               "Authorization": `Bearer ${this.globalStore.accessToken}`
             }
           })
-
-          if (this.settingsInfo.loadAvatar) {
-            const respAvatar = await this.uploadAvatar(this.settingsInfo.loadAvatar, this.globalStore.userInfo.id.toString())
-            console.log(respAvatar)
-          }
-
           
           this.saveUserInfoLocal()
           return true

@@ -1,14 +1,14 @@
 import { ChangeEvent, Dispatch, FC, FocusEvent, KeyboardEvent, SetStateAction, useState } from "react"
 import styles from "./styles.module.scss"
+import { TSetFilterField } from "@/pages/ProductsPage/ProductsPageStore"
 
 type SearcherFilterPriceProps = {
-  funcStart: (value: number) => void,
-  funcEnd: (value: number) => void,
+  updateFilterField: TSetFilterField | null,
   min: number,
   max: number
 }
 
-const SearcherFilterPrice: FC<SearcherFilterPriceProps> = ({funcStart, funcEnd, min, max}) => {
+const SearcherFilterPrice: FC<SearcherFilterPriceProps> = ({updateFilterField, min, max}) => {
   const [valueMin, setValueMin] = useState<string>(min.toString());
   const [valueMax, setValueMax] = useState<string>(max.toString());
 
@@ -39,17 +39,17 @@ const SearcherFilterPrice: FC<SearcherFilterPriceProps> = ({funcStart, funcEnd, 
 
   const handleBlurInputMin = (e: FocusEvent<HTMLInputElement, Element>) => {
     const valueNum = Number(e.target.value);
-    funcStart(valueNum)
+    if (updateFilterField) updateFilterField("priceStart", valueNum)
   };
 
   const handleBlurInputMax = (e: FocusEvent<HTMLInputElement, Element>) => {
     const valueNum = Number(e.target.value);
 
-    funcEnd(valueNum)
+    if (updateFilterField) updateFilterField("priceEnd" ,valueNum)
 
     if (Number(valueMin) >= valueNum && Number(valueMin) !== 0) {
       setValueMin((valueNum - 1).toString());
-      funcStart(valueNum - 1);
+      if (updateFilterField) updateFilterField("priceStart",valueNum - 1);
     }
   };
 

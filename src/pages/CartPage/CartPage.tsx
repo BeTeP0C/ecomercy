@@ -13,6 +13,7 @@ const CartPage = observer(() => {
     cartStore.addOrderLocal()
     cartStore.clearCart()
     modalStore.modalClose()
+    
     setTimeout(modalStore.modalReset, 300)
   }
 
@@ -39,7 +40,7 @@ const CartPage = observer(() => {
         <div className={styles.block}>
           <div className={styles.main}>
             {cartStore.amountProducts === 0 && (
-              <p className={styles.empty}>You haven't added anything to the shopping cart</p>
+              <p>You haven't added anything to the shopping cart</p>
             )}
             <ul className={styles.list}>
               {cartStore.productsCart.map(product => {
@@ -60,15 +61,15 @@ const CartPage = observer(() => {
                 <div className={styles.payment__info}>
                   <h3 className={styles.payment__heading}>Total</h3>
                   <div className={`${styles.payment__line_main} ${styles.payment__line}`}>
-                    <h4 className={`${styles.payment__title} ${styles.payment__title_main}`}>{cartStore.amountProducts} products</h4>
-                    <span className={`${styles.price} ${styles.price_main}`}>{cartStore.fullSumWithDiscount.toFixed(2)}$</span>
+                    <h4>{cartStore.amountProducts} products</h4>
+                    <span>{cartStore.fullSumWithDiscount.toFixed(2)}$</span>
                   </div>
                   <div className={styles.payment__line}>
-                    <h4 className={styles.payment__title}>{cartStore.amountProducts} products</h4>
-                    <span className={styles.price}>{cartStore.fullSum.toFixed(2)}$</span>
+                    <h4>{cartStore.amountProducts} products</h4>
+                    <span >{cartStore.fullSum.toFixed(2)}$</span>
                   </div>
                   <div className={styles.payment__line}>
-                    <h4 className={styles.payment__title}>Discount</h4>
+                    <h4>Discount</h4>
                     <span className={styles.price__discount}>-{((cartStore.fullSum - cartStore.fullSumWithDiscount).toFixed(2))}$</span>
                   </div>
                 </div>

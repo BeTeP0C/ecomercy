@@ -1,8 +1,9 @@
 import { FC, useEffect, useState } from "react"
 import styles from "./SearcherInput.module.scss"
+import { TSetFilterField } from "@/pages/ProductsPage/ProductsPageStore"
 
 type SearcherInputProps = {
-  func: (value: string) => void,
+  func: TSetFilterField,
   valueStore: string
 }
 
@@ -17,7 +18,7 @@ const SearcherInput: FC<SearcherInputProps> = ({
   }
 
   const handleBlurInput = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    func(e.target.value)
+    func("title", e.target.value)
   }
 
   useEffect(() => {

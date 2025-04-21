@@ -1,9 +1,9 @@
+import API_ENDPOINTS from "@/config/apiEndpoints";
 import { GlobalStore } from "@/store/globalStore";
 import { TAuthSuccess } from "@/types/api/TAuth";
 import localStorageStore from "@/utils/localStorageStore";
 import axios from "axios";
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
-
 
 export type TInfoTries = {
   amount: number,
@@ -22,6 +22,7 @@ class AuthPageStore {
   globalStore: GlobalStore
   authLogin: string = ""
   authPassword: string = ""
+
   private infoTries: TInfoTries = {
     amount: 0,
     dataBlock: 0
@@ -98,9 +99,10 @@ class AuthPageStore {
       runInAction(() => {
         this.isLoading = STATUSES.LOADING
       })
+      
       this.setErrorsForm("")
       try {
-        const resp = await axios.post(`${this.globalStore.endpoint}/auth/local`, {
+        const resp = await axios.post(`${this.globalStore.endpoint}${API_ENDPOINTS.AUTH}`, {
           "identifier": this.authLogin,
           "password": this.authPassword
         })
@@ -117,8 +119,10 @@ class AuthPageStore {
             mail: data.user.email,
             name: data.user.username
           }
+
           this.globalStore.handleAuthorizate()
           this.setTries(0, 0)
+
           localStorageStore.safeLocalStorageSet("infoTries", JSON.stringify(this.infoTries))
         })
 

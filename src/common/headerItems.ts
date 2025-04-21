@@ -9,8 +9,8 @@ export const headerItems: THeaderItem[] = [
   {
     id: 1,
     text: "Products",
-    active: true,
-    href: "/products"
+    active: false,
+    href: '/products'
   },
   {
     id: 2,

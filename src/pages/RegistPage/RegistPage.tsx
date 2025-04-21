@@ -5,7 +5,7 @@ import AuthInput from "@/components/UI/AuthInput"
 import { useStore } from "@/hooks/useStore"
 import { useNavigate } from "react-router"
 import RegistPageStore from "./RegistPageStore"
-import { FormEvent, useEffect } from "react"
+import { FormEvent, useCallback, useEffect } from "react"
 import Person from "@/components/Icons/Person"
 import AuthButtonSubmit from "@/components/UI/AuthButtonSubmit"
 import Mail from "@/components/Icons/Mail"
@@ -16,13 +16,13 @@ const RegistPage = observer(() => {
   const navigate = useNavigate()
   const store = useLocalObservable(() => new RegistPageStore (globalStore))
 
-  const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmitForm = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const result = await store.handleRegist()
 
     if (result) navigate("/products")
-  }
+  }, [store])
 
   useEffect(() => {
     const resultToken = globalStore.checkToken

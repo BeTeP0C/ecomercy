@@ -3,7 +3,7 @@ import { TProduct } from "@/types/TProduct"
 import { GlobalStore } from "@/store/globalStore"
 import qs from "qs"
 import axios from "axios"
-
+import API_ENDPOINTS from "@/config/apiEndpoints"
 
 export type TImage = {
   small: string,
@@ -51,7 +51,7 @@ class ProductStore {
     })
 
     try {
-      const resp = await axios.get(`${this.globalStore.endpoint}/products/${id}?${queryParams}`, {
+      const resp = await axios.get(`${this.globalStore.endpoint}${API_ENDPOINTS.PRODUCTS}/${id}?${queryParams}`, {
         headers: {
           "Authorization": `Bearer ${this.globalStore.token}`
         }
@@ -70,7 +70,7 @@ class ProductStore {
       populate: ['images', 'productCategory']
     })
 
-    const resp = await axios.get(`${this.globalStore.endpoint}/products?${qs.stringify({filters})}&${queryParams}`, {
+    const resp = await axios.get(`${this.globalStore.endpoint}${API_ENDPOINTS.PRODUCTS}?${qs.stringify({filters})}&${queryParams}`, {
       headers: {
         "Authorization": `Bearer ${this.globalStore.token}`
       }

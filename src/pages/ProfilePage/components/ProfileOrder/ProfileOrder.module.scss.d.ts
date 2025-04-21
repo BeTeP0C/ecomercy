@@ -1,6 +1,7 @@
 declare const classNames: {
   readonly item: "item";
   readonly info: "info";
+  readonly info__titles: "info__titles";
   readonly info__main: "info__main";
   readonly code: "code";
   readonly code_small: "code_small";
@@ -19,6 +20,9 @@ declare const classNames: {
   readonly list: "list";
   readonly list_active: "list_active";
   readonly price: "price";
+  readonly actions: "actions";
+  readonly actions__delete: "actions__delete";
   readonly delete: "delete";
+  readonly content__result: "content__result";
 };
 export = classNames;

@@ -20,5 +20,6 @@ declare const classNames: {
   readonly level__title_low: "level__title_low";
   readonly level__title_medium: "level__title_medium";
   readonly level__title_high: "level__title_high";
+  readonly input_password: "input_password";
 };
 export = classNames;

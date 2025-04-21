@@ -4,6 +4,7 @@ import styles from "./styles.module.scss"
 import { Link, useNavigate } from "react-router"
 import { TProductCart } from "@/types/TProductCart"
 import { TCategory } from "@/common/categoriesList"
+import LOCAL_ENDPOINT from "@/config/localEndpoint"
 
 type ProductProps = {
   id: number,
@@ -52,7 +53,7 @@ const Product: FC<ProductProps> = ({
   
       onClick(product)
     } else {
-      navigate("/cart")
+      navigate(LOCAL_ENDPOINT.CART)
     }
   }
 
@@ -77,7 +78,7 @@ const Product: FC<ProductProps> = ({
         </div>
       </div>
 
-      <Link className={styles.link} to={`/products/${idDocument}`}></Link>
+      <Link className={styles.link} to={`${LOCAL_ENDPOINT.PRODUCTS}/${idDocument}`}></Link>
     </article>
   )
 }

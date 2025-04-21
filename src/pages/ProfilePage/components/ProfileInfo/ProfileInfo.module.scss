@@ -2,8 +2,6 @@
 
 .content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-right: 30px;
   padding: 30px;
   border-radius: 30px;
@@ -11,6 +9,19 @@
   height: max-content;
   box-shadow: 1px 4px 4px 3px rgba($color-primary, 0.25);
   background: $color-off-white;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.empty {
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .info {
@@ -65,4 +76,40 @@
     background: rgba($color-gray-milk, 0.5);
     color: $color-black-light;
   }
+}
+
+@media (max-width: 970px) {
+  .content {
+    margin-right: 0;
+    margin-bottom: 30px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .main {
+    width: max-content;
+    margin-right: 30px;
+  }
+
+  .empty {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 530px) {
+  .content {
+    margin-right: 0;
+    margin-bottom: 30px;
+    justify-content: center;
+  }
+
+  .main {
+    margin-right: 0;
+  }
+
+  .empty {
+  display: none;
+  } 
 }

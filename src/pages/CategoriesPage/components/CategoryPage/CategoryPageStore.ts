@@ -4,6 +4,7 @@ import qs from "qs"
 import axios from "axios"
 import { action, makeObservable, observable, runInAction } from "mobx"
 import uppercaseFirstSymbol from "@/utils/uppercaseFirstSymbol"
+import API_ENDPOINTS from "@/config/apiEndpoints"
 
 class CategoryPageStore {
   isLoading: boolean = false
@@ -55,12 +56,12 @@ class CategoryPageStore {
     })
     
     try {
-      const resp = await axios.get(`${this.endpoint}/products?${qs.stringify({filters})}&${queryParams}`, )
+      const resp = await axios.get(`${this.endpoint}${API_ENDPOINTS.PRODUCTS}?${qs.stringify({filters})}&${queryParams}`, )
 
       return resp.data.data
     } catch (error: any) {
       const message: string = error.response.data.message
-
+      
       this.setErrorMessage(message)
       return false
     } finally {
@@ -72,7 +73,9 @@ class CategoryPageStore {
     const productsData = await this.getProductWithFilterCategory()
 
     if (productsData) {
-      this.products = productsData
+      runInAction(() => {
+        this.products = productsData
+      })
     }
   }
 }

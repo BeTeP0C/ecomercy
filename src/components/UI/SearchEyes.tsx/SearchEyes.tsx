@@ -8,13 +8,12 @@ const SearchEyes = observer(() => {
   const [isIdle, setIsIdle] = useState(true)
   const lastMoveTime = useRef(Date.now())
 
-  // Ограничения для зрачков (в пикселях)
-  const pupilMaxMove = 8; // Максимальное смещение зрачка по X и Y
+  const pupilMaxMove = 8;
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (Date.now() - lastMoveTime.current > 1500) {
-        setIsIdle(true) // Мышь не двигается, возвращаем к анимации
+        setIsIdle(true)
       }
     }, 100)
 
@@ -26,7 +25,6 @@ const SearchEyes = observer(() => {
     const deltaX = event.clientX - eyeCenter.x
     const deltaY = event.clientY - eyeCenter.y
 
-    // Ограничиваем движение зрачков, чтобы они не выходили за пределы глаза
     const x = Math.min(Math.max(deltaX * 0.05, -pupilMaxMove), pupilMaxMove)
     const y = Math.min(Math.max(deltaY * 0.05, -pupilMaxMove), pupilMaxMove)
 
@@ -36,7 +34,7 @@ const SearchEyes = observer(() => {
     }
 
     lastMoveTime.current = Date.now()
-    setIsIdle(false) // Если мышь двигается, выключаем "пауза"
+    setIsIdle(false)
   }
 
   useEffect(() => {

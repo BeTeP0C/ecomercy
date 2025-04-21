@@ -1,0 +1,56 @@
+@use "@/styles/variables.scss" as *;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 105px);
+}
+
+.error {
+  position: relative;
+  margin-bottom: 28px;
+  font-weight: 800;
+  font-size: 273px;
+  line-height: 328px;
+  color: $color-brand;
+  z-index: 1000;
+}
+
+.error_main {
+  position: absolute;
+  inset: 0;
+}
+
+.error_second {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  z-index: -1;
+  color: transparent;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: $color-brand;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: $color-primary;
+}
+
+.descr {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: $color-primary;
+}

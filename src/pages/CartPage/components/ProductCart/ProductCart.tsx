@@ -3,6 +3,7 @@ import styles from "./ProductCart.module.scss"
 import { FC, memo, useMemo } from "react"
 import Cart from "@/components/Icons/Cart"
 import { Link } from "react-router"
+import LOCAL_ENDPOINT from "@/config/localEndpoint"
 
 type ProductCartProps = {
   product: TProductCart,
@@ -21,7 +22,7 @@ const ProductCart: FC<ProductCartProps> = ({product, onClick}) => {
   return (
     <li className={styles.item}>
       <div className={styles.main}>
-        <Link to={`/products/${product.id}`}>
+        <Link to={`${LOCAL_ENDPOINT.PRODUCTS}/${product.id}`}>
           <img className={styles.img} src={product.images.medium} alt={product.title} />
         </Link>
         <div className={styles.info}>

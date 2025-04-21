@@ -2,9 +2,9 @@ import { action, computed, makeObservable, observable } from "mobx"
 import { RootStore } from "./rootStore"
 import { TProductCart } from "@/types/TProductCart";
 import { TOrder } from "@/types/TOrder";
-import { getDateTransform } from "@/utils/getDateTransform";
 import localStorageStore from "@/utils/localStorageStore";
 import { TProduct } from "@/types/TProduct";
+import getDateTransform from "@/utils/getDateTransform";
 
 class CartStore {
   rootStore: RootStore;

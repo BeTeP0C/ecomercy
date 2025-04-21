@@ -8,7 +8,6 @@ import {isTCategory } from "@/common/categoriesList"
 import ProductSkeleton from "@/pages/ProductsPage/components/ProductSkeleton"
 import Product from "@/pages/ProductsPage/components/Product"
 import Container from "@/components/UI/Container"
-import { toJS } from "mobx"
 import uppercaseFirstSymbol from "@/utils/uppercaseFirstSymbol"
 import ArrowBack from "@/components/Icons/ArrowBack"
 
@@ -50,7 +49,7 @@ const CategoryPage = observer(() => {
             </ul>
           )
         ) : (
-          <div className={styles.content}>
+          <div>
             <ul className={styles.list}>
               {store && store.products.map(product => {
                 const images = product.images[0].formats

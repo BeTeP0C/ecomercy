@@ -1,5 +1,4 @@
 import React from "react"
-import "./styles.module.scss"
 import { StoreProvider } from "../StoreProvider/StoreProvider"
 import { Outlet } from "react-router"
 import Header from "../Header"

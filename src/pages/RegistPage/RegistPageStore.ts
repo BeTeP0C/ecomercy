@@ -5,6 +5,7 @@ import { action, computed, makeObservable, observable, runInAction } from "mobx"
 import { STATUSES, TStatuses } from "../AuthPage/AuthPageStore";
 import { getLevelPassword, getMessageCorrectLogin, getMessageCorrectMail } from "@/utils/validation";
 import localStorageStore from "@/utils/localStorageStore";
+import API_ENDPOINTS from "@/config/apiEndpoints";
 
 type TInfoForm = {
   login: string,
@@ -103,7 +104,7 @@ class RegistPageStore {
   }
 
   get checkErrorsForm () {
-    let flag = true
+    const flag = true
 
     for (const value of Object.values(this.errorsForm)) {
       if (value.length !== 0) return false
@@ -133,7 +134,7 @@ class RegistPageStore {
       })
 
       try {
-        const resp = await axios.post(`${this.globalStore.endpoint}/auth/local/register`, {
+        const resp = await axios.post(`${this.globalStore.endpoint}${API_ENDPOINTS.REGIST}`, {
           "username": this.infoForm.login,
           "email": this.infoForm.email,
           "password": this.infoForm.password
