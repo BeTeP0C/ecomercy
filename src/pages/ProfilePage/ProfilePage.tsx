@@ -29,7 +29,8 @@ const ProfilePage = observer(() => {
     const lastOrderJSON = localStorageStore.safeLocalStorageGet("last_order")
 
     if (currentOrder && lastOrderJSON) {
-      modalStore.modalOpen("payment", {price: currentOrder.price, 
+      modalStore.modalOpen("payment", {
+        price: currentOrder.price, 
         onPayment: () => handlePayment({...currentOrder, id: JSON.parse(lastOrderJSON) + 1, dataCreate: getDateTransform()}, JSON.parse(lastOrderJSON) + 1),
         onClose: handleCancel
       })

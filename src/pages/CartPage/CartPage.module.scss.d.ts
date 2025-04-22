@@ -4,6 +4,7 @@ declare const classNames: {
   readonly amount: "amount";
   readonly block: "block";
   readonly main: "main";
+  readonly main_empty: "main_empty";
   readonly list: "list";
   readonly payment: "payment";
   readonly payment__main: "payment__main";
@@ -11,9 +12,15 @@ declare const classNames: {
   readonly payment__heading: "payment__heading";
   readonly payment__line: "payment__line";
   readonly payment__line_main: "payment__line_main";
+  readonly payment__line_price: "payment__line_price";
+  readonly payment__title: "payment__title";
   readonly payment__button: "payment__button";
+  readonly total: "total";
+  readonly total__price: "total__price";
+  readonly total__heading: "total__heading";
   readonly modul: "modul";
   readonly title: "title";
   readonly price__discount: "price__discount";
+  readonly actions: "actions";
 };
 export = classNames;

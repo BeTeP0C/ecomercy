@@ -3,6 +3,5 @@ declare const classNames: {
   readonly heading: "heading";
   readonly list: "list";
   readonly empty: "empty";
-  readonly title: "title";
 };
 export = classNames;

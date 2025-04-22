@@ -1,10 +1,10 @@
 import 'react';
 import ReactDom from 'react-dom/client';
 import "./styles/index.global.scss"
-import { createHashRouter, RouterProvider } from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 import { routesConfig } from './config/routes';
 
-const router = createHashRouter(routesConfig)
+const router = createBrowserRouter(routesConfig)
 const rootElement = document.getElementById('root')
 
 if (rootElement) {

@@ -21,6 +21,7 @@ class CartStore {
       deleteProductToCart: action,
       clearCart: action,
       addOrderLocal: action,
+      minusProductToCart: action,
       fullSum: computed,
       amountProducts: computed,
       fullSumWithDiscount: computed,
@@ -48,6 +49,26 @@ class CartStore {
     }
 
     localStorageStore.safeLocalStorageSet("productCart", JSON.stringify(this.productsCart))
+  }
+
+  minusProductToCart = (product: TProductCart) => {
+    if (this.productsCart.some(productCart => productCart.idDocument === product.idDocument) && product.amount !== 1) {
+
+      this.productsCart = this.productsCart.map(productCart => {
+        if (productCart.idDocument === product.idDocument) {
+          return {
+            ...productCart,
+            amount: productCart.amount - 1
+          }
+        }
+
+        return productCart
+      })
+
+      localStorageStore.safeLocalStorageSet("productCart", JSON.stringify(this.productsCart))
+    } else {
+      this.deleteProductToCart(product.idDocument)
+    }
   }
 
   getProductsCart = () => {

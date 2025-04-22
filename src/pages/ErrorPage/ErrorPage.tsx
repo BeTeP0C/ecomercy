@@ -13,9 +13,9 @@ const ErrorPage = () => {
         </h1>
 
         <div className={styles.info}>
-          <h2 className={styles.heading}>Страница не найдена</h2>
+          <h2 className={styles.heading}>Page not found</h2>
           <p className={styles.descr}>
-            Запрашиваемая страница не существует или была перемещена
+            The requested page does not exist or has been moved
           </p>
         </div>
       </main>

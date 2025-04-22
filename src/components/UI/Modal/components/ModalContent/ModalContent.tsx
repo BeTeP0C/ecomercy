@@ -18,11 +18,11 @@ const ModalContent: FC<ModalContentProps> = ({type, props}) => {
       case "payment":
         content = (
           <>
-            <ModalTitle title="Payment"/>
+            <ModalTitle title="Order payment"/>
             <ModalProductPrice {...props as TModalMap["payment"]}/>
             <div className={styles.actions}>
-              <Button className={styles.button__payment} text="Payment" func={props.onPayment}/>
-              <Button type="transparent" text="Close" func={props.onClose} />
+              <Button className={`${styles.button__payment} ${styles.button}`} text="Payment" func={props.onPayment}/>
+              <Button className={styles.button} type="transparent" text="Close" func={props.onClose} />
             </div>
           </>
         )

@@ -1,9 +1,74 @@
-@use "@/styles/variables" as *;
+@use "@/styles/_variables.scss" as *;
 
-.price {
-  margin-bottom: 15px;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 36px;
-  color: $color-brand;
+.content {
+  margin-bottom: 30px;
+  min-width: 314px;
+}
+
+.score {
+  position: relative;
+  margin-bottom: 5px;
+  padding-bottom: 12px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -11px;
+    bottom: 0;
+    left: -11px;
+    height: 1px;
+    background: $color-brand;
+  }
+
+  &__line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &_full {
+      margin-bottom: 20px;
+    }
+
+    &_discount {
+
+
+      .score__price, .score__title {
+        color: $color-brand;
+      }
+    }
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: $color-primary;
+  }
+
+  &__price {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $color-primary;
+  }
+}
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: $color-primary;
+  }
+
+  &__price {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    color: $color-primary;
+  }
 }

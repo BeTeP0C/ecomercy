@@ -2,7 +2,7 @@ import { TOrder } from "@/types/TOrder"
 import styles from "./ProfileOrders.module.scss"
 import { FC } from "react"
 import ProfileOrder from "../ProfileOrder/ProfileOrder"
-import SearchEyes from "@/components/UI/SearchEyes.tsx/SearchEyes"
+import BlockEmpty from "@/components/UI/BlockEmpty"
 
 type ProfileOrdersProps = {
   orders: TOrder[],
@@ -18,10 +18,7 @@ const ProfileOrders: FC<ProfileOrdersProps> = ({orders, handleDeleteOrder, handl
       <h2 className={styles.heading}>Orders</h2>
 
       {isEmpty ? (
-        <div className={styles.empty}>
-          <SearchEyes />
-          <h3 className={styles.title}>It's empty here for now...</h3>
-        </div>
+        <BlockEmpty />
       ): (
         <ul className={styles.list}>
           {orders.map(order => (
