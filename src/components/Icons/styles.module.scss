@@ -1,3 +1,4 @@
+@use "@/styles/variables.scss" as *;
 
 @keyframes spinBack {
   0% {
@@ -23,7 +24,20 @@
 }
 
 .basket path {
+  stroke: var(--color-text-header);
   transition: stroke 0.3s ease;
+}
+
+.logo {
+  &__bg {
+    fill: var(--color-bg-header);
+    transition: fill 0.3s ease;
+  }
+
+  &__text path {
+    fill: var(--color-text-header);
+    transition: fill 0.3s ease;
+  }
 }
 
 .person path {
@@ -61,6 +75,11 @@
 
 .loader_border {
   position: absolute;
+  
+  path {
+    fill: var(--color-brand-active);
+    transition: fill 0.3s ease;
+  }
 }
 
 .loader_border_first {
@@ -72,6 +91,10 @@
   inset: 10px;
   transform: rotate(20deg);
   animation: spinBack 1.2s linear infinite;
+
+  path {
+    fill: var(--color-brand-active);
+  }
 }
 
 .loader_border_third {

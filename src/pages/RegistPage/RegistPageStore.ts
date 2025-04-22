@@ -110,7 +110,7 @@ class RegistPageStore {
       if (value.length !== 0) return false
     }
 
-    return (flag && this.passwordLevel === "high")
+    return (flag && this.passwordLevel === "high" || 'medium')
   }
 
   resetErorrsForm () {

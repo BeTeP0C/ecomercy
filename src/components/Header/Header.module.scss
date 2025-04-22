@@ -96,8 +96,17 @@
   position: fixed;
   width: 100%;
   top: 0;
-  background: $color-white;
+  background: var(--color-bg-header);
   z-index: 2000;
+  transition: background 0.3s ease;
+
+  &__theme {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: red;
+    z-index: 100;
+  }
 }
 
 .header__container {
@@ -121,9 +130,9 @@
     right: 0;
     height: 100vh;
     padding: 35px 40px;
-    background: $color-white;
+    background: var(--color-bg-header);
     transform: translateX(-100%);
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, background 0.3s ease;
     z-index: 1000;
 
     &_active {
@@ -145,7 +154,7 @@
   &__line {
     width: 30px;
     height: 3px;
-    background: $color-primary;
+    // background: $color-primary;
 
     &:not(:last-child) {
       margin-bottom: 5px;
@@ -198,26 +207,26 @@
 .basket, .person {
 
   &:hover path {
-    stroke: $color-brand-hover;
+    stroke: var(--color-text-header-hover);
   }
 
   &:active path {
-    stroke: $color-brand-active;
+    stroke: var(--color-text-header-active);
   }
 }
 
 .person {
   font-weight: 500;
   font-size: 16px;
-  color: $color-primary;
+  color: var(--color-text-header);
   transition: color 0.3s ease;
 
   &:hover {
-    color: $color-brand-hover;
+    color: var(--color-text-header-hover);
   }  
 
   &:active {
-    color: $color-brand-active;
+    color: var(--color-text-header-active);
   }
 }
 
@@ -239,8 +248,8 @@
   height: 18px;
   font-weight: 500;
   font-size: 16px;
-  color: $color-white;
-  background: $color-brand;
+  // color: $color-white;
+  // background: $color-brand;
 }
 
 .line {
@@ -249,7 +258,8 @@
   bottom: 0;
   left: 0;
   height: 2px;
-  background: $color-gray-lighting;
+  background: var(--color-line-header);
+  transition: background 0.3s ease;
 }
 
 .line__active {
@@ -258,8 +268,8 @@
   left: 0;
   width: 80px;
   bottom: -36px;
-  background: $color-brand;
-  transition: left 0.3s ease, width 0.3s ease;
+  background: var(--color-text-header-active);
+  transition: left 0.3s ease, width 0.3s ease, background 0.3s ease;
   z-index: 1000;
 }
 

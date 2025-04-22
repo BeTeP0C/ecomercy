@@ -1,15 +1,19 @@
-@import "../../../../../styles/variables";
+@use "@/styles/variables.scss" as *;
 
 .filter {
   position: relative;
-  outline: transparent;
+  outline: 1px solid var(--color-input-border);
   width: 300px;
   height: 52px;
-  background: $color-bg-input;
-  transition: outline 0.3s ease;
+  background: var(--color-input-bg);
+  transition: outline 0.3s ease, background 0.3s ease;
 
   &_active {
-    outline: $color-input-border;
+    outline: 1px solid var(--color-input-border-active);
+
+    .title {
+      color: var(--color-input-border-active);
+    }
   }
 }
 
@@ -26,7 +30,8 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: $color-input-placeholder;
+  color: var(--color-input-placeholder);
+  transition: color 0.3s ease;
 }
 
 .icon {
@@ -40,8 +45,8 @@
     top: 10px;
     width: 14px;
     height: 1px;
-    background: $color-secondary;
-    transition: transform 0.3s ease;
+    background: var(--color-input-border);
+    transition: transform 0.3s ease, background 0.3s ease;
   }
 
   &::after {
@@ -57,10 +62,12 @@
   &_active {
     &::after {
       transform: rotate(-45deg);
+      background: var(--color-input-border-active);
     }
 
     &::before {
       transform: rotate(45deg);
+      background: var(--color-input-border-active);
     }
   }
 }

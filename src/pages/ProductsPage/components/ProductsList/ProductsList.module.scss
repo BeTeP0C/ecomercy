@@ -11,7 +11,8 @@
   font-weight: 700;
   font-size: 32px;
   line-height: 36px;
-  color: $color-primary;
+  color: var(--color-text-primary);
+  transition: color 0.3s ease;
 }
 
 .pages {
@@ -19,7 +20,8 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
-  color: $color-brand;
+  color: var(--color-brand);
+  transition: color 0.3s ease;
 }
 
 .main {

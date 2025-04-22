@@ -39,8 +39,70 @@ $color-danger-darknest: #AF0808;
 
 $color-green: #1C877F;
 
+/* _variables.scss */
+.theme-light {
+  --color-bg-main: #FAFAFA;
+  --color-brand: #518581;
+  --color-brand-hover: #86AAA7;
+  --color-brand-active: #487773;
+  --color-text-primary: #000000;
+  --color-text-secondary: #AFADB5;
+  --color-bg-block: #ffffff;
+
+  --color-bg-header: var(--color-bg-block);
+  --color-text-header: var(--color-text-primary);
+  --color-text-header-hover: var(--color-brand-hover);
+  --color-text-header-active: var(--color-brand-active);
+  --color-line-header: #F3F3F3;
+
+  --color-input-bg: var(--color-bg-block);
+  --color-input-placeholder: var(--color-text-secondary);
+  --color-input-border: var(--color-text-secondary);
+  --color-input-text: var(--color-text-primary)
+  --color-input-border-active: var(--color-brand-active);
+
+  --color-button-bg: var(--color-brand);
+  --color-button-bg-hover: var(--color-brand-hover);
+  --color-button-bg-active: var(--color-brand-active);
+  --color-button-text: #ffffff;
+  --color-button-text-hover: #ffffff;
+  --color-button-text-active: #ffffff;
+  --color-button-border: var(--color-text-secondary);
+}
+
+.theme-dark {
+  --color-bg-main: #121212;
+  --color-brand: #66B2A9;
+  --color-brand-hover: #8FD2CB;
+  --color-brand-active: #4C9990;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #8A8A8F;
+  --color-bg-block: #1F1F1F;
+  --color-bg-block-single: #1A1A1A;
+
+  --color-bg-header: var(--color-bg-block-single);
+  --color-text-header: var(--color-text-primary);
+  --color-text-header-hover: #A0ECE9;
+  --color-text-header-active: #7EDDD9;
+  --color-line-header: rgba(255,255,255, 0.2);
+
+  --color-input-bg: #2A2A2A;
+  --color-input-placeholder: var(--color-text-secondary);
+  --color-input-border: #4F4F4F;
+  --color-input-text: var(--color-text-primary);
+  --color-input-border-active: var(--color-brand-active);
+
+  --color-button-bg: var(--color-brand);
+  --color-button-bg-hover: var(--color-brand-hover);
+  --color-button-bg-active: var(--color-brand-active);
+  --color-button-text: #ffffff;
+  --color-button-text-hover: #ffffff;
+  --color-button-text-active: #ffffff;
+  --color-button-border: var(--color-text-secondary);
+}
+
 // $color-heading-dark: #FFFFFF;
-// $color-text-dark: #E5E5E5;
+// $color-text-dark: #8A8A8F;
 // $color-text-secondary-dark: #8A8A8F;
 // // $color-text-secondary-dark: #6F6F76;
 // $color-text-disabled-dark: #5A5A5A;

@@ -1,6 +1,10 @@
 declare const classNames: {
+  readonly "theme-light": "theme-light";
+  readonly "theme-dark": "theme-dark";
   readonly icon: "icon";
   readonly basket: "basket";
+  readonly logo__bg: "logo__bg";
+  readonly logo__text: "logo__text";
   readonly person: "person";
   readonly mail: "mail";
   readonly lock: "lock";

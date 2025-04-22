@@ -113,6 +113,9 @@ const Header = observer(() => {
         </nav>
 
         <div className={styles.actions}>
+          <button className={styles.header__theme} onClick={globalStore.switchTheme}>
+
+          </button>
           <Link to={LOCAL_ENDPOINT.CART} className={styles.basket}>
             <Basket />
             {cartStore.productsCart.length !== 0 && <span className={styles.amount}>{cartStore.amountProducts}</span>}

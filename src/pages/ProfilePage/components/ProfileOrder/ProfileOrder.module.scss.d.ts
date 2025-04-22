@@ -1,4 +1,6 @@
 declare const classNames: {
+  readonly "theme-light": "theme-light";
+  readonly "theme-dark": "theme-dark";
   readonly item: "item";
   readonly info: "info";
   readonly info__titles: "info__titles";

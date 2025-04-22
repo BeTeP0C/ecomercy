@@ -1,5 +1,8 @@
 declare const classNames: {
+  readonly "theme-light": "theme-light";
+  readonly "theme-dark": "theme-dark";
   readonly header: "header";
+  readonly header__theme: "header__theme";
   readonly header__container: "header__container";
   readonly nav: "nav";
   readonly menu: "menu";

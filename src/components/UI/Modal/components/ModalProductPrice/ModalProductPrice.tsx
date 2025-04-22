@@ -11,7 +11,7 @@ type ModalProductPriceProps = {
 const ModalProductPrice: FC<ModalProductPriceProps> = ({price, discount, fullPrice, amountProducts}) => {
   return (
     <div className={styles.content}>
-      {fullPrice && amountProducts && discount && (
+      {fullPrice !== undefined && amountProducts !== undefined && discount !== undefined && (
         <div className={styles.score}>
           <div className={`${styles.score__line} ${styles.score__line_full}`}>
             <h2 className={styles.score__title}>{amountProducts} products</h2>

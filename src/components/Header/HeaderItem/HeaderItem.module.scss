@@ -10,14 +10,15 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-  color: $color-header-link;
+  color: var(--color-text-header);
+  transition: color 0.3s ease;
   transition: color 0.3s ease;
 
   &:hover, &:focus-visible {
-    color: $color-header-link-hover;
+    color: var(--color-text-header-hover);
   }
 
   &_active {
-    color: $color-header-active;
+    color: var(--color-text-header-active);
   }
 }
