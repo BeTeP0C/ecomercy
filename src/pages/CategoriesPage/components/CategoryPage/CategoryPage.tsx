@@ -2,18 +2,17 @@ import { observer, useLocalObservable } from "mobx-react-lite"
 import styles from "./CategoryPage.module.scss"
 import CategoryPageStore from "./CategoryPageStore"
 import { useStore } from "@/hooks/useStore"
-import { useNavigate, useParams } from "react-router"
+import { useParams } from "react-router"
 import { useEffect } from "react"
 import {isTCategory } from "@/common/categoriesList"
 import ProductSkeleton from "@/pages/ProductsPage/components/ProductSkeleton"
 import Product from "@/pages/ProductsPage/components/Product"
 import Container from "@/components/UI/Container"
 import uppercaseFirstSymbol from "@/utils/uppercaseFirstSymbol"
-import ArrowBack from "@/components/Icons/ArrowBack"
+import ButtonBack from "@/components/UI/ButtonBack"
 
 const CategoryPage = observer(() => {
   const {category} = useParams()
-  const navigate = useNavigate()
   const {globalStore, cartStore} = useStore() 
   const validCategory = typeof category === "string" && isTCategory(category) ? category : null;
 
@@ -34,10 +33,7 @@ const CategoryPage = observer(() => {
   return (
     <main className={styles.main}>
       <Container>
-        <button onClick={() => navigate(-1)} type="button" className={styles.back}>
-          <ArrowBack />
-          Назад
-        </button>
+        <ButtonBack />
         <h1 className={styles.heading}>{uppercaseFirstSymbol(category ?? "")}</h1>
 
         {store && store.isLoading ? (

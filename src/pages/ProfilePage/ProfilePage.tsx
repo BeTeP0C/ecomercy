@@ -47,35 +47,29 @@ const ProfilePage = observer(() => {
     <main className={styles.main}>
       {globalStore.isAuthorizate && (
         <Container>
-          {store.isLoading ? (
-            <Loader />
-          ) : (
-            <>
-              <ButtonBack />
-                <h1 className={styles.heading}>Profile</h1>
+          <ButtonBack />
+          <h1 className={styles.heading}>Profile</h1>
 
-                <div className={styles.content}>
-                  {store.isLoading ? (
-                    <Loader />
-                  ): (
-                    <>
-                      {globalStore.userInfo && (
-                        <>
-                          <ProfileInfo 
-                            avatarUrl=""
-                            userName={globalStore.userInfo.name}
-                            mail={globalStore.userInfo.mail}
-                            handleLogout={globalStore.handleLogout}
-                          />
+          <div className={styles.content}>
+            {globalStore.isLoading ? (
+              <Loader />
+            ): (
+              <>
+                {globalStore.userInfo && (
+                  <>
+                    <ProfileInfo 
+                      avatarUrl={globalStore.userInfo.avatar}
+                      userName={globalStore.userInfo.name}
+                      mail={globalStore.userInfo.mail}
+                      handleLogout={globalStore.handleLogout}
+                    />
 
-                          <ProfileOrders orders={store.orders} handleDeleteOrder={store.deleteOrders} handleRepeatOrder={handleRepeat}/>
-                        </>
-                      )}
-                    </>
-                  )}
-                </div>
-            </>
-          )}
+                    <ProfileOrders orders={store.orders} handleDeleteOrder={store.deleteOrders} handleRepeatOrder={handleRepeat}/>
+                  </>
+                )}
+              </>
+            )}
+          </div>
         </Container>
       )}
     </main>

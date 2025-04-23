@@ -1,5 +1,5 @@
 import { GlobalStore } from "@/store/globalStore";
-import { action, computed, makeObservable, observable, runInAction } from "mobx";
+import { action, computed, makeObservable, observable, runInAction, toJS } from "mobx";
 import { TPasswordCorrect } from "../RegistPage/RegistPageStore";
 import axios from "axios";
 import { getLevelPassword, getMessageCorrectLogin, getMessageCorrectMail } from "@/utils/validation";
@@ -8,7 +8,7 @@ import API_ENDPOINTS from "@/config/apiEndpoints";
 type TSettingsInfo = {
   username: string,
   avatarUrl: string,
-  loadAvatar: File | null,
+  loadAvatar: string,
   mail: string,
   password: string
 }
@@ -16,7 +16,7 @@ type TSettingsInfo = {
 type TSettingsErrorsForm = {
   username: string,
   mail: string,
-  form: string
+  form: string,
 }
 
 export type TSettingsInfoKeys = keyof TSettingsInfo
@@ -26,7 +26,7 @@ class SettingsPageStore {
   globalStore: GlobalStore
   settingsInfo: TSettingsInfo =  {
     username: "",
-    loadAvatar: null,
+    loadAvatar: "",
     avatarUrl: "",
     mail: "",
     password: ""
@@ -67,7 +67,7 @@ class SettingsPageStore {
     if (this.globalStore.userInfo) {
       this.settingsInfo = {
         username: this.globalStore.userInfo.name,
-        loadAvatar: null,
+        loadAvatar: this.globalStore.userInfo.avatar,
         avatarUrl: "",
         mail: this.globalStore.userInfo.mail,
         password: ""
@@ -98,16 +98,18 @@ class SettingsPageStore {
   }
 
   saveUserInfoLocal () {
+    console.log(toJS(this.settingsInfo))
     if (this.globalStore.userInfo) {
       this.globalStore.userInfo = {...this.globalStore.userInfo,
         name: this.settingsInfo.username,
         mail: this.settingsInfo.mail,
+        avatar: this.settingsInfo.loadAvatar
       }
     }
   }
 
   deleteAvatar () {
-    this.settingsInfo.avatarUrl = ""
+    this.settingsInfo.loadAvatar = ""
   }
 
   setSettingsUserField = (value: string, type: TSettingsInfoKeys) => {
@@ -123,7 +125,8 @@ class SettingsPageStore {
   }
 
   setUploadAvatar = (value: File) => {
-    this.settingsInfo.loadAvatar = value
+    const url = URL.createObjectURL(value)
+    this.settingsInfo.loadAvatar = url
   }
 
   setErrorForm (message: string, type: TSettingsErrorsFormKeys) {

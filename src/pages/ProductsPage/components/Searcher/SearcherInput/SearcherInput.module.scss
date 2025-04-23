@@ -9,11 +9,10 @@
   line-height: 20px;
   color: var(--color-input-text);
   background: var(--color-input-bg);
-  transition: outline 0.3s ease, background 0.3s ease, color 0.3s ease;
+  transition: outline 0.3s ease;
 
   &::placeholder {
     color: var(--color-input-placeholder);
-    transition: color 0.3s ease;
   }
 
   &:focus-visible {

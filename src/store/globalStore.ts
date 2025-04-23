@@ -109,7 +109,8 @@ export class GlobalStore {
         this.userInfo = {
           id: data.id,
           mail: data.email,
-          name: data.username
+          name: data.username,
+          avatar: this.userInfo?.avatar ?? ''
         }
       })
     } catch (error: any) {

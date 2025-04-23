@@ -15,7 +15,7 @@ import LOCAL_ENDPOINT from "@/config/localEndpoint"
 import ButtonBack from "@/components/UI/ButtonBack"
 
 const ProductPage = observer(() => {
-  const {globalStore, cartStore} = useStore() 
+  const {globalStore, cartStore, modalStore} = useStore() 
   const {id} = useParams()
   const navigate = useNavigate()
 
@@ -32,6 +32,32 @@ const ProductPage = observer(() => {
       }
     }
   }, [store.product])
+
+  const handlePayment = () => {
+    if (store.product) {
+      store.addOrderLocal(store.product)
+    }
+
+    modalStore.modalClose()
+    setTimeout(modalStore.modalReset, 300)
+  }
+
+  const handleCancel = () => {
+    modalStore.modalClose()
+  }
+
+  const handleBuy = () => {
+    if (store.product) {
+      modalStore.modalOpen("payment", {
+        price: store.product.price * ( (100 - store.product.discountPercent) / 100),
+        amountProducts: 1,
+        fullPrice: store.product.price,
+        discount: store.product.price * ( store.product.discountPercent / 100), 
+        onPayment: handlePayment, 
+        onClose: handleCancel
+      })
+    }
+  }
 
   const slidesImage = store.images.map(image => {
     return (
@@ -52,7 +78,9 @@ const ProductPage = observer(() => {
   useEffect(() => {
     const loadData = async () => {
       if (id) {
-        await store.loadProductData(id)
+        const result = await store.loadProductData(id)
+
+        if (result === false) navigate("/error")
       }
     }
 
@@ -79,7 +107,7 @@ const ProductPage = observer(() => {
                   <p className={styles.descr}>{store.product?.description}</p>
                   <span className={styles.price}>${store.product?.price}</span>
                   <div className={styles.actions}>
-                    <Button className={styles.product__button_now} text="Buy Now" />
+                    <Button className={styles.product__button_now} text="Buy Now" func={handleBuy}/>
                     <Button className={styles.product__button} text={cartStore.amountProduct(store.product.documentId) === 0 ? "Add to cart" : "Go to cart"} func={handleButtonClick} />
                   </div>
                 </div>

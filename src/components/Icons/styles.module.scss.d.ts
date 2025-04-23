@@ -21,5 +21,7 @@ declare const classNames: {
   readonly edit: "edit";
   readonly success_arrow: "success_arrow";
   readonly photo: "photo";
+  readonly moon: "moon";
+  readonly arrow_back: "arrow_back";
 };
 export = classNames;

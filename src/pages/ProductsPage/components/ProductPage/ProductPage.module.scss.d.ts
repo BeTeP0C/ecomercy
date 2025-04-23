@@ -4,7 +4,6 @@ declare const classNames: {
   readonly main: "main";
   readonly product__container: "product__container";
   readonly product__container_loading: "product__container_loading";
-  readonly back: "back";
   readonly product: "product";
   readonly slider: "slider";
   readonly info: "info";

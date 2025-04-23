@@ -98,14 +98,19 @@
   top: 0;
   background: var(--color-bg-header);
   z-index: 2000;
-  transition: background 0.3s ease;
 
   &__theme {
     position: relative;
-    width: 20px;
-    height: 20px;
-    background: red;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
     z-index: 100;
+
+    &:hover {
+      path {
+        stroke: var(--color-text-header-hover);
+      }
+    }
   }
 }
 
@@ -129,14 +134,23 @@
     left: 0;
     right: 0;
     height: 100vh;
-    padding: 35px 40px;
+    padding: 35px;
+    padding-top: 50px;
     background: var(--color-bg-header);
     transform: translateX(-100%);
-    transition: transform 0.5s ease, background 0.3s ease;
+    transition: transform 0.5s ease;
     z-index: 1000;
 
     &_active {
       transform: translateX(0);
+    }
+
+    & li {
+      margin-right: 0;
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
     }
   }
 
@@ -154,7 +168,7 @@
   &__line {
     width: 30px;
     height: 3px;
-    // background: $color-primary;
+    background: var(--color-text-primary);
 
     &:not(:last-child) {
       margin-bottom: 5px;
@@ -205,12 +219,15 @@
 }
 
 .basket, .person {
-
   &:hover path {
     stroke: var(--color-text-header-hover);
   }
 
   &:active path {
+    stroke: var(--color-text-header-active);
+  }
+
+  &_active path {
     stroke: var(--color-text-header-active);
   }
 }
@@ -248,8 +265,8 @@
   height: 18px;
   font-weight: 500;
   font-size: 16px;
-  // color: $color-white;
-  // background: $color-brand;
+  color: #ffffff;
+  background: var(--color-brand);
 }
 
 .line {
@@ -259,7 +276,6 @@
   left: 0;
   height: 2px;
   background: var(--color-line-header);
-  transition: background 0.3s ease;
 }
 
 .line__active {
@@ -269,7 +285,7 @@
   width: 80px;
   bottom: -36px;
   background: var(--color-text-header-active);
-  transition: left 0.3s ease, width 0.3s ease, background 0.3s ease;
+  transition: left 0.3s ease, width 0.3s ease;
   z-index: 1000;
 }
 

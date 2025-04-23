@@ -6,7 +6,7 @@
   width: 300px;
   height: 52px;
   background: var(--color-input-bg);
-  transition: outline 0.3s ease, background 0.3s ease;
+  transition: outline 0.3s ease;
 
   &_active {
     outline: 1px solid var(--color-input-border-active);
@@ -31,7 +31,6 @@
   font-size: 16px;
   line-height: 20px;
   color: var(--color-input-placeholder);
-  transition: color 0.3s ease;
 }
 
 .icon {
@@ -73,9 +72,12 @@
 }
 
 .main {
+  position: absolute;
+  top: calc(100% + 10px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
 
   &_active {
     opacity: 1;

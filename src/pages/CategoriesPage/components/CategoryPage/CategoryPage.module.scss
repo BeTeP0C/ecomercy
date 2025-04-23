@@ -2,6 +2,7 @@
 
 .main {
   padding-top: 150px;
+  padding-bottom: 150px;
 }
 
 .heading {
@@ -9,18 +10,7 @@
   font-weight: 700;
   font-size: 44px;
   line-height: 48px;
-  color: $color-primary;
-}
-
-.back {
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 32px;
-  width: max-content;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  color: $color-primary;
+  color: var(--color-text-primary);
 }
 
 .list {

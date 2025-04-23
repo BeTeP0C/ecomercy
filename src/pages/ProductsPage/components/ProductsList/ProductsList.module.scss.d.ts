@@ -8,5 +8,6 @@ declare const classNames: {
   readonly list: "list";
   readonly list_skeleton: "list_skeleton";
   readonly item: "item";
+  readonly empty: "empty";
 };
 export = classNames;

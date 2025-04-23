@@ -31,37 +31,40 @@
 .logo {
   &__bg {
     fill: var(--color-bg-header);
-    transition: fill 0.3s ease;
   }
 
   &__text path {
     fill: var(--color-text-header);
-    transition: fill 0.3s ease;
   }
 }
 
 .person path {
   fill: none !important;
+  stroke: var(--color-text-header);
   transition: stroke 0.3s ease;
 }
 
 .mail path {
   stroke: none !important;
+  fill: var(--color-text-primary);
   transition: fill 0.3s ease;
 }
 
 .lock path {
   fill: none !important;
+  stroke: var(--color-text-primary);
   transition: stroke 0.3s ease;
 }
 
 .eye path {
   fill: none !important;
+  stroke: var(--color-text-primary);
   transition: stroke 0.3s ease;
 }
 
 .eye_close path {
   fill: none !important;
+  stroke: var(--color-text-primary);
   transition: stroke 0.3s ease;
 }
 
@@ -78,7 +81,6 @@
   
   path {
     fill: var(--color-brand-active);
-    transition: fill 0.3s ease;
   }
 }
 
@@ -104,17 +106,28 @@
 }
 
 .star {
-  & polygon {
-    transition: fill 0.3s ease;
+  & path {
+    stroke: var(--color-text-primary);
+    transition: fill 0.3s ease, stroke 0.3s ease;
   }
 }
 
 .door {
   padding-right: 3px;
+  
+  & path {
+    fill: var(--color-logout-text);
+    transition: fill 0.3s ease;
+  }
 }
 
 .edit {
   padding-right: 3px;
+
+  & path {
+    fill: var(--color-edit-text);
+    transition: fill 0.3s ease;
+  }
 }
 
 .success_arrow {
@@ -124,4 +137,16 @@
 .photo {
   position: relative;
   z-index: 1000;
+}
+
+.moon {
+  path {
+    stroke: var(--color-text-header);
+    transition: stroke 0.3s ease;
+  }
+}
+
+.arrow_back path {
+  stroke: var(--color-text-primary);
+  transition: stroke 0.3s ease;
 }

@@ -3,7 +3,6 @@ declare const classNames: {
   readonly "theme-dark": "theme-dark";
   readonly main: "main";
   readonly heading: "heading";
-  readonly back: "back";
   readonly list: "list";
   readonly list_skeleton: "list_skeleton";
   readonly item: "item";

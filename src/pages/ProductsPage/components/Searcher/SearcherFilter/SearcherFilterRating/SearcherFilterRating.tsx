@@ -9,7 +9,7 @@ type SearcherFilterRatingProps = {
 }
 
 const SearcherFilterRating: FC<SearcherFilterRatingProps> = ({stars, updateFilterField}) => {
-  const [sizeStar, setSizeStar] = useState<number>(50)
+  const [sizeStar, setSizeStar] = useState<number>(30)
 
   const handleButtonClick = (value: number) => {
     if (updateFilterField) {

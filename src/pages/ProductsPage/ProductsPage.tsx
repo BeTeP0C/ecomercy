@@ -21,27 +21,48 @@ const ProductsPage = observer(() => {
   const rating = query.get("rating")
   const currentPage = query.get("page")
 
+  const handleSearch = () => {
+    if (store.isMobile) store.resetForScroll()
+    store.setProducts()
+  }
+
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 620) store.setIsMobile(true)
+      else store.setIsMobile(false)
+    }
+
     store.setFilterField("title", text ?? "")
     store.setFilterField("priceStart", Number(priceStart))
-    store.setFilterField("priceEnd", Number(priceEnd))
+    store.setFilterField("priceEnd", priceEnd ? Number(priceEnd) : 100)
     store.setFilterField("rating", Number(rating))
     
     store.setPagePagination(currentPage ? Number(currentPage) : 1)
-  }, [store])
+
+    handleResize()
+
+    window.addEventListener("resize", handleResize)
+    
+    store.initialize()
+
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   return (
     <main>
       <Hero />
       <FilterContext.Provider value={store}>
-        <Searcher filter={store.filter} updateFilterField={store.setFilterField} setProductsFilter={store.setProducts}/>
+        <Searcher filter={store.filter} updateFilterField={store.setFilterField} setProductsFilter={handleSearch}/>
       </FilterContext.Provider>
       <ProductsList 
         pagination={store.pagination}
         products={store.products}
         isLoading={store.isLoading}
+        isMobile={store.isMobile}
+        setProducts={store.setProducts}
+        hasMore={store.hasMore}
       />
-      <ProductPagination currentPage={store.pagination.page} totalPages={store.pagination.pageCount} func={store.setPagePagination}/>
+      {!store.isMobile && store.products.length !== 0 && <ProductPagination currentPage={store.pagination.page} totalPages={store.pagination.pageCount} func={store.setPagePagination}/>}
     </main>
   )
 })

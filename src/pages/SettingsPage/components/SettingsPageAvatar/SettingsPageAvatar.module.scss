@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  border-bottom: 1px solid $color-brand;
+  border-bottom: 1px solid var(--color-brand);
 }
 
 .info {
@@ -16,14 +16,14 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
-  color: $color-primary;
+  color: var(--color-text-primary);
 }
 
 .descr {
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  color: $color-black-lighting;
+  color: var(--color-text-secondary);
 }
 
 .actions {
@@ -45,7 +45,7 @@
   width: 100px;
   height: 100px;
   overflow: hidden;
-  background: rgba($color-secondary, 0.5);
+  background: --color-avatar-bg;
 }
 
 .img {
@@ -68,18 +68,18 @@
 
   &_update {
     margin-right: 20px;
-    color: $color-green;
+    color: var(--color-avatar-update);
 
     &:hover {
-      color: $color-brand-hover;
+      color: var(--color-avatar-update-hover);
     }
   }
 
   &_delete {
-    color: $color-danger-darknest;
+    color: var(--color-avatar-delete);
 
     &:hover {
-      color: $color-danger;
+      color: var(--color-avatar-delete-hover);
     }
   }
 }

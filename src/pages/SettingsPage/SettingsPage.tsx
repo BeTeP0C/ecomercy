@@ -50,7 +50,7 @@ const SettingsPage = observer(() => {
             <Loader />
           ): (
             <>
-              <SettingsPageAvatar avatarUrl="" func={store.setUploadAvatar}/>
+              <SettingsPageAvatar avatarUrl={store.settingsInfo.avatarUrl} func={store.setUploadAvatar}/>
 
               <div className={styles.block}>
                 <SettingsPageField value={store.settingsInfo.username} title="Username" placeholder="User" type="username" errorMessage={store.settingsErrorsForm.username} func={store.setSettingsUserField}/>

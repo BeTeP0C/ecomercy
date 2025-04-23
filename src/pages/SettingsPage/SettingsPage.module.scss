@@ -9,7 +9,7 @@
   font-weight: 700;
   font-size: 44px;
   line-height: 48px;
-  color: $color-primary;
+  color: var(--color-text-primary);
 }
 
 .content {
@@ -17,7 +17,7 @@
   padding-bottom: 20px;
   border-radius: 30px;
   box-shadow: 0 4px 4px 0 rgba(#000000, 0.25);
-  background: $color-white;
+  background: var(--color-bg-block);
   min-height: 437px;
 }
 
@@ -45,7 +45,7 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-  color: $color-danger-darknest;
+  color: var(--color-logout-bg);
 }
 
 .reset {
@@ -53,11 +53,11 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: $color-primary;
+  color: var(--color-text-primary);
   transition: color 0.3s ease;
 
   &:hover {
-    color: $color-danger-darknest;
+    color: var(--color-level-low);
   }
 }
 

@@ -15,7 +15,7 @@
   font-weight: 800;
   font-size: 273px;
   line-height: 328px;
-  color: $color-brand;
+  color: var(--color-brand);
   z-index: 1000;
 }
 
@@ -31,7 +31,7 @@
   z-index: -1;
   color: transparent;
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: $color-brand;
+  -webkit-text-stroke-color: var(--color-brand);
 }
 
 .info {
@@ -45,12 +45,12 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-  color: $color-primary;
+  color: var(--color-text-primary);
 }
 
 .descr {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  color: $color-primary;
+  color: var(--color-text-primary);
 }

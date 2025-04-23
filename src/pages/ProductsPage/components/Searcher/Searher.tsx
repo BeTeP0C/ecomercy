@@ -18,7 +18,7 @@ const Searcher: FC<SearcherProps> = ({filter, updateFilterField, setProductsFilt
   const [queryParams, setQueryParams] = useSearchParams()
   const query = new URLSearchParams(useLocation().search)
 
-  const handleButtonSubmit = async () => {
+  const handleButtonSubmit = () => {
     const params = new URLSearchParams(queryParams.toString())
     params.set("text", filter.title)
     params.set("priceStart", filter.priceStart.toString())

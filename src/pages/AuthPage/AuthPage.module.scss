@@ -26,15 +26,16 @@
   font-weight: 700;
   font-size: 44px;
   line-height: 48px;
+  color: var(--color-text-primary);
 }
 
 .link {
   font-weight: 400;
   font-size: 14px;
-  color: $color-secondary;
+  color: var(--color-text-secondary);
   transition: color 0.3s ease;
 
   &:hover {
-    color: $color-brand;
+    color: var(--color-brand);
   }
 }

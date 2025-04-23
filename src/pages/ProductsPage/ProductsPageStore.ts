@@ -14,6 +14,9 @@ export type TSetFilterField = <K extends keyof TFilterStore>(key: K, value: TFil
 class ProductsPageStore {
   globalStore: GlobalStore
   products: TProduct[] = []
+  hasMore: boolean = true
+  isMobile: boolean = false
+  initialized: boolean = false;
 
   pagination: TPagination = {
     page: 1,
@@ -25,7 +28,7 @@ class ProductsPageStore {
   filter: TFilterStore = observable.object({
     title: "",
     priceStart: 0,
-    priceEnd: 0,
+    priceEnd: 100,
     rating: 0
   })
 
@@ -39,18 +42,43 @@ class ProductsPageStore {
       pagination: observable,
       isLoading: observable,
       filter: observable,
+      hasMore: observable,
+      initialized: observable,
+      isMobile: observable,
       getCurrentSavePage: action,
       setPagePagination: action,
       setProducts: action,
       setFilterField: action,
+      resetFilter: action,
+      setIsMobile: action,
+      initialize: action,
+      resetForScroll: action,
     })
 
     this.getCurrentSavePage()
-    this.setProducts()
+  }
+
+  setIsMobile = (value: boolean) => {
+    this.isMobile = value
   }
 
   setFilterField = <K extends keyof TFilterStore>(key: K, value: TFilterStore[K]) => {
     this.filter[key] = value
+  }
+
+  resetFilter = () => {
+    this.filter = {...this.filter,
+      priceStart: 0,
+      priceEnd: 0,
+      rating: 0
+    }
+  }
+
+  initialize = async () => {
+    if (this.initialized) return;
+    this.initialized = true;
+  
+    await this.setProducts();
   }
 
   async getProducts (): Promise<TProductApi | false> {
@@ -120,17 +148,35 @@ class ProductsPageStore {
     return resp.data.data
   }
 
+  resetForScroll = () => {
+    this.products = []
+    this.pagination.page = 1
+    this.hasMore = true
+  }
+
   setProducts = async () => {
+    if (this.isLoading) return
+
     runInAction(() => {
       this.isLoading = true
     })
-    
+
     const data = await this.getProducts()
 
     if (data) {
       runInAction(() => {
-        this.products = data.data
-        this.pagination = data.meta.pagination
+        if (this.isMobile) {
+          this.products.push(...data.data)
+
+          this.pagination = {...data.meta.pagination,
+            page: data.meta.pagination.page + 1
+          }
+
+          if (this.products.length >= this.pagination.total) this.hasMore = false
+        } else {
+          this.products = data.data
+          this.pagination = data.meta.pagination
+        }
       })
     }
 

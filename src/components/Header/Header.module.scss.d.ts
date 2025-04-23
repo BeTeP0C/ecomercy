@@ -20,6 +20,8 @@ declare const classNames: {
   readonly actions: "actions";
   readonly basket: "basket";
   readonly person: "person";
+  readonly basket_active: "basket_active";
+  readonly person_active: "person_active";
   readonly amount: "amount";
   readonly line: "line";
   readonly line__active: "line__active";

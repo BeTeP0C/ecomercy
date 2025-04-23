@@ -1,43 +1,17 @@
-$color-white: #ffffff;
-$color-off-white: #FAFAFA;
-$color-gray-lighting: #F3F3F3;
-$color-gray-milk: #CEC0C0;
-$color-primary: #000000;
-$color-primary-light: #151411;
-$color-black-light: #272424;
-$color-black-lighting: #423F48;
-$color-secondary: #AFADB5;
-
-$color-brand: #518581;
-$color-brand-hover: #86AAA7;
-$color-brand-active: #487773;
-
-$color-header-link: $color-primary;
-$color-header-link-hover: $color-brand-hover;
-$color-header-active: $color-brand;
-
-$color-bg-input: #FFFFFF;
-$color-text-input: #000000;
-$color-input-placeholder: #AFADB5;
-$color-input-border: $color-brand;
-
-$color-button-bg: $color-brand;
-$color-button-bg-hover: $color-brand-hover;
-$color-button-bg-active: $color-brand-active;
-$color-button-bg-disabled: #D9D9D9;
-$color-button-text: #ffffff;
-
-$color-card-bg: #FFFFFF;
 $color-card-bg-skeleton: #D9D9D9;
 $color-card-bg-skeleton-04: rgba(217, 217, 217, 0.4);
+$color-white: #ffffff;
+$color-black-light: #272424;
+$color-brand: #518581;
+$color-primary: #000000;
 
-$color-error: #D60F0F;
-$color-medium: #FFBB00;
+:root {
+  --color-danger: #FD0000;
+  --color-danger-darknest: #AF0808;
+  --color-medium: #FFBB00;
 
-$color-danger: #FD0000;
-$color-danger-darknest: #AF0808;
-
-$color-green: #1C877F;
+  --color-avatar-bg: rgba(0,0,0, 0.5)
+}
 
 /* _variables.scss */
 .theme-light {
@@ -46,8 +20,12 @@ $color-green: #1C877F;
   --color-brand-hover: #86AAA7;
   --color-brand-active: #487773;
   --color-text-primary: #000000;
+  --color-primary-light: #151411;
+  --color-primary-lighting: #423F48;
   --color-text-secondary: #AFADB5;
+  --color-text-secondary-rgb: 175, 173, 181;
   --color-bg-block: #ffffff;
+  --color-bg-block-single: #ffffff;
 
   --color-bg-header: var(--color-bg-block);
   --color-text-header: var(--color-text-primary);
@@ -58,7 +36,7 @@ $color-green: #1C877F;
   --color-input-bg: var(--color-bg-block);
   --color-input-placeholder: var(--color-text-secondary);
   --color-input-border: var(--color-text-secondary);
-  --color-input-text: var(--color-text-primary)
+  --color-input-text: var(--color-text-primary);
   --color-input-border-active: var(--color-brand-active);
 
   --color-button-bg: var(--color-brand);
@@ -68,6 +46,44 @@ $color-green: #1C877F;
   --color-button-text-hover: #ffffff;
   --color-button-text-active: #ffffff;
   --color-button-border: var(--color-text-secondary);
+
+  --color-logout-bg: rgba(253, 0, 0, 0.8);
+  --color-logout-border: rgba(253, 0, 0, 0.8);
+  --color-logout-text: var(--color-bg-main);
+  --color-logout-bg-hover: rgb(255, 0, 0);
+  --color-logout-border-hover: rgba(253, 0, 0, 1);
+  --color-logout-text-hover: var(--color-bg-main);
+
+  --color-edit-bg: rgba(206, 192, 192, 0.5);
+  --color-edit-border: rgba(206, 192, 192, 0.5);
+  --color-edit-text: #272424;
+  --color-edit-bg-hover: rgba(206, 192, 192, 0.7);
+  --color-edit-border-hover: rgba(206, 192, 192, 0.8);
+  --color-edit-text-hover: #1a1a1a;
+
+  --color-paid-bg: rgba(81, 133, 129, 0.15);
+
+  --color-more-text: #423F48;
+
+  --color-order-delete: var(--color-danger-darknest);
+
+  --color-peculiarity-bg: rgba(206, 192, 192, 0.2);
+
+  --color-level-default: rgba(175, 173, 181, 0.15);
+  --color-level-low: var(--color-danger-darknest);
+  --color-level-medium: #FFBB00;
+  --color-level-high: var(--color-brand);
+
+  --color-avatar-update: #1C877F;
+  --color-avatar-update-hover: var(--color-brand);
+
+  --color-avatar-delete: #AF0808;
+  --color-avatar-delete-hover: var(--color-danger);
+
+  --color-modal-bg: rgba(0,0,0, 0.4);
+
+  --color-pagination-arrow-bg: var(--color-text-primary);
+  --color-pagination-arrow-bg-disabled: rgba(0,0,0, 0.3);
 }
 
 .theme-dark {
@@ -76,7 +92,10 @@ $color-green: #1C877F;
   --color-brand-hover: #8FD2CB;
   --color-brand-active: #4C9990;
   --color-text-primary: #ffffff;
+  --color-primary-light: #bbbab6;
+  --color-primary-lighting: #E0E0E0;
   --color-text-secondary: #8A8A8F;
+  --color-text-secondary-rgb: 138, 138, 143;
   --color-bg-block: #1F1F1F;
   --color-bg-block-single: #1A1A1A;
 
@@ -99,49 +118,42 @@ $color-green: #1C877F;
   --color-button-text-hover: #ffffff;
   --color-button-text-active: #ffffff;
   --color-button-border: var(--color-text-secondary);
+
+  --color-logout-bg: #3A1F1F;
+  --color-logout-border: #5A2A2A;
+  --color-logout-text: #FF5A5A;
+  --color-logout-bg-hover: #4A2626;
+  --color-logout-border-hover: #6B2F2F;
+  --color-logout-text-hover: #FF7676;
+
+  --color-edit-bg: rgba(255, 255, 255, 0.05);
+  --color-edit-border: #3A3A3A;
+  --color-edit-text: #E5E5E5;
+  --color-edit-bg-hover: rgba(255, 255, 255, 0.1);
+  --color-edit-border-hover: #5A5A5A;
+  --color-edit-text-hover: #FFFFFF;
+
+  --color-paid-bg: rgba(102, 178, 169, 0.15);
+
+  --color-more-text: #6F6F76;
+
+  --color-order-delete: var(--color-danger);
+
+  --color-peculiarity-bg: #3A3A3A;
+
+  --color-level-default: rgba(175, 173, 181, 0.15);
+  --color-level-low: var(--color-danger-darknest);
+  --color-level-medium: #FFBB00;
+  --color-level-high: var(--color-brand);
+
+  --color-avatar-update: #289E94;
+  --color-avatar-update-hover: var(--color-brand);
+
+  --color-avatar-delete: #E86E6E;
+  --color-avatar-delete-hover: var(--color-danger);
+
+  --color-modal-bg: rgba(0,0,0, 0.5);
+
+  --color-pagination-arrow-bg: #FFFFFF;
+  --color-pagination-arrow-bg-disabled: #8A8A8F;
 }
-
-// $color-heading-dark: #FFFFFF;
-// $color-text-dark: #8A8A8F;
-// $color-text-secondary-dark: #8A8A8F;
-// // $color-text-secondary-dark: #6F6F76;
-// $color-text-disabled-dark: #5A5A5A;
-
-// $color-button-bg-dark:         $color-brand-dark;         // #66B2A9
-// // box-shadow: 1px 4px 8px rgba(102, 178, 169, 0.2); // для кнопки в обычном состоянии
-// $color-button-bg-hover-dark:   $color-brand-hover-dark;   // #8FD2CB 
-// // box-shadow: 1px 4px 8px rgba(143, 210, 203, 0.2); // для hover
-// $color-button-bg-active-dark:  $color-brand-active-dark;  // #4C9990
-// // box-shadow: 1px 4px 8px rgba(76, 153, 144, 0.2); // для активной кнопки
-// $color-button-text-dark:       #FFFFFF;
-// $color-button-disabled-dark:   #3A3A3A;
-
-
-// // Цвет фона инпута
-// $color-bg-input-dark: #2A2A2A;
-
-// // Цвет текста в инпуте
-// $color-text-input-dark: #FFFFFF;
-
-// // Цвет плейсхолдера
-// $color-input-placeholder-dark: #8A8A8F;
-
-// // Цвет границы инпута
-// $color-input-border-dark: #4F4F4F;
-
-// // Цвет границы инпута при фокусе
-// $color-input-border-focus-dark: #66B2A9;
-
-// // Цвет инпута с ошибкой
-// $color-input-error-dark: #FD0000;
-
-
-// // Выход
-// $color-logout-bg-dark: rgba(253, 0, 0, 0.15);   // #FD000026
-// $color-logout-text-dark: #FD0000;
-// $color-logout-border-dark: #AF0808;
-
-// // Редактировать
-// $color-edit-bg-dark: rgba(255, 255, 255, 0.06);
-// $color-edit-text-dark: #E5E5E5;
-// $color-edit-border-dark: #3A3A3A;

@@ -9,5 +9,6 @@ declare const classNames: {
   readonly button_active: "button_active";
   readonly button_back: "button_back";
   readonly button_next: "button_next";
+  readonly doted: "doted";
 };
 export = classNames;

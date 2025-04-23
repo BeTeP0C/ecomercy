@@ -21,7 +21,7 @@ const ModalProductPrice: FC<ModalProductPriceProps> = ({price, discount, fullPri
           <div className={`${styles.score__line} ${styles.score__line_discount}`}>
             <h2 className={styles.score__title}>Discount</h2>
             
-            <span className={`${styles.score__price}`}>{discount}$</span>
+            <span className={`${styles.score__price}`}>{discount.toFixed(2)}$</span>
           </div>
         </div>
       )}

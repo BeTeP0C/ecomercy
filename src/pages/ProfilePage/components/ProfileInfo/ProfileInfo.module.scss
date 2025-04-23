@@ -8,7 +8,7 @@
   width: 300px;
   height: max-content;
   box-shadow: 1px 4px 4px 3px rgba($color-primary, 0.25);
-  background: $color-off-white;
+  background: var(--color-bg-block);
 }
 
 .main {
@@ -22,6 +22,7 @@
   display: none;
   justify-content: center;
   align-items: center;
+  color: var(--color-text-primary);
 }
 
 .info {
@@ -42,14 +43,14 @@
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
-  color: $color-primary;
+  color: var(--color-text-primary);
 }
 
 .mail {
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  color: $color-secondary;
+  color: var(--color-text-secondary);
 }
 
 .actions {
@@ -64,17 +65,39 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, outline 0.3s ease, color 0.3s ease;
 
   &_logout {
     margin-right: 6px;
-    background: rgba($color-danger, 0.8);
-    color: $color-white;
+    background: var(--color-logout-bg);
+    outline: 1px solid var(--color-logout-border);
+    color: var(--color-logout-text);
+
+    &:hover {
+      background: var(--color-logout-bg-hover);
+      outline: 1px solid var(--color-logout-border-hover);
+      color: var(--color-logout-text-hover);
+
+      & path {
+        fill: var(--color-logout-text-hover);
+      }
+    }
   }
 
   &_edit {
-    background: rgba($color-gray-milk, 0.5);
-    color: $color-black-light;
+    background: var(--color-edit-bg);
+    outline: 1px solid var(--color-edit-border);
+    color: var(--color-edit-text);
+
+    &:hover {
+      background: var(--color-edit-bg-hover);
+      outline: 1px solid var(--color-edit-border-hover);
+      color: var(--color-edit-text-hover);
+
+      & path {
+        fill: var(--color-edit-text-hover);
+      }
+    }
   }
 }
 

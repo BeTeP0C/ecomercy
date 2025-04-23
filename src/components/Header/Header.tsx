@@ -10,10 +10,13 @@ import { useEffect, useRef, useState } from "react"
 import HeaderItem from "./HeaderItem"
 import HeaderStore from "./HeaderStore"
 import LOCAL_ENDPOINT from "@/config/localEndpoint"
+import Moon from "../Icons/Moon"
+import { useLocation } from "react-router"
 
 const Header = observer(() => {
   const { globalStore, cartStore } = useStore()
-
+  const { pathname } = useLocation()
+  const [activeLink, setActiveLink] = useState<"busket" | "person" | "auth" | null>(null)
   const store = useLocalObservable(() => new HeaderStore())
   const lineRef = useRef<HTMLDivElement | null>(null)
   
@@ -49,6 +52,13 @@ const Header = observer(() => {
   }
 
   useEffect(() => {
+    if (pathname === "/cart") setActiveLink("busket")
+    else if (pathname === "/profile" || pathname === "/settings") setActiveLink("person")
+    else if (pathname === "/auth" || pathname === "/regist") setActiveLink("auth")
+    else setActiveLink(null)
+  }, [pathname])
+
+  useEffect(() => {
     if (cartStore.productsCart.length === 0) {
       cartStore.getProductsCart()
     }
@@ -57,7 +67,6 @@ const Header = observer(() => {
   return (
     <header className={styles.header}>
       <Container className={styles.header__container}>
-        
       <div className={`${styles.menu}`}>
         <nav className={`${styles.nav} ${styles.menu__nav} ${isMenuOpen ? styles.menu__nav_active : ""}`}>
           <ul className={`${styles.list} ${styles.menu__list}`}>
@@ -114,14 +123,14 @@ const Header = observer(() => {
 
         <div className={styles.actions}>
           <button className={styles.header__theme} onClick={globalStore.switchTheme}>
-
+            <Moon />
           </button>
-          <Link to={LOCAL_ENDPOINT.CART} className={styles.basket}>
+          <Link to={LOCAL_ENDPOINT.CART} className={`${styles.basket} ${activeLink === "busket" && styles.basket_active}`}>
             <Basket />
             {cartStore.productsCart.length !== 0 && <span className={styles.amount}>{cartStore.amountProducts}</span>}
           </Link>
           
-          <Link to={globalStore.isAuthorizate ? LOCAL_ENDPOINT.PROFILE : LOCAL_ENDPOINT.AUTH} className={styles.person}>
+          <Link to={globalStore.isAuthorizate ? LOCAL_ENDPOINT.PROFILE : LOCAL_ENDPOINT.AUTH} className={`${styles.person} ${(activeLink === "person" ||  activeLink === "auth")  && styles.person_active}`}>
             {globalStore.isAuthorizate ? <Person /> : "Login"}
           </Link>
         </div>

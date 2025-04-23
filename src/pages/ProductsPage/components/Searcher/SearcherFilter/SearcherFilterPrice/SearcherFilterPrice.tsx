@@ -1,6 +1,7 @@
-import { ChangeEvent, Dispatch, FC, FocusEvent, KeyboardEvent, SetStateAction, useState } from "react"
+import { ChangeEvent, Dispatch, FC, FocusEvent, KeyboardEvent, SetStateAction, useEffect, useState } from "react"
 import styles from "./styles.module.scss"
 import { TSetFilterField } from "@/pages/ProductsPage/ProductsPageStore"
+import { observer } from "mobx-react-lite"
 
 type SearcherFilterPriceProps = {
   updateFilterField: TSetFilterField | null,
@@ -8,7 +9,7 @@ type SearcherFilterPriceProps = {
   max: number
 }
 
-const SearcherFilterPrice: FC<SearcherFilterPriceProps> = ({updateFilterField, min, max}) => {
+const SearcherFilterPrice: FC<SearcherFilterPriceProps> = observer(({updateFilterField, min, max}) => {
   const [valueMin, setValueMin] = useState<string>(min.toString());
   const [valueMax, setValueMax] = useState<string>(max.toString());
 
@@ -53,9 +54,14 @@ const SearcherFilterPrice: FC<SearcherFilterPriceProps> = ({updateFilterField, m
     }
   };
 
+  useEffect(() => {
+    setValueMin(min.toString())
+    setValueMax(max.toString())
+  }, [min, max])
+
   return (
     <div className={styles.price}>
-      <h3 className={styles.title}>Price: </h3>
+      <h3 className={styles.title}>Price</h3>
 
       <div>
         <input
@@ -64,7 +70,7 @@ const SearcherFilterPrice: FC<SearcherFilterPriceProps> = ({updateFilterField, m
           onBlur={handleBlurInputMin}
           className={`${styles.input} ${styles.input_start}`}
           type="text"
-          placeholder="from"
+          placeholder="From"
           value={valueMin}
         />
         <input
@@ -73,12 +79,12 @@ const SearcherFilterPrice: FC<SearcherFilterPriceProps> = ({updateFilterField, m
           onBlur={handleBlurInputMax}
           className={styles.input}
           type="text"
-          placeholder="to"
+          placeholder="To"
           value={valueMax}
         />
       </div>
     </div>
   )
-}
+})
 
 export default SearcherFilterPrice

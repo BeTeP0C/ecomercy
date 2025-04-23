@@ -5,7 +5,7 @@
   text-align: center;
   font-weight: 500;
   font-size: 16px;
-  color: $color-error;
+  color: var(--color-danger);
 }
 
 .button {
@@ -14,19 +14,19 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 18px;
-  color: $color-button-text;
-  background: $color-button-bg;
+  color: var(--color-button-text);
+  background: var(--color-button-bg);
   transition: background 0.3s ease;
 
   &:hover, &:focus-visible {
-    background: $color-button-bg-hover;
+    background: var(--color-button-bg-hover);
   }
 
   &:active {
-    background: $color-button-bg-active;
+    background: var(--color-button-bg-active);
   }
 
   &:disabled {
-    background: $color-button-bg-disabled;
+    background: var(--color-button-bg-disabled);
   }
 }

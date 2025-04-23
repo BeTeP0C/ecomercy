@@ -60,7 +60,7 @@ const ProductPagination: FC<ProductPaginationProps> = ({currentPage, totalPages,
         </li>
       ) : (
         <li key={index} className={styles.item}>
-          <span>...</span>
+          <span className={styles.doted}>...</span>
         </li>
       )
     );

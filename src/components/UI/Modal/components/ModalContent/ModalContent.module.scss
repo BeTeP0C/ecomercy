@@ -21,3 +21,24 @@
     margin-right: 15px;
   }
 }
+
+@media (max-width: 780px) {
+  .content {
+    width: 300px;
+  }
+
+  .button {
+    width: 120px;
+  }
+}
+
+@media (max-width: 410px) {
+  .content {
+    width: 200px;
+  }
+
+  .button {
+    font-size: 12px !important;
+    width: 90px;
+  }
+}

@@ -5,5 +5,12 @@
   font-weight: 500;
   font-size: 36px;
   line-height: 40px;
-  color: $color-primary;
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 410px) {
+  .title {
+    font-size: 28px;
+    line-height: 32px;
+  }
 }

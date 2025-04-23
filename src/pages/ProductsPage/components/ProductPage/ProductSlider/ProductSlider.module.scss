@@ -1,4 +1,4 @@
-@use "../../../../../styles/_variables.scss" as *;
+@use "@/styles/_variables.scss" as *;
 .slider {
   position: relative;
   overflow: hidden;
@@ -57,7 +57,7 @@
   transition: background 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
   
   &:hover {
-    background: $color-primary;
+    background: #000000;
   }
 
   &:disabled {
