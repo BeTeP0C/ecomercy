@@ -36,6 +36,10 @@
   &_skeleton {
     margin-bottom: 69px;
   }
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 .item {

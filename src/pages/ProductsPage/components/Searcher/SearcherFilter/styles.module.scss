@@ -85,9 +85,24 @@
   }
 }
 
+@media (max-width: 650px) {
+  .main {
+    left: 0;
+    max-width: 590px;
+    width: max-content;
+    width: 90vw;
+  }
+}
+
 @media (max-width: 521px) {
   .filter {
     width: 100%;
     margin-bottom: 24px;
+  }
+
+  .main {
+    left: auto;
+    max-width: auto;
+    width: 100%;
   }
 }

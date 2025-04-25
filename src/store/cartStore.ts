@@ -162,7 +162,8 @@ class CartStore {
           priceOne: product.price * (1 - product.discount / 100),
           type: product.type,
           isGuarantee: true,
-          isPopular: Math.random() > 0.5
+          isPopular: Math.random() > 0.5,
+          documentId: product.idDocument
         }
       }),
       price: this.fullSumWithDiscount,

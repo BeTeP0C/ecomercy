@@ -63,7 +63,7 @@ const SearcherFilterPrice: FC<SearcherFilterPriceProps> = observer(({updateFilte
     <div className={styles.price}>
       <h3 className={styles.title}>Price</h3>
 
-      <div>
+      <div className={styles.content}>
         <input
           onChange={(e) => handleChangeInput(e, setValueMin)}
           onKeyDown={handleKeyDown}

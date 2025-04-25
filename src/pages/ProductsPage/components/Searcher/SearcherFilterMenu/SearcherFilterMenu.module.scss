@@ -14,8 +14,21 @@
   width: 200px;
 }
 
+@media (max-width: 650px) {
+  .menu {
+    max-width: 90vw;
+    width: 100%;
+  }
+}
+
 @media (max-width: 521px) {
   .menu {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .button {
     width: 100%;
   }
 }

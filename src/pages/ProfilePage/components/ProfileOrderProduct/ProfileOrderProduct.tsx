@@ -1,6 +1,8 @@
 import { TOrderProduct } from "@/types/TOrder"
 import styles from "./ProfileOrderProduct.module.scss"
 import { FC } from "react"
+import { Link } from "react-router"
+import LOCAL_ENDPOINT from "@/config/localEndpoint"
 
 type ProfileOrderProductProps = {
   product: TOrderProduct
@@ -10,10 +12,16 @@ const ProfileOrderProduct: FC<ProfileOrderProductProps> = ({product}) => {
   return (
     <li className={styles.item}>
       <div className={styles.content}>
-        <img className={styles.img} src={product.imgUrl} alt="img product" />
+        <Link to={`${LOCAL_ENDPOINT.PRODUCTS}/${product.documentId}`}>
+          <img className={styles.img} src={product.imgUrl} alt="img product" />
+        </Link>
 
         <div className={styles.info}>
-          <h3 className={styles.title}>{product.title}</h3>
+          <Link to={`${LOCAL_ENDPOINT.PRODUCTS}/${product.documentId}`}>
+            <h3 className={styles.title}>{product.title}</h3>
+          </Link>
+            
+          
           <span className={styles.code}>
             Code product: <span className={styles.code_stroke}>{product.id}</span>
           </span>

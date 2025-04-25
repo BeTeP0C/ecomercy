@@ -17,5 +17,6 @@ export type TOrderProduct = {
   priceOne: number,
   type: TCategory,
   isGuarantee: boolean,
-  isPopular: boolean
+  isPopular: boolean,
+  documentId: string,
 }

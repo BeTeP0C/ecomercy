@@ -22,9 +22,19 @@ const SearcherFilterRating: FC<SearcherFilterRatingProps> = ({stars, updateFilte
   }
   
   useEffect(() => {
-    if (window.innerWidth < 490) {
-      setSizeStar(25)
+    const handleResizeWindow = () => {
+      if (window.innerWidth <= 400) {
+        setSizeStar(20)
+      } else {
+        setSizeStar(30)
+      }
     }
+
+    handleResizeWindow()
+
+    window.addEventListener("resize", handleResizeWindow)
+
+    return () => window.removeEventListener("resize", handleResizeWindow)
   }, [])
 
   return (

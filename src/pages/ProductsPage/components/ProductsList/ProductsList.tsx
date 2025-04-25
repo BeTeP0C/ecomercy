@@ -28,7 +28,7 @@ const ProductsList: FC<ProductsListProps> = observer(({pagination, products, isL
       const amountProduct = cartStore.amountProduct(product.documentId)
   
       return (
-        <div className={`${styles.item}`} key={product.documentId}>
+        <div className={`${styles.item}`}>
           <Product
             id={product.id}
             idDocument={product.documentId}
@@ -50,7 +50,7 @@ const ProductsList: FC<ProductsListProps> = observer(({pagination, products, isL
       )
     })
   
-    return <ObservedProduct />
+    return <ObservedProduct key={product.documentId}/>
   }
   return (
     <section className={styles.section}>
@@ -84,6 +84,7 @@ const ProductsList: FC<ProductsListProps> = observer(({pagination, products, isL
                       <ProductSkeleton />
                     ) : (
                       <Virtuoso 
+                        useWindowScroll
                         style={{ height: 3000 }}
                         data={products}
                         itemContent={(index, product) => getItem(product)}
