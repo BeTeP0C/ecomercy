@@ -6,7 +6,7 @@
       "components": ["components/*"],
       "config": ["config/*"],
       "styles": ["styles/*"],
-      "utils": ["utils/*"],
+      "utils": ["src/utils/*"],
       "hooks": ["hooks/*"]
     }
   },

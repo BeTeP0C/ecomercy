@@ -1,8 +1,13 @@
+import { TCategory } from "@/common/categoriesList"
+
 export type TProductCart = {
-  id: string,
+  idDocument: string,
+  id: number,
+  amount: number,
   title: string,
   price: number,
   discount: number,
+  type: TCategory
   images: {
     large: string,
     small: string,

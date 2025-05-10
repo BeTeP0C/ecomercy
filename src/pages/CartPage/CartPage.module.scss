@@ -9,7 +9,7 @@
   font-weight: 600;
   font-size: 32px;
   line-height: 48px;
-  color: $color-primary;
+  color: var(--color-text-primary);
 }
 
 .amount {
@@ -17,7 +17,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  color: $color-secondary;
+  color: var(--color-text-secondary);
 }
 
 .block {
@@ -26,127 +26,125 @@
 }
 
 .main {
-  margin-right: 20px;
-  padding: 15px;
-  width: 800px;
+  margin-right: 50px;
+  width: 813px;
   border-radius: 20px;
-  box-shadow: 1px 0 2px 0;
-  background: $color-white;
+
+  &_empty {
+    display: none;
+  }
 }
 
 .list {
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 }
 
 .payment {
-  box-shadow: 1px 0 2px 0;
-  width: 300px;
-  border-radius: 20px;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0, 0.25);
+  width: 377px;
+  border-radius: 30px;
   height: max-content;
-  background: $color-white;
+  background: var(--color-bg-block);
 
   &__main {
     display: flex;
     flex-direction: column;
-    padding: 15px;
   }
 
   &__info {
-    margin-bottom: 20px;
+    padding: 20px;
+    border-bottom: 1px solid var(--color-brand);
   }
-
+  
   &__heading {
-    margin-bottom: 5px;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    color: $color-secondary;
   }
 
   &__line {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: $color-primary;
-
-    &:not(:last-child) {
-      margin-bottom: 5px;
-    }
 
     &_main {
-      margin-bottom: 15px;
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 24px;
+      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: var(--color-text-primary);
+    }
+
+    &_price {
+      margin-bottom: 5px;
+      color: var(--color-text-primary);
     }
   }
 
+  &__title {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--color-primary-light);
+  }
+
   &__button {
-    border-radius: 20px;
+    width: 100%;
+    border-radius: 10px;
+  }
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-secondary);
+
+  &__price {
+    font-weight: 400;
+    text-decoration: var(--color-text-secondary) line-through;
+  }
+
+  &__heading {
+    font-weight: 500;
   }
 }
 
 .modul {
-  padding: 15px;
-  border-bottom: 2px solid $color-card-bg-skeleton;
+  padding: 20px;
+  border-bottom: 1px solid var(--color-brand);
 }
 
 .title {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 32px;
-  color: $color-primary;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--color-text-primary);
 }
 
 .price__discount {
-  color: $color-brand;
+  color: var(--color-brand);
 }
 
-.modal {
-  &__main {
-    display: flex;
+.actions {
+  padding: 20px;
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  .block {
     flex-direction: column;
-    align-items: center;
-    width: 300px;
+    margin-bottom: 30px;
   }
 
-  &__title {
-    margin-bottom: 15px;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 32px;
-    color: $color-primary;
+  .main {
+    margin-right: 0;
+    width: 100%;
   }
 
-  &__price {
-    margin-bottom: 15px;
-    font-weight: 600;
-    font-size: 32px;
-    line-height: 36px;
-    color: $color-brand;
-  }
-
-  &__actions {
-    display: flex;
-  }
-
-  &__payment {
-    margin-right: 15px;
-  }
-
-  &__cancle {
-    outline: 1px solid $color-input-placeholder;
-    background: transparent;
-    color: $color-primary;
-    transition: color 0.3s ease, outline 0.3s ease, background 0.3s ease;
-
-    &:hover {
-      color: $color-white;
-      outline: 1px solid $color-brand-hover;
-    }
+  .payment {
+    width: 100%;
   }
 }

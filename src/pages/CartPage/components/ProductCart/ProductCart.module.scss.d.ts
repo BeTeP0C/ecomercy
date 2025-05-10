@@ -1,11 +1,25 @@
 declare const classNames: {
+  readonly "theme-light": "theme-light";
+  readonly "theme-dark": "theme-dark";
   readonly item: "item";
   readonly main: "main";
+  readonly main__view: "main__view";
+  readonly main__secondary: "main__secondary";
   readonly img: "img";
+  readonly id: "id";
   readonly info: "info";
   readonly title: "title";
+  readonly title__link: "title__link";
+  readonly counter: "counter";
+  readonly counter__button: "counter__button";
+  readonly counter__button_down: "counter__button_down";
+  readonly counter__button_up: "counter__button_up";
+  readonly counter__result: "counter__result";
+  readonly price_one: "price_one";
   readonly price: "price";
-  readonly price__discount: "price__discount";
+  readonly price__full: "price__full";
+  readonly price__final: "price__final";
+  readonly discount: "discount";
   readonly delete: "delete";
 };
 export = classNames;

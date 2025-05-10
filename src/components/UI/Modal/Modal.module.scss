@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0, 0.4);
+  background: var(--color-modal-bg);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -22,7 +22,7 @@
   position: relative;
   padding: 20px;
   border-radius: 15px;
-  background: $color-white;
+  background: var(--color-bg-block-single);
   transform: scale(0);
   transition: transform 0.3s ease;
 
@@ -41,5 +41,5 @@
   border-radius: 50%;
   width: 18px;
   height: 18px;
-  background: $color-brand;
+  background: var(--color-brand);
 }

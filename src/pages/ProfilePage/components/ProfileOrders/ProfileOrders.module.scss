@@ -1,0 +1,25 @@
+@use "@/styles/variables" as *;
+
+.content {
+  flex-grow: 1;
+}
+
+.heading {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 36px;
+  color: var(--color-text-primary);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 350px) {
+  .empty {
+    height: 300px;
+  }
+}

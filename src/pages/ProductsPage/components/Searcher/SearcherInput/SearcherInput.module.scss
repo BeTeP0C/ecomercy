@@ -1,21 +1,21 @@
-@import "../../../../../styles/variables";
+@use '@/styles/variables' as *;
 
 .input {
   padding: 16px 12px;
   width: 100%;
-  outline: transparent;
+  outline: 1px solid var(--color-input-border);
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  color: $color-text-input;
-  background: $color-bg-input;
-  transition: outline 0.3s ease, background 0.3s ease;
+  color: var(--color-input-text);
+  background: var(--color-input-bg);
+  transition: outline 0.3s ease;
 
   &::placeholder {
-    color: $color-input-placeholder;
+    color: var(--color-input-placeholder);
   }
 
   &:focus-visible {
-    outline: $color-input-border;
+    outline: 1px solid var(--color-input-border-active);
   }
 }

@@ -1,18 +1,22 @@
 import { FC, memo } from "react"
 import Button from "@/components/UI/Button"
 import styles from "./styles.module.scss"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { TProductCart } from "@/types/TProductCart"
+import { TCategory } from "@/common/categoriesList"
+import LOCAL_ENDPOINT from "@/config/localEndpoint"
 
 type ProductProps = {
-  id: string,
+  id: number,
+  idDocument: string,
   images: {
     large: string,
     small: string,
     medium: string,
     thumbnail: string
   },
-  type: string,
+  amount: number,
+  type: TCategory,
   title: string,
   descr: string,
   price: number,
@@ -26,20 +30,31 @@ const Product: FC<ProductProps> = ({
   type,
   title,
   descr,
+  amount,
   price,
   discount,
+  idDocument,
   onClick
 }) => { 
-  const handleButtonClick = () => {
-    const product: TProductCart = {
-      id: id,
-      title: title,
-      price: price,
-      discount: discount,
-      images: images
-    }
+  const navigate = useNavigate()
 
-    onClick(product)
+  const handleButtonClick = () => {
+    if (amount === 0) {
+      const product: TProductCart = {
+        id: id,
+        title: title,
+        price: price,
+        discount: discount,
+        idDocument: idDocument,
+        type: type,
+        amount: 1,
+        images: images
+      }
+  
+      onClick(product)
+    } else {
+      navigate(LOCAL_ENDPOINT.CART)
+    }
   }
 
   return (
@@ -59,11 +74,11 @@ const Product: FC<ProductProps> = ({
             {discount !== 0 && <span className={styles.price__discount}>{price}</span>}
           </span>
 
-          <Button className={styles.product__button} text="Add to cart" func={handleButtonClick}/>
+          <Button className={styles.product__button} text={amount === 0 ? "Add to cart" : "Go to Cart"} func={handleButtonClick}/>
         </div>
       </div>
 
-      <Link className={styles.link} to={`/products/${id}`}></Link>
+      <Link className={styles.link} to={`${LOCAL_ENDPOINT.PRODUCTS}/${idDocument}`}></Link>
     </article>
   )
 }

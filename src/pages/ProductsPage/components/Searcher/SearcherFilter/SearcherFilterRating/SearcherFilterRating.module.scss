@@ -3,14 +3,16 @@
 .rating {
   display: flex;
   align-items: center;
+  margin-bottom: 25px;
 }
 
 .title {
-  margin-right: 12px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  color: $color-primary;
+  margin-right: 20px;
+  min-width: 70px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--color-text-primary);
 }
 
 .list {
@@ -24,12 +26,36 @@
 }
 
 .button {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 
   &_active {
-    & polygon {
-      fill: $color-brand;
+    & path {
+      fill: var(--color-brand);
+      stroke: var(--color-brand);
+    }
+  }
+}
+
+
+@media (max-width: 400px) {
+  .rating {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .title {
+    margin-bottom: 10px;
+  }
+
+  .button {
+    width: 20px;
+    height: 20px;
+  }
+
+  .item {
+    &:not(:last-child) {
+      margin-right: 8px;
     }
   }
 }

@@ -1,0 +1,127 @@
+@use "@/styles/variables" as *;
+
+.content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--color-brand);
+}
+
+.info {
+  margin-right: 185px;
+}
+
+.title {
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+}
+
+.descr {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  &__buttons {
+    display: flex;
+  }
+}
+
+.avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  background: --color-avatar-bg;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+}
+
+.button {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  transition: color 0.3s ease;
+
+  &_update {
+    margin-right: 20px;
+    color: var(--color-avatar-update);
+
+    &:hover {
+      color: var(--color-avatar-update-hover);
+    }
+  }
+
+  &_delete {
+    color: var(--color-avatar-delete);
+
+    &:hover {
+      color: var(--color-avatar-delete-hover);
+    }
+  }
+}
+
+.hiddenInput {
+  display: none;
+}
+
+@media (max-width: 730px) {
+  .content {
+    justify-content: space-between;
+  }
+
+  .info {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .content {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .info {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 335px) {
+  .info {
+    text-align: center;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .avatar {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
