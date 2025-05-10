@@ -1,0 +1,36 @@
+@use "@/styles/_variables.scss" as *;
+
+.main {
+  padding-top: 190px;
+  padding-bottom: 150px;
+}
+
+.heading {
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 48px;
+  color: var(--color-text-primary);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.content {
+  margin-bottom: 40px;
+}
+
+@media (max-width: 1000px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

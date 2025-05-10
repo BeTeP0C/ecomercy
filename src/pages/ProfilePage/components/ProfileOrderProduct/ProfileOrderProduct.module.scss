@@ -1,0 +1,161 @@
+@use "@/styles/variables" as *;
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 17px;
+  border-bottom: 1px solid var(--color-brand);
+
+  &:first-child {
+    border-top: 1px solid var(--color-brand);
+  }
+
+  &:last-child {
+    border: none;
+  }
+
+  &:first-child:last-child {
+    border-top: 1px solid var(--color-brand);
+  }
+}
+
+.img {
+  margin-right: 12px;
+  width: 100px;
+  height: 100px;
+}
+
+.content {
+  display: flex;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 12px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+}
+
+.code {
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--color-text-secondary);
+
+  &_stroke {
+    color: var(--color-text-primary);
+  }
+}
+
+.peculiarities {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.peculiarity {
+  padding: 6px 9px;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--color-primary-light);
+  background: var(--color-peculiarity-bg);
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+}
+
+.result {
+  text-align: end;
+
+  &__details { 
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 14px;
+    color: var(--color-primary-lighting);
+  }
+}
+
+.price {
+  margin-bottom: 3px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-primary-lighting);
+
+  &_stroke {
+    font-size: 16px;
+    color: var(--color-text-primary);
+  }
+}
+
+@media (max-width: 500px) {
+  .item {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .content {
+    margin-bottom: 10px;
+  }
+
+  .result {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .price {
+    margin-bottom: 0;
+  }
+
+  .result__details {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--color-primary-lighting);
+  }
+
+  .peculiarity {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 365px) {
+  .content {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .img {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 200px
+  }
+}
+
+@media (max-width: 290px) {
+  .result {
+    flex-direction: column-reverse;
+    align-items: start;
+
+    &__details {
+      margin-bottom: 10px;
+    }
+  }
+
+  .price {
+    margin-bottom: 0;
+  }
+}

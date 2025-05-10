@@ -7,13 +7,23 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+      "components": ["components/*"],
+      "config": ["config/*"],
+      "styles": ["styles/*"],
+      "utils": ["src/utils/*"],
+      "hooks": ["hooks/*"]
+    },
+
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-
+    "noImplicitAny": false,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

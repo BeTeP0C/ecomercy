@@ -1,0 +1,260 @@
+@use "@/styles/_mixins" as *;
+@use "@/styles/variables" as *;
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 30px;
+  border-radius: 30px; 
+  min-height: 118px;
+  background: var(--color-bg-block);
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}
+
+.main {
+  display: flex;
+
+  &__view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  &__secondary {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: space-between;
+    height: 85px;
+  }
+}
+
+.img {
+  @include square(100px);
+}
+
+.id {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  color: var(--color-text-secondary);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+}
+
+.title {
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+
+  &__link {
+    color: var(--color-text-primary);
+  }
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid var(--color-text-secondary);
+  border-radius: 8px;
+  width: max-content;
+
+  &__button {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 39px;
+    padding: 10.5px 8px;
+    transition: background 0.3s ease;
+
+    &_down {
+      padding-left: 12px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        width: 18px;
+        height: 1px;
+        background: var(--color-text-secondary);
+        transform: translateY(-50%);
+        transition: background 0.3s ease;
+      }
+    }
+
+    &_up {
+      padding-right: 12px;
+
+      &::after, &::before {
+        content: "";
+        position: absolute;
+        background: var(--color-text-secondary);
+        transition: background 0.3s ease;
+      }
+
+      &::after {
+        top: 50%;
+        right: 12px;
+        width: 18px;
+        height: 1px;
+        transform: translateY(-50%);
+      }
+
+      &::before {
+        top: 10.5px;
+        width: 1px;
+        height: 18px;
+        transform: translateX(-50%);
+      }
+    }
+
+    &:hover {
+      background: rgba(var(--color-text-secondary-rgb), 0.15);
+      transition: background 0.3s ease;
+    }
+  }
+
+  &__result {
+    padding: 10.5px 4px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    color: var(--color-text-primary);
+  }
+}
+
+.price_one {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-text-secondary);
+}
+
+.price {
+  display: flex;
+  align-items: center;
+
+  &__full {
+    margin-right: 9px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: line-through var(--color-text-secondary);
+    color: var(--color-text-secondary);
+  }
+
+  &__final {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: var(--color-text-primary);
+  }
+}
+
+.discount {
+  text-align: end;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-brand);
+}
+
+
+.delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: rgba(var(--color-text-secondary-rgb), 0.2);
+  }
+}
+
+@media (max-width: 520px) {
+  .item {
+    flex-direction: column;
+  }
+
+  .main {
+    margin-bottom: 20px;
+    flex-direction: column;
+
+    &__view {
+      margin-right: 0;
+      margin-bottom: 15px;
+      align-items: start;
+
+      & a {
+        width: 100%;
+      }
+    }
+
+    &__secondary {
+      flex-direction: column-reverse;
+      align-items: start;
+    }
+  }
+
+  .img {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 300px;
+  }
+
+  .id {
+    font-size: 20px;
+  }
+
+  .discount {
+    text-align: start;
+  }
+
+  .price {
+    display: flex;
+    flex-direction: row-reverse;
+
+    &__full {
+      margin-right: 0;
+    }
+
+    &__final {
+      margin-right: 15px;
+    }
+  }
+
+  .price_one {
+    margin-bottom: 20px;
+    order: 2;
+  }
+
+  .counter {
+    margin-bottom: 0;
+    order: 3;
+  }
+}
+
+@media (max-width: 340px) {
+  .img {
+    height: 150px;
+  }
+}

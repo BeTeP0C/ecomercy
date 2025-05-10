@@ -1,0 +1,314 @@
+@import "@/styles/_variables.scss";
+
+@keyframes firstAn {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(8px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(8px) rotate(45deg);
+  }
+}
+
+@keyframes secondAn {
+  0% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes thirdAn {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+@keyframes firstAnReverse {
+  0% {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  50% {
+    transform: translateY(8px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes secondAnReverse {
+  0% {
+    opacity: 0;
+  }
+
+  45% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes thirdAnReverse {
+  0% {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: var(--color-bg-header);
+  z-index: 2000;
+
+  &__theme {
+    position: relative;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+    z-index: 100;
+
+    &:hover {
+      path {
+        stroke: var(--color-text-header-hover);
+      }
+    }
+  }
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 30px;
+}
+
+.nav {
+  position: relative;
+}
+
+.menu {
+  display: none;
+
+  &__nav {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    padding: 35px;
+    padding-top: 50px;
+    background: var(--color-bg-header);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    z-index: 1000;
+
+    &_active {
+      transform: translateX(0);
+    }
+
+    & li {
+      margin-right: 0;
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__list {
+    flex-direction: column;
+  }
+}
+
+.burger {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  z-index: 2000;
+
+  &__line {
+    width: 30px;
+    height: 3px;
+    background: var(--color-text-primary);
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+
+  &_close {
+    .burger__line {
+      &_first {
+        animation: firstAn 0.5s linear 1 forwards;
+      }
+
+      &_second {
+        animation: secondAn 0.5s linear 1 forwards;
+      }
+
+      &_third {
+        animation: thirdAn 0.5s linear 1 forwards;
+      }
+    } 
+  }
+
+  &_reverse {
+    .burger__line {
+      &_first {
+        animation: firstAnReverse 0.5s linear 1;
+      }
+
+      &_second {
+        animation: secondAnReverse 0.5s linear 1;
+      }
+
+      &_third {
+        animation: thirdAnReverse 0.5s linear 1;
+      }
+    }
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.basket, .person {
+  &:hover path {
+    stroke: var(--color-text-header-hover);
+  }
+
+  &:active path {
+    stroke: var(--color-text-header-active);
+  }
+
+  &_active path {
+    stroke: var(--color-text-header-active);
+  }
+}
+
+.person {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-text-header);
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: var(--color-text-header-hover);
+  }  
+
+  &:active {
+    color: var(--color-text-header-active);
+  }
+}
+
+.basket {
+  position: relative;
+  margin-right: 16px;
+}
+
+.amount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #ffffff;
+  background: var(--color-brand);
+}
+
+.line {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-line-header);
+}
+
+.line__active {
+  position: absolute;
+  height: 2px;
+  left: 0;
+  width: 80px;
+  bottom: -36px;
+  background: var(--color-text-header-active);
+  transition: left 0.3s ease, width 0.3s ease;
+  z-index: 1000;
+}
+
+@media (max-width: 700px) {
+  .nav {
+    display: none;
+  }
+
+  .menu {
+    display: block;
+
+    &__nav {
+      display: block;
+    }
+
+    &__list {
+      align-items: start;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .logo {
+    display: none;
+  }
+}

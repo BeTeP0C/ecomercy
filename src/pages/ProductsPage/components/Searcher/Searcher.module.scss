@@ -1,0 +1,37 @@
+.section {
+  padding-top: 58px;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  &__button {
+    width: 137px;
+  }
+}
+
+.button {
+  display: none;
+}
+
+.input {
+  flex-grow: 1;
+  margin-right: 24px;
+}
+
+@media (max-width: 521px) {
+  .input {
+    margin-right: 0;
+  }
+
+  .search__button {
+    display: none;
+  }
+
+  .button {
+    display: block;
+  }
+}

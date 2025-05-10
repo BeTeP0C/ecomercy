@@ -1,0 +1,27 @@
+declare const classNames: {
+  readonly "theme-light": "theme-light";
+  readonly "theme-dark": "theme-dark";
+  readonly content: "content";
+  readonly title: "title";
+  readonly label: "label";
+  readonly label_error: "label_error";
+  readonly input: "input";
+  readonly label_low: "label_low";
+  readonly label_medium: "label_medium";
+  readonly label_high: "label_high";
+  readonly label_password: "label_password";
+  readonly error: "error";
+  readonly message: "message";
+  readonly error__arrow: "error__arrow";
+  readonly levels: "levels";
+  readonly level: "level";
+  readonly level_low: "level_low";
+  readonly level_medium: "level_medium";
+  readonly level_high: "level_high";
+  readonly level__title: "level__title";
+  readonly level__title_low: "level__title_low";
+  readonly level__title_medium: "level__title_medium";
+  readonly level__title_high: "level__title_high";
+  readonly input_password: "input_password";
+};
+export = classNames;

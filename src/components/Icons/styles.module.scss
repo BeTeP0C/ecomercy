@@ -1,0 +1,152 @@
+@use "@/styles/variables.scss" as *;
+
+@keyframes spinBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.icon {
+  display: inline-block;
+  line-height: 0;
+}
+
+.basket path {
+  stroke: var(--color-text-header);
+  transition: stroke 0.3s ease;
+}
+
+.logo {
+  &__bg {
+    fill: var(--color-bg-header);
+  }
+
+  &__text path {
+    fill: var(--color-text-header);
+  }
+}
+
+.person path {
+  fill: none !important;
+  stroke: var(--color-text-header);
+  transition: stroke 0.3s ease;
+}
+
+.mail path {
+  stroke: none !important;
+  fill: var(--color-text-primary);
+  transition: fill 0.3s ease;
+}
+
+.lock path {
+  fill: none !important;
+  stroke: var(--color-text-primary);
+  transition: stroke 0.3s ease;
+}
+
+.eye path {
+  fill: none !important;
+  stroke: var(--color-text-primary);
+  transition: stroke 0.3s ease;
+}
+
+.eye_close path {
+  fill: none !important;
+  stroke: var(--color-text-primary);
+  transition: stroke 0.3s ease;
+}
+
+.arrow path {
+  transition: stroke 0.3s ease;
+}
+
+.loader {
+  animation: spin 1.5s linear infinite;
+}
+
+.loader_border {
+  position: absolute;
+  
+  path {
+    fill: var(--color-brand-active);
+  }
+}
+
+.loader_border_first {
+  inset: 0;
+  animation: spin 1.8s linear infinite;
+}
+
+.loader_border_second {
+  inset: 10px;
+  transform: rotate(20deg);
+  animation: spinBack 1.2s linear infinite;
+
+  path {
+    fill: var(--color-brand-active);
+  }
+}
+
+.loader_border_third {
+  inset: 20px;
+  transform: rotate(20deg);
+  animation: spin 1s linear infinite;
+}
+
+.star {
+  & path {
+    stroke: var(--color-text-primary);
+    transition: fill 0.3s ease, stroke 0.3s ease;
+  }
+}
+
+.door {
+  padding-right: 3px;
+  
+  & path {
+    fill: var(--color-logout-text);
+    transition: fill 0.3s ease;
+  }
+}
+
+.edit {
+  padding-right: 3px;
+
+  & path {
+    fill: var(--color-edit-text);
+    transition: fill 0.3s ease;
+  }
+}
+
+.success_arrow {
+  padding-left: 5px;
+}
+
+.photo {
+  position: relative;
+  z-index: 1000;
+}
+
+.moon {
+  path {
+    stroke: var(--color-text-header);
+    transition: stroke 0.3s ease;
+  }
+}
+
+.arrow_back path {
+  stroke: var(--color-text-primary);
+  transition: stroke 0.3s ease;
+}

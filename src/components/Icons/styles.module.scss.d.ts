@@ -1,0 +1,27 @@
+declare const classNames: {
+  readonly "theme-light": "theme-light";
+  readonly "theme-dark": "theme-dark";
+  readonly icon: "icon";
+  readonly basket: "basket";
+  readonly logo__bg: "logo__bg";
+  readonly logo__text: "logo__text";
+  readonly person: "person";
+  readonly mail: "mail";
+  readonly lock: "lock";
+  readonly eye: "eye";
+  readonly eye_close: "eye_close";
+  readonly arrow: "arrow";
+  readonly loader: "loader";
+  readonly loader_border: "loader_border";
+  readonly loader_border_first: "loader_border_first";
+  readonly loader_border_second: "loader_border_second";
+  readonly loader_border_third: "loader_border_third";
+  readonly star: "star";
+  readonly door: "door";
+  readonly edit: "edit";
+  readonly success_arrow: "success_arrow";
+  readonly photo: "photo";
+  readonly moon: "moon";
+  readonly arrow_back: "arrow_back";
+};
+export = classNames;

@@ -1,0 +1,108 @@
+@use "@/styles/variables.scss" as *;
+
+.filter {
+  position: relative;
+  outline: 1px solid var(--color-input-border);
+  width: 300px;
+  height: 52px;
+  background: var(--color-input-bg);
+  transition: outline 0.3s ease;
+
+  &_active {
+    outline: 1px solid var(--color-input-border-active);
+
+    .title {
+      color: var(--color-input-border-active);
+    }
+  }
+}
+
+.button {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 12px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-input-placeholder);
+}
+
+.icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+
+  &::after, &::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    width: 14px;
+    height: 1px;
+    background: var(--color-input-border);
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+
+  &::after {
+    left: 0;
+    transform: rotate(45deg);
+  }
+
+  &::before {
+    right: 0;
+    transform: rotate(-45deg);
+  }
+
+  &_active {
+    &::after {
+      transform: rotate(-45deg);
+      background: var(--color-input-border-active);
+    }
+
+    &::before {
+      transform: rotate(45deg);
+      background: var(--color-input-border-active);
+    }
+  }
+}
+
+.main {
+  position: absolute;
+  top: calc(100% + 10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1000;
+
+  &_active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (max-width: 650px) {
+  .main {
+    left: 0;
+    max-width: 590px;
+    width: max-content;
+    width: 90vw;
+  }
+}
+
+@media (max-width: 521px) {
+  .filter {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .main {
+    left: auto;
+    max-width: auto;
+    width: 100%;
+  }
+}
